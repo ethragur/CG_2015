@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/cg_2015.dir/RotatingCube.cpp.o"
   "CMakeFiles/cg_2015.dir/LoadShader.cpp.o"
   "CMakeFiles/cg_2015.dir/InitClass.cpp.o"
+  "CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
   "cg_2015.pdb"
   "cg_2015"
 )

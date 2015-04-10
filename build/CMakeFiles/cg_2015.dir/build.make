@@ -141,12 +141,36 @@ CMakeFiles/cg_2015.dir/InitClass.cpp.o.provides: CMakeFiles/cg_2015.dir/InitClas
 
 CMakeFiles/cg_2015.dir/InitClass.cpp.o.provides.build: CMakeFiles/cg_2015.dir/InitClass.cpp.o
 
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../GraphicsObject.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o -c /home/effi/projects/CG_2015/GraphicsObject.cpp
+
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cg_2015.dir/GraphicsObject.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/effi/projects/CG_2015/GraphicsObject.cpp > CMakeFiles/cg_2015.dir/GraphicsObject.cpp.i
+
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cg_2015.dir/GraphicsObject.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/effi/projects/CG_2015/GraphicsObject.cpp -o CMakeFiles/cg_2015.dir/GraphicsObject.cpp.s
+
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.requires
+
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.provides: CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.provides
+
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.provides.build: CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
+
 # Object files for target cg_2015
 cg_2015_OBJECTS = \
 "CMakeFiles/cg_2015.dir/Matrix.cpp.o" \
 "CMakeFiles/cg_2015.dir/RotatingCube.cpp.o" \
 "CMakeFiles/cg_2015.dir/LoadShader.cpp.o" \
-"CMakeFiles/cg_2015.dir/InitClass.cpp.o"
+"CMakeFiles/cg_2015.dir/InitClass.cpp.o" \
+"CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
 
 # External object files for target cg_2015
 cg_2015_EXTERNAL_OBJECTS =
@@ -155,6 +179,7 @@ cg_2015: CMakeFiles/cg_2015.dir/Matrix.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/RotatingCube.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/LoadShader.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/InitClass.cpp.o
+cg_2015: CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/build.make
 cg_2015: /usr/lib64/libGLEW.so
 cg_2015: /usr/lib64/libGLU.so
@@ -180,6 +205,7 @@ CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/Matrix.cpp.o.requires
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.requires
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/LoadShader.cpp.o.requires
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/InitClass.cpp.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.requires
 .PHONY : CMakeFiles/cg_2015.dir/requires
 
 CMakeFiles/cg_2015.dir/clean:

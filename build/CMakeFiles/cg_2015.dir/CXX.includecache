@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+/home/effi/projects/CG_2015/GraphicsObject.cpp
+GraphicsObject.h
+/home/effi/projects/CG_2015/GraphicsObject.h
+
+/home/effi/projects/CG_2015/GraphicsObject.h
+GL/glew.h
+-
+GL/freeglut.h
+-
+stdio.h
+-
+
 /home/effi/projects/CG_2015/InitClass.cpp
 
 /home/effi/projects/CG_2015/LoadShader.cpp
@@ -47,4 +59,6 @@ LoadShader.h
 /home/effi/projects/CG_2015/LoadShader.h
 Matrix.h
 /home/effi/projects/CG_2015/Matrix.h
+GraphicsObject.h
+/home/effi/projects/CG_2015/GraphicsObject.h
 

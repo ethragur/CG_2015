@@ -155,6 +155,30 @@ cg_2015/fast:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/build
 .PHONY : cg_2015/fast
 
+GraphicsObject.o: GraphicsObject.cpp.o
+.PHONY : GraphicsObject.o
+
+# target to build an object file
+GraphicsObject.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
+.PHONY : GraphicsObject.cpp.o
+
+GraphicsObject.i: GraphicsObject.cpp.i
+.PHONY : GraphicsObject.i
+
+# target to preprocess a source file
+GraphicsObject.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/GraphicsObject.cpp.i
+.PHONY : GraphicsObject.cpp.i
+
+GraphicsObject.s: GraphicsObject.cpp.s
+.PHONY : GraphicsObject.s
+
+# target to generate assembly for a file
+GraphicsObject.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/GraphicsObject.cpp.s
+.PHONY : GraphicsObject.cpp.s
+
 InitClass.o: InitClass.cpp.o
 .PHONY : InitClass.o
 
@@ -264,6 +288,9 @@ help:
 	@echo "... cg_2015"
 	@echo "... list_install_components"
 	@echo "... install/local"
+	@echo "... GraphicsObject.o"
+	@echo "... GraphicsObject.i"
+	@echo "... GraphicsObject.s"
 	@echo "... InitClass.o"
 	@echo "... InitClass.i"
 	@echo "... InitClass.s"

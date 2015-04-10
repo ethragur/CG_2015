@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/effi/projects/CG_2015/GraphicsObject.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
   "/home/effi/projects/CG_2015/InitClass.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/InitClass.cpp.o"
   "/home/effi/projects/CG_2015/LoadShader.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/LoadShader.cpp.o"
   "/home/effi/projects/CG_2015/Matrix.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/Matrix.cpp.o"
