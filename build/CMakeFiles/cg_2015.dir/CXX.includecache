@@ -21,8 +21,24 @@ stdlib.h
 -
 string.h
 -
+vector
+-
+Matrix.h
+/home/effi/projects/CG_2015/Matrix.h
+math.h
+-
 
 /home/effi/projects/CG_2015/InitClass.cpp
+InitClass.h
+/home/effi/projects/CG_2015/InitClass.h
+
+/home/effi/projects/CG_2015/InitClass.h
+stdio.h
+-
+GL/glew.h
+-
+GL/freeglut.h
+-
 
 /home/effi/projects/CG_2015/LoadShader.cpp
 stdio.h
@@ -65,4 +81,6 @@ Matrix.h
 /home/effi/projects/CG_2015/Matrix.h
 GraphicsObject.h
 /home/effi/projects/CG_2015/GraphicsObject.h
+vector
+-
 

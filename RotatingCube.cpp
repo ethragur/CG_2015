@@ -31,19 +31,7 @@
 #include "LoadShader.h"   /* Provides loading function for shader code */
 #include "Matrix.h"  
 #include "GraphicsObject.h"
-
-/*----------------------------------------------------------------*/
-
-/* Define handle to a vertex buffer object */
-//GLuint VBO;
-
-/* Define handle to a color buffer object */
-//GLuint CBO; 
-
-/* Define handle to an index buffer object */
-//GLuint IBO;
-
-
+#include <vector>
 
 
 /* Strings for loading and storing shader code */
@@ -58,7 +46,12 @@ float ViewMatrix[16]; /* Camera view matrix */
 
 GraphicsObject *n;
 GraphicsObject *w;
-GLfloat vertex_buffer_data[] = 
+GraphicsObject *pillar;
+GraphicsObject *platform1;
+GraphicsObject *platform2;
+
+//cube
+std::vector<GLfloat> vertex_buffer_data = 
   { /* /* 8 cube vertices XYZ */
     -1.0, -1.0,  1.0,
      1.0, -1.0,  1.0,
@@ -69,21 +62,58 @@ GLfloat vertex_buffer_data[] =
      1.0,  1.0, -1.0,
     -1.0,  1.0, -1.0,
   };
+//pillar  
+std::vector<GLfloat> vertex_buffer_data1 = 
+  { /* /* 8 cube vertices XYZ */
+    -0.2, -4.0,  0.2,
+     0.2, -4.0,  0.2,
+     0.2,  4.0,  0.2,
+    -0.2,  4.0,  0.2,
+    -0.2, -4.0, -0.2,
+     0.2, -4.0, -0.2,
+     0.2,  4.0, -0.2,
+    -0.2,  4.0, -0.2,
+  };
+  
+//platform
+std::vector<GLfloat> vertex_buffer_data2 = 
+  { /* /* 8 cube vertices XYZ */
+    -8.0, -0.2,  8.0,
+     8.0, -0.2,  8.0,
+     8.0,  0.2,  8.0,
+    -8.0,  0.2,  8.0,
+    -8.0, -0.2, -8.0,
+     8.0, -0.2, -8.0,
+     8.0,  0.2, -8.0,
+    -8.0,  0.2, -8.0,
+  };
 
-GLfloat   color_buffer_data[] = 
+std::vector<GLfloat>   color_buffer_data = 
   { /* RGB color values for 8 vertices  */
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+  }; 
+  
+  std::vector<GLfloat>   color_buffer_data1 = 
+  { /* RGB color values for 8 vertices  */
+      1.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 1.0f,
+      0.0f, 1.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 0.0f,
+      0.0f, 0.0f, 1.0f,
+      1.0f, 0.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
   }; 
 
 
-GLushort index_buffer_data[] = 
+std::vector<GLushort> index_buffer_data = 
   { /* Indices of 6*2 triangles (6 sides) */
       0, 1, 2,
       2, 3, 0,
@@ -98,16 +128,6 @@ GLushort index_buffer_data[] =
       3, 2, 6,
       6, 7, 3,
   };
-
-
-/* Transformation matrices for initial position
-float TranslateOrigin[16];
-float TranslateDown[16];
-float TranslateX[16];
-float RotateX[16];
-float RotateZ[16];
-float InitialTransform[16];
-*/
 
 
 /*----------------------------------------------------------------*/
@@ -131,6 +151,9 @@ void Display()
 
     n->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
     w->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+    pillar->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+    platform1->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+    platform2->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
     /* Swap between front and back buffer */ 
     glutSwapBuffers();
 }
@@ -146,48 +169,26 @@ void Display()
 
 void OnIdle()
 {
-    float angle = (glutGet(GLUT_ELAPSED_TIME) / 1000.0) * (360.0/M_PI); 
+    /*float angle = (glutGet(GLUT_ELAPSED_TIME) / 1000.0) * (360.0/M_PI); 
     float RotationMatrixAnim[16];
 
-    /* Time dependent rotation */
+    /* Time dependent rotation 
     SetRotationY(angle, RotationMatrixAnim);
-
-    /* Apply model rotation; finally move cube down */
+    
+    /* Apply model rotation; finally move cube down 
     MultiplyMatrix(RotationMatrixAnim, n->InitialTransform, n->ModelMatrix);
-    SetRotationZ(angle, RotationMatrixAnim);
+    
     MultiplyMatrix(RotationMatrixAnim, w->InitialTransform, w->ModelMatrix);
-    //MultiplyMatrix(TranslateDown, ModelMatrix, ModelMatrix);
-    //MultiplyMatrix(TranslateX, ModelMatrix, ModelMatrix);
-    /* Request redrawing forof window content */  
+    
+    
+    
+     Request redrawing forof window content */  
+    w->IdleWork(true);
+    n->IdleWork(true);
+    pillar->IdleWork(false);
+    platform1->IdleWork(false);
+    platform2->IdleWork(false);
     glutPostRedisplay();
-}
-
-
-/******************************************************************
-*
-* SetupDataBuffers
-*
-* Create buffer objects and load data into buffers
-*
-*******************************************************************/
-void SetupDataBuffers(GraphicsObject *obj)
-{
-  for(int i = 0; i < sizeof(obj->vertex_buffer_data); i++)
-  {
-    printf("%f\n", obj->vertex_buffer_data[i]);
-  }
-    glGenBuffers(1, &obj->VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, obj->VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(obj->vertex_buffer_data), obj->vertex_buffer_data, GL_STATIC_DRAW);
-
-    glGenBuffers(1, &obj->IBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->IBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(obj->index_buffer_data), obj->index_buffer_data, GL_STATIC_DRAW);
-
-    glGenBuffers(1, &obj->CBO);
-    glBindBuffer(GL_ARRAY_BUFFER, obj->CBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(obj->color_buffer_data), obj->color_buffer_data, GL_STATIC_DRAW);
-   
 }
 
 
@@ -314,9 +315,7 @@ void Initialize(void)
     glDepthFunc(GL_LESS);    
 
     /* Setup vertex, color, and index buffer objects */
-    SetupDataBuffers(n);
-    SetupDataBuffers(w);
-
+    
     /* Setup shaders and shader program */
     CreateShaderProgram();  
 
@@ -324,11 +323,6 @@ void Initialize(void)
     SetIdentityMatrix(ProjectionMatrix);
     SetIdentityMatrix(ViewMatrix);
     
-    
-    
-    SetIdentityMatrix(n->ModelMatrix);
-    SetIdentityMatrix(w->ModelMatrix);
-
     /* Set projection transform */
     float fovy = 45.0;
     float aspect = 1.0; 
@@ -337,30 +331,16 @@ void Initialize(void)
     SetPerspectiveMatrix(fovy, aspect, nearPlane, farPlane, ProjectionMatrix);
 
     /* Set viewing transform */
-    float camera_disp = -25.0;
+    float camera_disp = -42.0;
     SetTranslation(0.0, 0.0, camera_disp, ViewMatrix);
-
-    /* Translate and rotate cube onto tip */
-    
-
-    /* Translate down */
-    //SetTranslation(0, -sqrtf(sqrtf(2.0) * 1.0), 0, TranslateDown);
-    //SetTranslation(2.0,0,0, TranslateX);
-    /* Initial transformation matrix */
-    SetTranslation(0, 0, 6, n->TranslateOrigin);
-    SetRotationX(0, n->RotateX);
-    SetRotationZ(0, n->RotateZ);	
-    MultiplyMatrix(n->RotateX, n->TranslateOrigin, n->InitialTransform);
-  
-    MultiplyMatrix(n->RotateZ, n->InitialTransform, n->InitialTransform);
     
     
-    SetTranslation(0, 0, 0, w->TranslateOrigin);
-    SetRotationX(0, w->RotateX);
-    SetRotationZ(0, w->RotateZ);	
-    MultiplyMatrix(w->RotateX, w->TranslateOrigin, w->InitialTransform);
-  
-    MultiplyMatrix(w->RotateZ, w->InitialTransform, w->InitialTransform);
+    n->initobj(8,0,0);
+    w->initobj(-8,0,0);
+    pillar->initobj(0,0,0);
+    platform1->initobj(0,4,0);
+    platform2->initobj(0,-4,0);
+   
 }
 
 
@@ -374,12 +354,15 @@ void Initialize(void)
 
 int main(int argc, char** argv)
 {
-    n = new GraphicsObject(vertex_buffer_data, color_buffer_data, index_buffer_data);
-    w = new GraphicsObject(vertex_buffer_data, color_buffer_data, index_buffer_data);
+    n = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
+    w = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
+    pillar = new GraphicsObject(vertex_buffer_data1, color_buffer_data, index_buffer_data); 
+    platform1 = new GraphicsObject(vertex_buffer_data2, color_buffer_data, index_buffer_data); 
+    platform2 = new GraphicsObject(vertex_buffer_data2, color_buffer_data, index_buffer_data); 
     /* Initialize GLUT; set double buffered window and RGBA color model */
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-    glutInitWindowSize(600, 600);
+    glutInitWindowSize(900, 900);
     glutInitWindowPosition(400, 400);
     glutCreateWindow("CG Proseminar - Rotating Cube");
 
@@ -401,6 +384,6 @@ int main(int argc, char** argv)
     glutDisplayFunc(Display);
     glutMainLoop();
 
-    /* ISO C requires main to return int */
-    return 0;
+    
+    return EXIT_SUCCESS;
 }

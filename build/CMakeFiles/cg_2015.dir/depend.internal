@@ -4,8 +4,10 @@
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.cpp
  /home/effi/projects/CG_2015/GraphicsObject.h
+ /home/effi/projects/CG_2015/Matrix.h
 CMakeFiles/cg_2015.dir/InitClass.cpp.o
  /home/effi/projects/CG_2015/InitClass.cpp
+ /home/effi/projects/CG_2015/InitClass.h
 CMakeFiles/cg_2015.dir/LoadShader.cpp.o
  /home/effi/projects/CG_2015/LoadShader.cpp
 CMakeFiles/cg_2015.dir/Matrix.cpp.o

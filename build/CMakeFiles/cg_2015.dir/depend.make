@@ -3,8 +3,10 @@
 
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../GraphicsObject.cpp
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../GraphicsObject.h
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../Matrix.h
 
 CMakeFiles/cg_2015.dir/InitClass.cpp.o: ../InitClass.cpp
+CMakeFiles/cg_2015.dir/InitClass.cpp.o: ../InitClass.h
 
 CMakeFiles/cg_2015.dir/LoadShader.cpp.o: ../LoadShader.cpp
 

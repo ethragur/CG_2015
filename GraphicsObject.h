@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <vector>
+#include "Matrix.h"
+#include <math.h>
 
 class GraphicsObject
 {
@@ -22,16 +25,18 @@ public:
   float RotateZ[16];
   float InitialTransform[16];
   float ModelMatrix[16];  /* Model matrix */ 
-  GLfloat vertex_buffer_data[];
-  GLfloat color_buffer_data[];
-  GLushort index_buffer_data[];
+  float Pos[3];
+  std::vector<GLfloat> vertex_buffer_data;
+  std::vector<GLfloat> color_buffer_data;
+  std::vector<GLushort> index_buffer_data;
 
     
   //func
-  GraphicsObject(GLfloat vertex_buffer_temp[], GLfloat color_buffer_temp[], GLushort index_buffer_temp[]);
+  GraphicsObject(std::vector<GLfloat> vertex_buffer_temp, std::vector<GLfloat> color_buffer_temp, std::vector<GLushort> index_buffer_temp);
   void Draw(GLuint ShaderProgram, float ProjectionMatrix[16], float ViewMatrix[16]);
-  //void SetupDataBuffers();
-  
+  void SetupDataBuffers();
+  void initobj(float x, float y, float z);
+  void IdleWork(bool updown);
   
   enum DataID {vPosition = 0, vColor = 1}; 
 
