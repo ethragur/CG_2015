@@ -170,6 +170,25 @@ void OnIdle()
 * Create buffer objects and load data into buffers
 *
 *******************************************************************/
+void SetupDataBuffers(GraphicsObject *obj)
+{
+  for(int i = 0; i < sizeof(obj->vertex_buffer_data); i++)
+  {
+    printf("%f\n", obj->vertex_buffer_data[i]);
+  }
+    glGenBuffers(1, &obj->VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, obj->VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(obj->vertex_buffer_data), obj->vertex_buffer_data, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &obj->IBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->IBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(obj->index_buffer_data), obj->index_buffer_data, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &obj->CBO);
+    glBindBuffer(GL_ARRAY_BUFFER, obj->CBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(obj->color_buffer_data), obj->color_buffer_data, GL_STATIC_DRAW);
+   
+}
 
 
 
@@ -295,8 +314,8 @@ void Initialize(void)
     glDepthFunc(GL_LESS);    
 
     /* Setup vertex, color, and index buffer objects */
-    n->SetupDataBuffers();
-    w->SetupDataBuffers();
+    SetupDataBuffers(n);
+    SetupDataBuffers(w);
 
     /* Setup shaders and shader program */
     CreateShaderProgram();  
