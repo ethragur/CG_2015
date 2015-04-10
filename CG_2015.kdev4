@@ -1,0 +1,4 @@
+[Project]
+Name=CG_2015
+Manager=KDevCMakeManager
+VersionControl=kdevgit
