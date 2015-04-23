@@ -25,9 +25,9 @@ void GraphicsObject::initobj(float x, float y, float z)
   SetupDataBuffers();
   SetIdentityMatrix(ModelMatrix);
   SetTranslation(x, y, z, TranslateOrigin);
-  Pos[0] = x;
-  Pos[1] = y;
-  Pos[2] = z;
+  Pos[0] = stPos[0] = x;
+  Pos[1] = stPos[1] = y;
+  Pos[2] = stPos[2] = z;
   SetRotationX(0, RotateX);
   SetRotationZ(0, RotateZ);	
   MultiplyMatrix(RotateX, TranslateOrigin, InitialTransform);
@@ -40,25 +40,27 @@ void GraphicsObject::IdleWork(bool updown)
 {
   float angle = (glutGet(GLUT_ELAPSED_TIME) / 1500.0) * (360.0/M_PI); 
   float RotationMatrixAnim[16];
+  //should object move up and down
   if(updown)
   {
     SetRotationY(angle, RotationMatrixAnim);
-    static bool down = true;
+    
     if(down)
     {
       Pos[1] += 0.1f;
-      if(Pos[1] >= 3)
+      if(Pos[1] >= 3 - stPos[1])
       {
-	
-      
+	//for float correction
+	Pos[1] = 3 - stPos[1];
 	down = false;
       }
     }
     else
     {
       Pos[1] -= 0.1f;
-      if(Pos[1] <= -3)
+      if(Pos[1] <= -3 - stPos[1])
       {
+	Pos[1] = -3 - stPos[1];
 	down = true;
       }
     }
@@ -66,6 +68,7 @@ void GraphicsObject::IdleWork(bool updown)
     
     MultiplyMatrix(RotationMatrixAnim, InitialTransform, ModelMatrix);
     MultiplyMatrix(TranslateOrigin, ModelMatrix, ModelMatrix);
+   
     
   }
   else

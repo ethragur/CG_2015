@@ -1,17 +1,11 @@
 /******************************************************************
-*
-* RotatingCube.c
-*
-* Description: This example demonstrates a colored, rotating
-* cube in shader-based OpenGL. The use of transformation
-* matrices, perspective projection, and indexed triangle sets 
-* are shown.
-*
-* Computer Graphics Proseminar SS 2015
 * 
-* Interactive Graphics and Simulation Group
-* Institute of Computer Science
-* University of Innsbruck
+* 
+* 
+* Computer Graphics Project 2015
+* 
+* by Stefan Kuhnert, Philipp Pobitzer, Tobias Raggl
+* 
 *
 *******************************************************************/
 
@@ -34,6 +28,13 @@
 #include <vector>
 
 
+#define USES_MESA_DRIVER 1
+
+
+/*----------------------------------------------------------------*/
+/* Define handle to a vertex array object (only for MESA USE) */
+GLuint VAO;
+
 /* Strings for loading and storing shader code */
 static const char* VertexShaderString;
 static const char* FragmentShaderString;
@@ -42,10 +43,11 @@ GLuint ShaderProgram;
 
 float ProjectionMatrix[16]; /* Perspective projection matrix */
 float ViewMatrix[16]; /* Camera view matrix */ 
-/*float ModelMatrix[16]; /* Model matrix */ 
 
-GraphicsObject *n;
-GraphicsObject *w;
+GraphicsObject *cube1;
+GraphicsObject *cube2;
+GraphicsObject *cube3;
+GraphicsObject *cube4;
 GraphicsObject *pillar;
 GraphicsObject *platform1;
 GraphicsObject *platform2;
@@ -149,8 +151,10 @@ void Display()
     /* Clear window; color specified in 'Initialize()' */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    n->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
-    w->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+    cube1->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+    cube2->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+    cube3->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+    cube4->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
     pillar->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
     platform1->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
     platform2->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
@@ -169,22 +173,11 @@ void Display()
 
 void OnIdle()
 {
-    /*float angle = (glutGet(GLUT_ELAPSED_TIME) / 1000.0) * (360.0/M_PI); 
-    float RotationMatrixAnim[16];
-
-    /* Time dependent rotation 
-    SetRotationY(angle, RotationMatrixAnim);
-    
-    /* Apply model rotation; finally move cube down 
-    MultiplyMatrix(RotationMatrixAnim, n->InitialTransform, n->ModelMatrix);
-    
-    MultiplyMatrix(RotationMatrixAnim, w->InitialTransform, w->ModelMatrix);
-    
-    
-    
-     Request redrawing forof window content */  
-    w->IdleWork(true);
-    n->IdleWork(true);
+   
+    cube1->IdleWork(true);
+    cube2->IdleWork(true);
+    cube3->IdleWork(true);
+    cube4->IdleWork(true);
     pillar->IdleWork(false);
     platform1->IdleWork(false);
     platform2->IdleWork(false);
@@ -296,6 +289,14 @@ void CreateShaderProgram()
 }
 
 
+
+void setupArrayObject(){
+    if (USES_MESA_DRIVER){
+		glGenVertexArrays(1, &VAO); // Create our Vertex Array Object  
+		glBindVertexArray(VAO); // Bind our Vertex Array Object so we can use it 
+	}
+}
+
 /******************************************************************
 *
 * Initialize
@@ -307,14 +308,18 @@ void CreateShaderProgram()
 
 void Initialize(void)
 {   
-    /* Set background (clear) color to dark blue */ 
+    /* Set background (clear) color to grey */ 
     glClearColor(0.4, 0.4, 0.4, 0.0);
 
     /* Enable depth testing */
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);    
+    glDepthFunc(GL_LESS);
 
-    /* Setup vertex, color, and index buffer objects */
+    
+    /*Intel troubleshooting*/
+    setupArrayObject();
+
+    
     
     /* Setup shaders and shader program */
     CreateShaderProgram();  
@@ -335,14 +340,30 @@ void Initialize(void)
     SetTranslation(0.0, 0.0, camera_disp, ViewMatrix);
     
     
-    n->initobj(8,0,0);
-    w->initobj(-8,0,0);
+    cube1->initobj(8,1,0);
+    cube2->initobj(-8,-1,0);
+    cube3->initobj(0,1,8);
+    cube4->initobj(0,-1,-8);
     pillar->initobj(0,0,0);
     platform1->initobj(0,4,0);
     platform2->initobj(0,-4,0);
    
 }
 
+
+
+
+void setupIntelMesaConfiguration(){
+
+	if (USES_MESA_DRIVER){
+		/*
+		INTEL MESA TROUBLESHOOTING
+		*/
+		glutInitContextVersion(3,3);
+		glutInitContextProfile(GLUT_CORE_PROFILE);
+    	glewExperimental = GL_TRUE;
+	}
+}
 
 /******************************************************************
 *
@@ -354,13 +375,17 @@ void Initialize(void)
 
 int main(int argc, char** argv)
 {
-    n = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
-    w = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
+    cube1 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
+    cube2 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);   
+    cube3 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
+    cube4 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
     pillar = new GraphicsObject(vertex_buffer_data1, color_buffer_data, index_buffer_data); 
     platform1 = new GraphicsObject(vertex_buffer_data2, color_buffer_data, index_buffer_data); 
     platform2 = new GraphicsObject(vertex_buffer_data2, color_buffer_data, index_buffer_data); 
     /* Initialize GLUT; set double buffered window and RGBA color model */
     glutInit(&argc, argv);
+    
+    setupIntelMesaConfiguration();
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowSize(900, 900);
     glutInitWindowPosition(400, 400);

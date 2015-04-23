@@ -36,7 +36,7 @@ endif()
 #########################################################
 # Include Files
 #########################################################
-add_executable(cg_2015 Matrix.cpp RotatingCube.cpp LoadShader.cpp InitClass.cpp GraphicsObject.cpp)
+add_executable(cg_2015 Matrix.cpp MerryGoRound.cpp LoadShader.cpp InitClass.cpp GraphicsObject.cpp)
 
 ########################################################
 # Linking & stuff

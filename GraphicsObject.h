@@ -26,6 +26,7 @@ public:
   float InitialTransform[16];
   float ModelMatrix[16];  /* Model matrix */ 
   float Pos[3];
+  float stPos[3];
   std::vector<GLfloat> vertex_buffer_data;
   std::vector<GLfloat> color_buffer_data;
   std::vector<GLushort> index_buffer_data;
@@ -39,6 +40,9 @@ public:
   void IdleWork(bool updown);
   
   enum DataID {vPosition = 0, vColor = 1}; 
+  
+private:
+  bool down = true;
 
 };
 #endif /*GRAPHICSOBJECT_H */
