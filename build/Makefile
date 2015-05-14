@@ -203,30 +203,6 @@ InitClass.cpp.s:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/InitClass.cpp.s
 .PHONY : InitClass.cpp.s
 
-Matrix.o: Matrix.cpp.o
-.PHONY : Matrix.o
-
-# target to build an object file
-Matrix.cpp.o:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/Matrix.cpp.o
-.PHONY : Matrix.cpp.o
-
-Matrix.i: Matrix.cpp.i
-.PHONY : Matrix.i
-
-# target to preprocess a source file
-Matrix.cpp.i:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/Matrix.cpp.i
-.PHONY : Matrix.cpp.i
-
-Matrix.s: Matrix.cpp.s
-.PHONY : Matrix.s
-
-# target to generate assembly for a file
-Matrix.cpp.s:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/Matrix.cpp.s
-.PHONY : Matrix.cpp.s
-
 MerryGoRound.o: MerryGoRound.cpp.o
 .PHONY : MerryGoRound.o
 
@@ -342,9 +318,6 @@ help:
 	@echo "... InitClass.o"
 	@echo "... InitClass.i"
 	@echo "... InitClass.s"
-	@echo "... Matrix.o"
-	@echo "... Matrix.i"
-	@echo "... Matrix.s"
 	@echo "... MerryGoRound.o"
 	@echo "... MerryGoRound.i"
 	@echo "... MerryGoRound.s"

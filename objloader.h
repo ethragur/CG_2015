@@ -8,7 +8,7 @@
 class ObjLoader
 {
 public:
-  static std::vector<GraphicsObject> loadObj(const std::string& path );
+  static std::vector<GraphicsObject> loadObj( const std::string& objpath, const std::string& mtlpath );
 };
 
 

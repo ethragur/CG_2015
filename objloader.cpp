@@ -5,7 +5,7 @@
  * 	@path Path to the Obj file
  * 
  */
-std::vector<GraphicsObject> ObjLoader::loadObj ( const std::string& path )
+std::vector<GraphicsObject> ObjLoader::loadObj ( const std::string& objpath, const std::string& mtlpath )
 {
   //tiny obj structs for storing Vert, Indic, color...
   std::vector <tinyobj::shape_t> shapes;
@@ -13,11 +13,11 @@ std::vector<GraphicsObject> ObjLoader::loadObj ( const std::string& path )
   
   std::vector<GraphicsObject> retVec;
   
-  std::string retString = tinyobj::LoadObj(shapes,mats, path.c_str(), NULL);
+  std::string retString = tinyobj::LoadObj(shapes,mats, objpath.c_str(), mtlpath.c_str());
   //error handling
   if(!retString.empty())
   {
-    std::cerr << "SthIsWrong with your obj File" << retString << std::endl;
+    std::cerr << "Sth IsWrong with your obj File: " << retString << std::endl;
     exit(1);
   }
   

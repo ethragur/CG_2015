@@ -29,8 +29,6 @@ string
 -
 vector
 -
-Matrix.h
-/home/effi/projects/CG_2015/Matrix.h
 glm/glm.hpp
 -
 math.h
@@ -48,18 +46,6 @@ GL/glew.h
 GL/freeglut.h
 -
 
-/home/effi/projects/CG_2015/Matrix.cpp
-stdio.h
--
-stdlib.h
--
-string.h
--
-math.h
--
-
-/home/effi/projects/CG_2015/Matrix.h
-
 /home/effi/projects/CG_2015/MerryGoRound.cpp
 stdio.h
 -
@@ -73,8 +59,6 @@ GL/glew.h
 -
 GL/freeglut.h
 -
-Matrix.h
-/home/effi/projects/CG_2015/Matrix.h
 GraphicsObject.h
 /home/effi/projects/CG_2015/GraphicsObject.h
 vector
@@ -92,6 +76,10 @@ camera.h
 glm/gtc/matrix_transform.hpp
 -
 glm/ext.hpp
+-
+cmath
+-
+GL/freeglut.h
 -
 
 /home/effi/projects/CG_2015/camera.h

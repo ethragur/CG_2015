@@ -21,7 +21,6 @@
 
 
 /* Local includes */
-#include "Matrix.h"  
 #include "GraphicsObject.h"
 #include <vector>
 #include "objloader.h"
@@ -34,11 +33,10 @@
 /* Strings for loading and storing shader code */
 Camera cam;
 
-float ProjectionMatrix[16];
-float ViewMatrix[16];
-
 //storage for all the modles loaded from the obj
 std::vector<GraphicsObject> allObjs;
+
+bool MODE1 = true;
 
 /******************************************************************
 *
@@ -59,7 +57,9 @@ void Display()
     {
       allObjs[i].Draw(InitClass::ShaderProgram, cam.ProjectionMatrix, cam.ViewMatrix);
     }
-
+    glColor3f( 20, 20, 20 );
+    glRasterPos2f(10, 10);
+    glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'C');
     /* Swap between front and back buffer */ 
     glutSwapBuffers();
 }
@@ -68,10 +68,6 @@ void Display()
 /******************************************************************
 *
 * OnIdle
-* 
-* 
-* 
-* 
 *
 *******************************************************************/
 
@@ -81,38 +77,20 @@ void OnIdle()
     {
       if(allObjs[i].name.compare("horse") == 1)
       {
+	//horses move up and down
 	allObjs[i].IdleWork(true);
 	continue;
       }
       allObjs[i].IdleWork(false);
     }
-
-    glutPostRedisplay();
-}
-
-
-/******************************************************************
-*
-* Keyboard
-*
-* Function to be called on key press in window; set by
-* glutKeyboardFunc(); x and y specify mouse position on keypress;
-* not used in this example 
-*
-*******************************************************************/
-
-void Keyboard(unsigned char key, int x, int y)   
-{
-  float rotateCamMat[16];
-  SetIdentityMatrix(rotateCamMat);
-    switch( key ) 
-    {
-      
     
-    }
-
+    if(!MODE1)
+      cam.freeFly();
     glutPostRedisplay();
 }
+
+
+
 
 void Mouse()
 {
@@ -136,12 +114,9 @@ void Initialize(void)
     /* Enable depth testing */
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-
     
     /*Intel troubleshooting*/
-    InitClass::setupArrayObject();
-
-    
+    InitClass::setupArrayObject();    
     
     /* Setup shaders and shader program */
     InitClass::CreateShaderProgram();  
@@ -157,11 +132,84 @@ void Initialize(void)
     }
   
 }
+/******************************************************************
+*
+* Keyboard
+*
+* Function to be called on key press in window; set by
+* glutKeyboardFunc(); x and y specify mouse position on keypress;
+* not used in this example 
+*
+*******************************************************************/
+void Keyboard(unsigned char key, int x, int y)   
+{
+  if(MODE1)
+  {
+    switch( key ) 
+    {  
+      case 'a': cam.move(glm::vec3(0.5,0.0,0.0)); break;
+      case 'd': cam.move(glm::vec3(-0.5,0.0,0.0)); break;
+      case 's': cam.move(glm::vec3(0.0,0.0,-0.50)); break;
+      case 'w': cam.move(glm::vec3(0.0,0.0,0.50)); break;
+      case '2': MODE1 = false; break;
+      default: break;
+    
+    }
+  }
+  else
+  {
+    switch( key )
+    {
+       case '1': MODE1 = true; break;
+    }
+    
+  }
+    glutPostRedisplay();
+}
 
+/******************************************************************
+*
+* Mouse
+*
+* Function is called on mouse button press; has been seta
+* with glutMouseFunc(), x and y specify mouse coordinates,
+* but are not used here.
+*
+*******************************************************************/
 
+void Mouse(int button, int state, int x, int y) 
+{
+    if(state == GLUT_DOWN) 
+    {
+    /* Depending on button pressed, set rotation axis,
+      * turn on animation */
+      switch(button) 
+      {
+	  case 3:
+		cam.move(glm::vec3(0.0,0.0,1.00));
+		break;
+	  case 4:
+		cam.move(glm::vec3(0.0,0.0,-1.00));
+		break;
+      }
 
+    }
+}
 
-
+void mouseMovement(int x, int y) 
+{   
+  if(MODE1)
+  {
+    int centx = glutGet(GLUT_WINDOW_WIDTH) / 2;
+    int centy = glutGet(GLUT_WINDOW_HEIGHT) / 2;
+    cam.rotate(glm::vec3( (0.001*(y- centy))   , 0.001 * (x - centx) , 0));
+    //cam.rotate(glm::vec3());
+    if (x != centx || y != centy)
+    {
+      glutWarpPointer(centx, centy);
+    }
+  }
+}
 
 /******************************************************************
 *
@@ -177,7 +225,7 @@ int main(int argc, char** argv)
     /* Initialize GLUT; set double buffered window and RGBA color model */
     glutInit(&argc, argv);
     InitClass::USES_MESA = (USES_MESA_DRIVER == 1) ? 1 : 0;
-    allObjs = ObjLoader::loadObj("merry.obj");
+    allObjs = ObjLoader::loadObj("../merry.obj", "../");
     
     InitClass::setupIntelMesaConfiguration();
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
@@ -202,6 +250,8 @@ int main(int argc, char** argv)
     glutIdleFunc(OnIdle);
     glutDisplayFunc(Display);
     glutKeyboardFunc(Keyboard); 
+    glutMouseFunc(Mouse);
+    glutPassiveMotionFunc(mouseMovement);
     glutMainLoop();
 
     

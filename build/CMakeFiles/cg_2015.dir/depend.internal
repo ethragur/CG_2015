@@ -4,16 +4,12 @@
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.cpp
  /home/effi/projects/CG_2015/GraphicsObject.h
- /home/effi/projects/CG_2015/Matrix.h
 CMakeFiles/cg_2015.dir/InitClass.cpp.o
  /home/effi/projects/CG_2015/InitClass.cpp
  /home/effi/projects/CG_2015/InitClass.h
-CMakeFiles/cg_2015.dir/Matrix.cpp.o
- /home/effi/projects/CG_2015/Matrix.cpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.h
  /home/effi/projects/CG_2015/InitClass.h
- /home/effi/projects/CG_2015/Matrix.h
  /home/effi/projects/CG_2015/MerryGoRound.cpp
  /home/effi/projects/CG_2015/camera.h
  /home/effi/projects/CG_2015/objloader.h
@@ -22,7 +18,6 @@ CMakeFiles/cg_2015.dir/camera.cpp.o
  /home/effi/projects/CG_2015/camera.h
 CMakeFiles/cg_2015.dir/objloader.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.h
- /home/effi/projects/CG_2015/Matrix.h
  /home/effi/projects/CG_2015/objloader.cpp
  /home/effi/projects/CG_2015/objloader.h
  /home/effi/projects/CG_2015/tiny_obj_loader.hpp

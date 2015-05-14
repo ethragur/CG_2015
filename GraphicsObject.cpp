@@ -35,12 +35,14 @@ void GraphicsObject::IdleWork(bool updown)
   //compute FPS independent TIME
   oldtime = newtime;
   newtime = glutGet(GLUT_ELAPSED_TIME); 
-  
-  rotAroundCenter();
- 
-  if(updown)
+  if(!(name.compare("back1") == 0 || name.compare("Plane") == 0))
   {
-    UpDown();
+    rotAroundCenter();
+  
+    if(updown)
+    {
+      UpDown();
+    }
   }
 }
 
