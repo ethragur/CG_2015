@@ -8,12 +8,24 @@ CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../Matrix.h
 CMakeFiles/cg_2015.dir/InitClass.cpp.o: ../InitClass.cpp
 CMakeFiles/cg_2015.dir/InitClass.cpp.o: ../InitClass.h
 
-CMakeFiles/cg_2015.dir/LoadShader.cpp.o: ../LoadShader.cpp
-
 CMakeFiles/cg_2015.dir/Matrix.cpp.o: ../Matrix.cpp
 
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o: ../GraphicsObject.h
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o: ../LoadShader.h
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o: ../Matrix.h
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o: ../RotatingCube.cpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../GraphicsObject.h
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../InitClass.h
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../Matrix.h
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../MerryGoRound.cpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../camera.h
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../objloader.h
+
+CMakeFiles/cg_2015.dir/camera.cpp.o: ../camera.cpp
+CMakeFiles/cg_2015.dir/camera.cpp.o: ../camera.h
+
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../GraphicsObject.h
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../Matrix.h
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../objloader.cpp
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../objloader.h
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../tiny_obj_loader.hpp
+
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o: ../tiny_obj_loader.cpp
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o: ../tiny_obj_loader.hpp
 

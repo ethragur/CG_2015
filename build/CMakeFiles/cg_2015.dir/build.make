@@ -72,55 +72,32 @@ CMakeFiles/cg_2015.dir/Matrix.cpp.o.provides: CMakeFiles/cg_2015.dir/Matrix.cpp.
 
 CMakeFiles/cg_2015.dir/Matrix.cpp.o.provides.build: CMakeFiles/cg_2015.dir/Matrix.cpp.o
 
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o: CMakeFiles/cg_2015.dir/flags.make
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o: ../RotatingCube.cpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../MerryGoRound.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/RotatingCube.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/RotatingCube.cpp.o -c /home/effi/projects/CG_2015/RotatingCube.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o -c /home/effi/projects/CG_2015/MerryGoRound.cpp
 
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cg_2015.dir/RotatingCube.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/effi/projects/CG_2015/RotatingCube.cpp > CMakeFiles/cg_2015.dir/RotatingCube.cpp.i
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cg_2015.dir/MerryGoRound.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/effi/projects/CG_2015/MerryGoRound.cpp > CMakeFiles/cg_2015.dir/MerryGoRound.cpp.i
 
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cg_2015.dir/RotatingCube.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/effi/projects/CG_2015/RotatingCube.cpp -o CMakeFiles/cg_2015.dir/RotatingCube.cpp.s
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cg_2015.dir/MerryGoRound.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/effi/projects/CG_2015/MerryGoRound.cpp -o CMakeFiles/cg_2015.dir/MerryGoRound.cpp.s
 
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.requires:
-.PHONY : CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.requires
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.requires
 
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.provides: CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.requires
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.provides.build
-.PHONY : CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.provides
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.provides: CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.provides
 
-CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.provides.build: CMakeFiles/cg_2015.dir/RotatingCube.cpp.o
-
-CMakeFiles/cg_2015.dir/LoadShader.cpp.o: CMakeFiles/cg_2015.dir/flags.make
-CMakeFiles/cg_2015.dir/LoadShader.cpp.o: ../LoadShader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/LoadShader.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/LoadShader.cpp.o -c /home/effi/projects/CG_2015/LoadShader.cpp
-
-CMakeFiles/cg_2015.dir/LoadShader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cg_2015.dir/LoadShader.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/effi/projects/CG_2015/LoadShader.cpp > CMakeFiles/cg_2015.dir/LoadShader.cpp.i
-
-CMakeFiles/cg_2015.dir/LoadShader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cg_2015.dir/LoadShader.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/effi/projects/CG_2015/LoadShader.cpp -o CMakeFiles/cg_2015.dir/LoadShader.cpp.s
-
-CMakeFiles/cg_2015.dir/LoadShader.cpp.o.requires:
-.PHONY : CMakeFiles/cg_2015.dir/LoadShader.cpp.o.requires
-
-CMakeFiles/cg_2015.dir/LoadShader.cpp.o.provides: CMakeFiles/cg_2015.dir/LoadShader.cpp.o.requires
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/LoadShader.cpp.o.provides.build
-.PHONY : CMakeFiles/cg_2015.dir/LoadShader.cpp.o.provides
-
-CMakeFiles/cg_2015.dir/LoadShader.cpp.o.provides.build: CMakeFiles/cg_2015.dir/LoadShader.cpp.o
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.provides.build: CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o
 
 CMakeFiles/cg_2015.dir/InitClass.cpp.o: CMakeFiles/cg_2015.dir/flags.make
 CMakeFiles/cg_2015.dir/InitClass.cpp.o: ../InitClass.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/InitClass.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/InitClass.cpp.o -c /home/effi/projects/CG_2015/InitClass.cpp
 
@@ -143,7 +120,7 @@ CMakeFiles/cg_2015.dir/InitClass.cpp.o.provides.build: CMakeFiles/cg_2015.dir/In
 
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: CMakeFiles/cg_2015.dir/flags.make
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../GraphicsObject.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o -c /home/effi/projects/CG_2015/GraphicsObject.cpp
 
@@ -164,22 +141,95 @@ CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.provides: CMakeFiles/cg_2015.dir/Gra
 
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.provides.build: CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
 
+CMakeFiles/cg_2015.dir/objloader.cpp.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../objloader.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/objloader.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/objloader.cpp.o -c /home/effi/projects/CG_2015/objloader.cpp
+
+CMakeFiles/cg_2015.dir/objloader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cg_2015.dir/objloader.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/effi/projects/CG_2015/objloader.cpp > CMakeFiles/cg_2015.dir/objloader.cpp.i
+
+CMakeFiles/cg_2015.dir/objloader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cg_2015.dir/objloader.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/effi/projects/CG_2015/objloader.cpp -o CMakeFiles/cg_2015.dir/objloader.cpp.s
+
+CMakeFiles/cg_2015.dir/objloader.cpp.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/objloader.cpp.o.requires
+
+CMakeFiles/cg_2015.dir/objloader.cpp.o.provides: CMakeFiles/cg_2015.dir/objloader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/objloader.cpp.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/objloader.cpp.o.provides
+
+CMakeFiles/cg_2015.dir/objloader.cpp.o.provides.build: CMakeFiles/cg_2015.dir/objloader.cpp.o
+
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o: ../tiny_obj_loader.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o -c /home/effi/projects/CG_2015/tiny_obj_loader.cpp
+
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/effi/projects/CG_2015/tiny_obj_loader.cpp > CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.i
+
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/effi/projects/CG_2015/tiny_obj_loader.cpp -o CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.s
+
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.requires
+
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.provides: CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.provides
+
+CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.provides.build: CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o
+
+CMakeFiles/cg_2015.dir/camera.cpp.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/camera.cpp.o: ../camera.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/cg_2015.dir/camera.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cg_2015.dir/camera.cpp.o -c /home/effi/projects/CG_2015/camera.cpp
+
+CMakeFiles/cg_2015.dir/camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cg_2015.dir/camera.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/effi/projects/CG_2015/camera.cpp > CMakeFiles/cg_2015.dir/camera.cpp.i
+
+CMakeFiles/cg_2015.dir/camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cg_2015.dir/camera.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/effi/projects/CG_2015/camera.cpp -o CMakeFiles/cg_2015.dir/camera.cpp.s
+
+CMakeFiles/cg_2015.dir/camera.cpp.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/camera.cpp.o.requires
+
+CMakeFiles/cg_2015.dir/camera.cpp.o.provides: CMakeFiles/cg_2015.dir/camera.cpp.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/camera.cpp.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/camera.cpp.o.provides
+
+CMakeFiles/cg_2015.dir/camera.cpp.o.provides.build: CMakeFiles/cg_2015.dir/camera.cpp.o
+
 # Object files for target cg_2015
 cg_2015_OBJECTS = \
 "CMakeFiles/cg_2015.dir/Matrix.cpp.o" \
-"CMakeFiles/cg_2015.dir/RotatingCube.cpp.o" \
-"CMakeFiles/cg_2015.dir/LoadShader.cpp.o" \
+"CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o" \
 "CMakeFiles/cg_2015.dir/InitClass.cpp.o" \
-"CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
+"CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o" \
+"CMakeFiles/cg_2015.dir/objloader.cpp.o" \
+"CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o" \
+"CMakeFiles/cg_2015.dir/camera.cpp.o"
 
 # External object files for target cg_2015
 cg_2015_EXTERNAL_OBJECTS =
 
 cg_2015: CMakeFiles/cg_2015.dir/Matrix.cpp.o
-cg_2015: CMakeFiles/cg_2015.dir/RotatingCube.cpp.o
-cg_2015: CMakeFiles/cg_2015.dir/LoadShader.cpp.o
+cg_2015: CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/InitClass.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
+cg_2015: CMakeFiles/cg_2015.dir/objloader.cpp.o
+cg_2015: CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o
+cg_2015: CMakeFiles/cg_2015.dir/camera.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/build.make
 cg_2015: /usr/lib64/libGLEW.so
 cg_2015: /usr/lib64/libGLU.so
@@ -202,10 +252,12 @@ CMakeFiles/cg_2015.dir/build: cg_2015
 .PHONY : CMakeFiles/cg_2015.dir/build
 
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/Matrix.cpp.o.requires
-CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/RotatingCube.cpp.o.requires
-CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/LoadShader.cpp.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o.requires
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/InitClass.cpp.o.requires
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/objloader.cpp.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/camera.cpp.o.requires
 .PHONY : CMakeFiles/cg_2015.dir/requires
 
 CMakeFiles/cg_2015.dir/clean:

@@ -1,9 +1,11 @@
 file(REMOVE_RECURSE
   "CMakeFiles/cg_2015.dir/Matrix.cpp.o"
-  "CMakeFiles/cg_2015.dir/RotatingCube.cpp.o"
-  "CMakeFiles/cg_2015.dir/LoadShader.cpp.o"
+  "CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o"
   "CMakeFiles/cg_2015.dir/InitClass.cpp.o"
   "CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
+  "CMakeFiles/cg_2015.dir/objloader.cpp.o"
+  "CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o"
+  "CMakeFiles/cg_2015.dir/camera.cpp.o"
   "cg_2015.pdb"
   "cg_2015"
 )

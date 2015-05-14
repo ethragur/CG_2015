@@ -203,30 +203,6 @@ InitClass.cpp.s:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/InitClass.cpp.s
 .PHONY : InitClass.cpp.s
 
-LoadShader.o: LoadShader.cpp.o
-.PHONY : LoadShader.o
-
-# target to build an object file
-LoadShader.cpp.o:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/LoadShader.cpp.o
-.PHONY : LoadShader.cpp.o
-
-LoadShader.i: LoadShader.cpp.i
-.PHONY : LoadShader.i
-
-# target to preprocess a source file
-LoadShader.cpp.i:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/LoadShader.cpp.i
-.PHONY : LoadShader.cpp.i
-
-LoadShader.s: LoadShader.cpp.s
-.PHONY : LoadShader.s
-
-# target to generate assembly for a file
-LoadShader.cpp.s:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/LoadShader.cpp.s
-.PHONY : LoadShader.cpp.s
-
 Matrix.o: Matrix.cpp.o
 .PHONY : Matrix.o
 
@@ -251,29 +227,101 @@ Matrix.cpp.s:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/Matrix.cpp.s
 .PHONY : Matrix.cpp.s
 
-RotatingCube.o: RotatingCube.cpp.o
-.PHONY : RotatingCube.o
+MerryGoRound.o: MerryGoRound.cpp.o
+.PHONY : MerryGoRound.o
 
 # target to build an object file
-RotatingCube.cpp.o:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/RotatingCube.cpp.o
-.PHONY : RotatingCube.cpp.o
+MerryGoRound.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o
+.PHONY : MerryGoRound.cpp.o
 
-RotatingCube.i: RotatingCube.cpp.i
-.PHONY : RotatingCube.i
+MerryGoRound.i: MerryGoRound.cpp.i
+.PHONY : MerryGoRound.i
 
 # target to preprocess a source file
-RotatingCube.cpp.i:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/RotatingCube.cpp.i
-.PHONY : RotatingCube.cpp.i
+MerryGoRound.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/MerryGoRound.cpp.i
+.PHONY : MerryGoRound.cpp.i
 
-RotatingCube.s: RotatingCube.cpp.s
-.PHONY : RotatingCube.s
+MerryGoRound.s: MerryGoRound.cpp.s
+.PHONY : MerryGoRound.s
 
 # target to generate assembly for a file
-RotatingCube.cpp.s:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/RotatingCube.cpp.s
-.PHONY : RotatingCube.cpp.s
+MerryGoRound.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/MerryGoRound.cpp.s
+.PHONY : MerryGoRound.cpp.s
+
+camera.o: camera.cpp.o
+.PHONY : camera.o
+
+# target to build an object file
+camera.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/camera.cpp.o
+.PHONY : camera.cpp.o
+
+camera.i: camera.cpp.i
+.PHONY : camera.i
+
+# target to preprocess a source file
+camera.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/camera.cpp.i
+.PHONY : camera.cpp.i
+
+camera.s: camera.cpp.s
+.PHONY : camera.s
+
+# target to generate assembly for a file
+camera.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/camera.cpp.s
+.PHONY : camera.cpp.s
+
+objloader.o: objloader.cpp.o
+.PHONY : objloader.o
+
+# target to build an object file
+objloader.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/objloader.cpp.o
+.PHONY : objloader.cpp.o
+
+objloader.i: objloader.cpp.i
+.PHONY : objloader.i
+
+# target to preprocess a source file
+objloader.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/objloader.cpp.i
+.PHONY : objloader.cpp.i
+
+objloader.s: objloader.cpp.s
+.PHONY : objloader.s
+
+# target to generate assembly for a file
+objloader.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/objloader.cpp.s
+.PHONY : objloader.cpp.s
+
+tiny_obj_loader.o: tiny_obj_loader.cpp.o
+.PHONY : tiny_obj_loader.o
+
+# target to build an object file
+tiny_obj_loader.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o
+.PHONY : tiny_obj_loader.cpp.o
+
+tiny_obj_loader.i: tiny_obj_loader.cpp.i
+.PHONY : tiny_obj_loader.i
+
+# target to preprocess a source file
+tiny_obj_loader.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.i
+.PHONY : tiny_obj_loader.cpp.i
+
+tiny_obj_loader.s: tiny_obj_loader.cpp.s
+.PHONY : tiny_obj_loader.s
+
+# target to generate assembly for a file
+tiny_obj_loader.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.s
+.PHONY : tiny_obj_loader.cpp.s
 
 # Help Target
 help:
@@ -294,15 +342,21 @@ help:
 	@echo "... InitClass.o"
 	@echo "... InitClass.i"
 	@echo "... InitClass.s"
-	@echo "... LoadShader.o"
-	@echo "... LoadShader.i"
-	@echo "... LoadShader.s"
 	@echo "... Matrix.o"
 	@echo "... Matrix.i"
 	@echo "... Matrix.s"
-	@echo "... RotatingCube.o"
-	@echo "... RotatingCube.i"
-	@echo "... RotatingCube.s"
+	@echo "... MerryGoRound.o"
+	@echo "... MerryGoRound.i"
+	@echo "... MerryGoRound.s"
+	@echo "... camera.o"
+	@echo "... camera.i"
+	@echo "... camera.s"
+	@echo "... objloader.o"
+	@echo "... objloader.i"
+	@echo "... objloader.s"
+	@echo "... tiny_obj_loader.o"
+	@echo "... tiny_obj_loader.i"
+	@echo "... tiny_obj_loader.s"
 .PHONY : help
 
 
