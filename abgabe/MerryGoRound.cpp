@@ -9,7 +9,6 @@
 *
 *******************************************************************/
 
-
 /* Standard includes */
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,125 +21,22 @@
 
 
 /* Local includes */
-#include "LoadShader.h"   /* Provides loading function for shader code */
-#include "Matrix.h"  
 #include "GraphicsObject.h"
 #include <vector>
+#include "objloader.h"
+#include "camera.h"
+#include "InitClass.h"
 
-
+//set to 1 when using the opensource intel or amd driver
 #define USES_MESA_DRIVER 1
 
-
-/*----------------------------------------------------------------*/
-/* Define handle to a vertex array object (only for MESA USE) */
-GLuint VAO;
-
 /* Strings for loading and storing shader code */
-static const char* VertexShaderString;
-static const char* FragmentShaderString;
+Camera cam;
 
-GLuint ShaderProgram;
+//storage for all the modles loaded from the obj
+std::vector<GraphicsObject> allObjs;
 
-float ProjectionMatrix[16]; /* Perspective projection matrix */
-float ViewMatrix[16]; /* Camera view matrix */ 
-
-GraphicsObject *cube1;
-GraphicsObject *cube2;
-GraphicsObject *cube3;
-GraphicsObject *cube4;
-GraphicsObject *pillar;
-GraphicsObject *platform1;
-GraphicsObject *platform2;
-
-//cube
-GLfloat v[] = 
-  { 
-    -1.0, -1.0,  1.0,
-     1.0, -1.0,  1.0,
-     1.0,  1.0,  1.0,
-    -1.0,  1.0,  1.0,
-    -1.0, -1.0, -1.0,
-     1.0, -1.0, -1.0,
-     1.0,  1.0, -1.0,
-    -1.0,  1.0, -1.0,
-  };
-  
-std::vector<GLfloat> vertex_buffer_data(&v[0], &v[0]+24);
-//pillar  
-GLfloat v1[] = 
-  { 
-    -0.2, -4.0,  0.2,
-     0.2, -4.0,  0.2,
-     0.2,  4.0,  0.2,
-    -0.2,  4.0,  0.2,
-    -0.2, -4.0, -0.2,
-     0.2, -4.0, -0.2,
-     0.2,  4.0, -0.2,
-    -0.2,  4.0, -0.2,
-  };
-std::vector<GLfloat> vertex_buffer_data1(&v1[0], &v1[0]+24);
-//platform
-GLfloat v2[] = 
-  {
-    -8.0, -0.2,  8.0,
-     8.0, -0.2,  8.0,
-     8.0,  0.2,  8.0,
-    -8.0,  0.2,  8.0,
-    -8.0, -0.2, -8.0,
-     8.0, -0.2, -8.0,
-     8.0,  0.2, -8.0,
-    -8.0,  0.2, -8.0,
-  };
-  
-std::vector<GLfloat> vertex_buffer_data2(&v2[0], &v2[0]+24);
-
-GLfloat c[] = 
-  { 
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-  }; 
-std::vector<GLfloat> color_buffer_data(&c[0], &c[0]+24);
-
-
-GLfloat  c1[] = 
-  {
-      1.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 1.0f,
-      0.0f, 1.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 0.0f,
-      0.0f, 0.0f, 1.0f,
-      1.0f, 0.0f, 0.0f,
-      0.0f, 1.0f, 0.0f,
-  }; 
-std::vector<GLfloat> color_buffer_data1(&c1[0], &c1[0]+24);
-
-
-GLushort i1[] = 
-  {
-      0, 1, 2,
-      2, 3, 0,
-      1, 5, 6,
-      6, 2, 1,
-      7, 6, 5,
-      5, 4, 7,
-      4, 0, 3,
-      3, 7, 4,
-      4, 5, 1,
-      1, 0, 4,
-      3, 2, 6,
-      6, 7, 3,
-  };
-std::vector<GLushort> index_buffer_data(&i1[0], &i1[0]+36);
-
-/*----------------------------------------------------------------*/
-
+bool MODE1 = true;
 
 /******************************************************************
 *
@@ -157,14 +53,13 @@ void Display()
 {
     /* Clear window; color specified in 'Initialize()' */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    cube1->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
-    cube2->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
-    cube3->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
-    cube4->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
-    pillar->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
-    platform1->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
-    platform2->Draw(ShaderProgram, ProjectionMatrix, ViewMatrix);
+     for(int i = 0; i < allObjs.size(); i ++)
+    {
+      allObjs[i].Draw(InitClass::ShaderProgram, cam.ProjectionMatrix, cam.ViewMatrix);
+    }
+    glColor3f( 20, 20, 20 );
+    glRasterPos2f(10, 10);
+    glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'C');
     /* Swap between front and back buffer */ 
     glutSwapBuffers();
 }
@@ -174,134 +69,32 @@ void Display()
 *
 * OnIdle
 *
-* 
-*
 *******************************************************************/
 
 void OnIdle()
 {
-   
-    cube1->IdleWork(true);
-    cube2->IdleWork(true);
-    cube3->IdleWork(true);
-    cube4->IdleWork(true);
-    pillar->IdleWork(false);
-    platform1->IdleWork(false);
-    platform2->IdleWork(false);
+   for(int i = 0; i < allObjs.size(); i ++)
+    {
+      if(allObjs[i].name.compare("horse") == 1)
+      {
+	//horses move up and down
+	allObjs[i].IdleWork(true);
+	continue;
+      }
+      allObjs[i].IdleWork(false);
+    }
+    
+    if(!MODE1)
+      cam.freeFly();
     glutPostRedisplay();
 }
 
 
 
-/******************************************************************
-*
-* AddShader
-*
-* This function creates and adds individual shaders
-*
-*******************************************************************/
 
-void AddShader(GLuint ShaderProgram, const char* ShaderCode, GLenum ShaderType)
+void Mouse()
 {
-    /* Create shader object */
-    GLuint ShaderObj = glCreateShader(ShaderType);
-
-    if (ShaderObj == 0) 
-    {
-        fprintf(stderr, "Error creating shader type %d\n", ShaderType);
-        exit(0);
-
-    }
-
-    /* Associate shader source code string with shader object */
-    glShaderSource(ShaderObj, 1, &ShaderCode, NULL);
-
-    GLint success = 0;
-    GLchar InfoLog[1024];
-
-    /* Compile shader source code */
-    glCompileShader(ShaderObj);
-    glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success);
-
-    if (!success) 
-    {
-        glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
-        fprintf(stderr, "Error compiling shader type %d: '%s'\n", ShaderType, InfoLog);
-        exit(1);
-    }
-
-    /* Associate shader with shader program */
-    glAttachShader(ShaderProgram, ShaderObj);
-}
-
-
-/******************************************************************
-*
-* CreateShaderProgram
-*
-* This function creates the shader program; vertex and fragment
-* shaders are loaded and linked into program; final shader program
-* is put into the rendering pipeline 
-*
-*******************************************************************/
-
-void CreateShaderProgram()
-{
-    /* Allocate shader object */
-    ShaderProgram = glCreateProgram();
-
-    if (ShaderProgram == 0) 
-    {
-        fprintf(stderr, "Error creating shader program\n");
-        exit(1);
-    }
-
-    /* Load shader code from file */
-    VertexShaderString = LoadShader("vertexshader.vs");
-    FragmentShaderString = LoadShader("fragmentshader.fs");
-
-    /* Separately add vertex and fragment shader to program */
-    AddShader(ShaderProgram, VertexShaderString, GL_VERTEX_SHADER);
-    AddShader(ShaderProgram, FragmentShaderString, GL_FRAGMENT_SHADER);
-
-    GLint Success = 0;
-    GLchar ErrorLog[1024];
-
-    /* Link shader code into executable shader program */
-    glLinkProgram(ShaderProgram);
-
-    /* Check results of linking step */
-    glGetProgramiv(ShaderProgram, GL_LINK_STATUS, &Success);
-
-    if (Success == 0) 
-    {
-        glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-        fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
-        exit(1);
-    }
-
-    /* Check if shader program can be executed */ 
-    glValidateProgram(ShaderProgram);
-    glGetProgramiv(ShaderProgram, GL_VALIDATE_STATUS, &Success);
-
-    if (!Success) 
-    {
-        glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-        fprintf(stderr, "Invalid shader program: '%s'\n", ErrorLog);
-        exit(1);
-    }
-
-    /* Put linked shader program into drawing pipeline */
-    glUseProgram(ShaderProgram);
-}
-
-
-
-void setupArrayObject(){
-    if (USES_MESA_DRIVER){
-		glGenVertexArrays(1, &VAO); // Create our Vertex Array Object  
-		glBindVertexArray(VAO); // Bind our Vertex Array Object so we can use it 
-	}
+  
 }
 
 /******************************************************************
@@ -321,55 +114,120 @@ void Initialize(void)
     /* Enable depth testing */
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-
     
     /*Intel troubleshooting*/
-    setupArrayObject();
-
-    
+    InitClass::setupArrayObject();    
     
     /* Setup shaders and shader program */
-    CreateShaderProgram();  
-
-    /* Initialize matrices */
-    SetIdentityMatrix(ProjectionMatrix);
-    SetIdentityMatrix(ViewMatrix);
-    
-    /* Set projection transform */
-    float fovy = 45.0;
-    float aspect = 1.0; 
-    float nearPlane = 1.0; 
-    float farPlane = 100.0;
-    SetPerspectiveMatrix(fovy, aspect, nearPlane, farPlane, ProjectionMatrix);
-
-    /* Set viewing transform */
-    float camera_disp = -42.0;
-    SetTranslation(0.0, 0.0, camera_disp, ViewMatrix);
+    InitClass::CreateShaderProgram();  
+    /* Initialize Camera */
+    cam = Camera();
     
     
-    cube1->initobj(8,1,0);
-    cube2->initobj(-8,-1,0);
-    cube3->initobj(0,1,8);
-    cube4->initobj(0,-1,-8);
-    pillar->initobj(0,0,0);
-    platform1->initobj(0,4,0);
-    platform2->initobj(0,-4,0);
-   
+    
+    /* Init all Objects in the Obj file */
+    for(int i = 0; i < allObjs.size(); i ++)
+    {
+      allObjs[i].initobj(0,0,0);
+    }
+  
+}
+/******************************************************************
+*
+* Keyboard
+*
+* Function to be called on key press in window; set by
+* glutKeyboardFunc(); x and y specify mouse position on keypress;
+* not used in this example 
+*
+*******************************************************************/
+void Keyboard(unsigned char key, int x, int y)   
+{
+  if(MODE1)
+  {
+    switch( key ) 
+    {  
+      case 'a': cam.move(glm::vec3(0.5,0.0,0.0)); break;
+      case 'd': cam.move(glm::vec3(-0.5,0.0,0.0)); break;
+      case 's': cam.move(glm::vec3(0.0,0.0,-0.50)); break;
+      case 'w': cam.move(glm::vec3(0.0,0.0,0.50)); break;
+      case '2': MODE1 = false; cam.ViewMatrix = cam.initialViewMatrix; break;
+      default: break;
+    
+    }
+  }
+  else
+  {
+    switch( key )
+    {
+       case '1': MODE1 = true; break;
+       case '+': cam.factor += 0.1; break;
+       case '-': cam.factor -= 0.1; break;
+       case 'q': GraphicsObject::speed *= 1.1; break;
+       case 'e': GraphicsObject::speed /= 1.1; break;
+    }
+    
+  }
+    glutPostRedisplay();
 }
 
+/******************************************************************
+*
+* Mouse
+*
+* Function is called on mouse button press; has been seta
+* with glutMouseFunc(), x and y specify mouse coordinates,
+* but are not used here.
+*
+*******************************************************************/
 
+void Mouse(int button, int state, int x, int y) 
+{
+    if(state == GLUT_DOWN) 
+    {
+    /* Depending on button pressed, set rotation axis,
+      * turn on animation */
+      switch(button) 
+      {
+	  case 3:
+		cam.move(glm::vec3(0.0,0.0,1.00));
+		break;
+	  case 4:
+		cam.move(glm::vec3(0.0,0.0,-1.00));
+		break;
+      }
 
+    }
+}
 
-void setupIntelMesaConfiguration(){
+void mouseMovement(int x, int y) 
+{   
+  if(MODE1)
+  {
+    int centx = glutGet(GLUT_WINDOW_WIDTH) / 2;
+    int centy = glutGet(GLUT_WINDOW_HEIGHT) / 2;
+    cam.rotate(glm::vec3( (0.001*(y- centy))   , 0.001 * (x - centx) , 0));
+    //cam.rotate(glm::vec3());
+    if (x != centx || y != centy)
+    {
+      glutWarpPointer(centx, centy);
+    }
+  }
+}
 
-	if (USES_MESA_DRIVER){
-		/*
-		INTEL MESA TROUBLESHOOTING
-		*/
-		glutInitContextVersion(3,3);
-		glutInitContextProfile(GLUT_CORE_PROFILE);
-    	glewExperimental = GL_TRUE;
-	}
+void acMouseMovement(int x, int y) 
+{   
+  if(MODE1)
+  {
+    int centx = glutGet(GLUT_WINDOW_WIDTH) / 2;
+    int centy = glutGet(GLUT_WINDOW_HEIGHT) / 2;
+    cam.rotateScreenMid(glm::vec3( (0.001*(y- centy))   , 0.001 * (x - centx) , 0));
+    //cam.rotate(glm::vec3());
+    if (x != centx || y != centy)
+    {
+      glutWarpPointer(centx, centy);
+    }
+  }
 }
 
 /******************************************************************
@@ -382,21 +240,17 @@ void setupIntelMesaConfiguration(){
 
 int main(int argc, char** argv)
 {
-    cube1 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
-    cube2 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);   
-    cube3 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
-    cube4 = new GraphicsObject(vertex_buffer_data, color_buffer_data1, index_buffer_data);
-    pillar = new GraphicsObject(vertex_buffer_data1, color_buffer_data, index_buffer_data); 
-    platform1 = new GraphicsObject(vertex_buffer_data2, color_buffer_data, index_buffer_data); 
-    platform2 = new GraphicsObject(vertex_buffer_data2, color_buffer_data, index_buffer_data); 
+   
     /* Initialize GLUT; set double buffered window and RGBA color model */
     glutInit(&argc, argv);
+    InitClass::USES_MESA = (USES_MESA_DRIVER == 1) ? 1 : 0;
+    allObjs = ObjLoader::loadObj("res/merry.obj", "res/");
     
-    setupIntelMesaConfiguration();
+    InitClass::setupIntelMesaConfiguration();
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowSize(900, 900);
     glutInitWindowPosition(400, 400);
-    glutCreateWindow("CG Proseminar - Rotating Cube");
+    glutCreateWindow("CG Proseminar - MerryGoRound");
 
     /* Initialize GL extension wrangler */
     GLenum res = glewInit();
@@ -414,6 +268,10 @@ int main(int argc, char** argv)
      * handing control over to GLUT */
     glutIdleFunc(OnIdle);
     glutDisplayFunc(Display);
+    glutKeyboardFunc(Keyboard); 
+    glutMouseFunc(Mouse);
+    glutPassiveMotionFunc(mouseMovement);
+    glutMotionFunc(acMouseMovement);
     glutMainLoop();
 
     

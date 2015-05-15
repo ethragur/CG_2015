@@ -1,15 +1,13 @@
 #include "GraphicsObject.h"
+#include "glm/ext.hpp"
+#include <cmath>
+#include <iostream>
 
-GraphicsObject::GraphicsObject(std::vector<GLfloat> vertex_buffer_temp, std::vector<GLfloat> color_buffer_temp, std::vector<GLushort> index_buffer_temp)
-{	
-  
-  vertex_buffer_data = vertex_buffer_temp;
-  
+float GraphicsObject::speed = 1.0;
 
-  color_buffer_data = color_buffer_temp;
-  
-
-  index_buffer_data = index_buffer_temp;
+GraphicsObject::GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, const std::vector<GLfloat> & color_buffer_temp, const std::vector<GLuint> & index_buffer_temp, const std::string &name) :
+vertex_buffer_data(vertex_buffer_temp), color_buffer_data(color_buffer_temp), index_buffer_data(index_buffer_temp), name(name) 
+{ 
   
 }
 
@@ -19,67 +17,57 @@ GraphicsObject::GraphicsObject(std::vector<GLfloat> vertex_buffer_temp, std::vec
  * starting Pos, Rotation....
  * 
 *****++++++++++++++++++++++++++++++++++++++++*/
-
 void GraphicsObject::initobj(float x, float y, float z)
 {
   SetupDataBuffers();
-  SetIdentityMatrix(ModelMatrix);
-  SetTranslation(x, y, z, TranslateOrigin);
-  Pos[0] = stPos[0] = x;
-  Pos[1] = stPos[1] = y;
-  Pos[2] = stPos[2] = z;
-  SetRotationX(0, RotateX);
-  SetRotationZ(0, RotateZ);	
-  MultiplyMatrix(RotateX, TranslateOrigin, InitialTransform);
-  MultiplyMatrix(RotateZ, InitialTransform, InitialTransform);
-  MultiplyMatrix(TranslateOrigin, ModelMatrix, ModelMatrix);
-  down = true;
+  ModelMatrix = glm::mat4(1.0);
+  TranslateOrigin = glm::translate(glm::vec3(x,y,z));
+  ModelMatrix = TranslateOrigin * ModelMatrix;
+
 }
 
 
 void GraphicsObject::IdleWork(bool updown)
 {
-  float angle = (glutGet(GLUT_ELAPSED_TIME) / 1500.0) * (360.0/M_PI); 
-  float RotationMatrixAnim[16];
+  //compute FPS independent TIME
   oldtime = newtime;
   newtime = glutGet(GLUT_ELAPSED_TIME); 
-  //should object move up and down
-  if(updown)
+  if(!(name.compare("back1") == 0 || name.compare("Plane") == 0))
   {
-    SetRotationY(angle, RotationMatrixAnim);
-    
-    if(down)
+    rotAroundCenter();
+  
+    if(updown)
     {
-      Pos[1] += (newtime -oldtime)/100;
-      if(Pos[1] >= 3 - stPos[1])
-      {
-	//for float correction
-	Pos[1] = 3 - stPos[1];
-	down = false;
-      }
+      UpDown();
     }
-    else
-    {
-      Pos[1] -= (newtime - oldtime)/100;
-      if(Pos[1] <= -3 - stPos[1])
-      {
-	Pos[1] = -3 - stPos[1];
-	down = true;
-      }
-    }
-    SetTranslation(0, Pos[1], 0,TranslateOrigin);
-    
-    MultiplyMatrix(RotationMatrixAnim, InitialTransform, ModelMatrix);
-    MultiplyMatrix(TranslateOrigin, ModelMatrix, ModelMatrix);
-   
-    
-  }
-  else
-  {
-    SetRotationY(-angle, RotationMatrixAnim);
-    MultiplyMatrix(RotationMatrixAnim, InitialTransform, ModelMatrix);
   }
 }
+
+
+
+/* Updown Movement Function for the Horses
+ * 
+ * */
+void GraphicsObject::UpDown()
+{
+  TranslateOrigin = glm::translate(glm::vec3(0,sin((newtime/10)*(M_PI/180)),0));
+  ModelMatrix = TranslateOrigin * ModelMatrix;
+}
+
+
+/* Rotation Function for all GraphicsObjects
+ * 
+ * */
+void GraphicsObject::rotAroundCenter()
+{
+  float angle = (newtime/ (1500* (1/GraphicsObject::speed))) * (360.0/M_PI); 
+  
+  glm::mat4 RotationMatrixAnim;
+  RotationMatrixAnim = glm::rotate((GLfloat)(angle*M_PI/180)   , glm::vec3(0,1,0));
+  
+  ModelMatrix = RotationMatrixAnim * InitialTransform;
+}
+
 
 /******************************************************************
 *
@@ -93,21 +81,23 @@ void GraphicsObject::SetupDataBuffers()
   
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLfloat), &vertex_buffer_data[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(GLfloat), &vertex_buffer_data[0], GL_STATIC_DRAW);
 
     glGenBuffers(1, &IBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLushort), &index_buffer_data[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 
     glGenBuffers(1, &CBO);
     glBindBuffer(GL_ARRAY_BUFFER, CBO);
-    glBufferData(GL_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLfloat), &color_buffer_data[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, color_buffer_data.size() * sizeof(GLfloat), &color_buffer_data[0], GL_STATIC_DRAW);
    
 }
 
 
-
-void GraphicsObject::Draw(GLuint ShaderProgram, float ProjectionMatrix[16], float ViewMatrix[16])
+/*
+ * Draw Object to screen
+ * */
+void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm::mat4 ViewMatrix)
 {
     glEnableVertexAttribArray(vPosition);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -128,7 +118,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, float ProjectionMatrix[16], floa
         fprintf(stderr, "Could not bind uniform ProjectionMatrix\n");
 	exit(-1);
     }
-    glUniformMatrix4fv(projectionUniform, 1, GL_TRUE, ProjectionMatrix);
+    glUniformMatrix4fv(projectionUniform, 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
     
     GLint ViewUniform = glGetUniformLocation(ShaderProgram, "ViewMatrix");
     if (ViewUniform == -1) 
@@ -136,7 +126,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, float ProjectionMatrix[16], floa
         fprintf(stderr, "Could not bind uniform ViewMatrix\n");
         exit(-1);
     }
-    glUniformMatrix4fv(ViewUniform, 1, GL_TRUE, ViewMatrix);
+    glUniformMatrix4fv(ViewUniform, 1, GL_FALSE, glm::value_ptr(ViewMatrix));
    
     GLint RotationUniform = glGetUniformLocation(ShaderProgram, "ModelMatrix");
     if (RotationUniform == -1) 
@@ -144,10 +134,10 @@ void GraphicsObject::Draw(GLuint ShaderProgram, float ProjectionMatrix[16], floa
         fprintf(stderr, "Could not bind uniform ModelMatrix\n");
         exit(-1);
     }
-    glUniformMatrix4fv(RotationUniform, 1, GL_TRUE, ModelMatrix);  
+    glUniformMatrix4fv(RotationUniform, 1, GL_FALSE, glm::value_ptr(ModelMatrix));  
 
     /* Issue draw command, using indexed triangle list */
-    glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, size/sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
     /* Disable attributes */
     glDisableVertexAttribArray(vPosition);

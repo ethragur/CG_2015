@@ -5,9 +5,9 @@
 #include <GL/freeglut.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
 #include <vector>
-#include "Matrix.h"
+#include "glm/glm.hpp"
 #include <math.h>
 
 class GraphicsObject
@@ -15,35 +15,36 @@ class GraphicsObject
 
 public:
   //vars
+  std::string name;
   GLuint VBO;
   GLuint CBO;
   GLuint IBO;
-  float TranslateOrigin[16];
-  float TranslateDown[16];
-  float TranslateX[16];
-  float RotateX[16];
-  float RotateZ[16];
-  float InitialTransform[16];
-  float ModelMatrix[16];  /* Model matrix */ 
-  float Pos[3];
-  float stPos[3];
+  glm::mat4 TranslateOrigin;
+  glm::mat4 InitialTransform;
+  glm::mat4 ModelMatrix;
   std::vector<GLfloat> vertex_buffer_data;
   std::vector<GLfloat> color_buffer_data;
-  std::vector<GLushort> index_buffer_data;
+  std::vector<GLuint> index_buffer_data;
+  static float speed;
 
     
   //func
-  GraphicsObject(std::vector<GLfloat> vertex_buffer_temp, std::vector<GLfloat> color_buffer_temp, std::vector<GLushort> index_buffer_temp);
-  void Draw(GLuint ShaderProgram, float ProjectionMatrix[16], float ViewMatrix[16]);
-  void SetupDataBuffers();
+  GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, const std::vector<GLfloat> & color_buffer_temp, const std::vector<GLuint> & index_buffer_temp, const std::string & name);
+  void Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm::mat4 ViewMatrix);
   void initobj(float x, float y, float z);
   void IdleWork(bool updown);
   
   enum DataID {vPosition = 0, vColor = 1}; 
   
 private:
-  bool down;
+  //vars
+  
   float oldtime;
   float newtime;
+  
+  //func
+  void rotAroundCenter();
+  void UpDown();
+  void SetupDataBuffers();
 };
 #endif /*GRAPHICSOBJECT_H */
