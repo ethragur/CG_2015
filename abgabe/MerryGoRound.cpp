@@ -26,6 +26,7 @@
 #include "objloader.h"
 #include "camera.h"
 #include "InitClass.h"
+#include "glm/glm.hpp"
 
 //set to 1 when using the opensource intel or amd driver
 #define USES_MESA_DRIVER 1
