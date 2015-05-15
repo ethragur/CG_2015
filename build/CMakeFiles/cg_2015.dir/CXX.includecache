@@ -10,7 +10,7 @@
 GraphicsObject.h
 /home/effi/projects/CG_2015/GraphicsObject.h
 glm/ext.hpp
--
+/home/effi/projects/CG_2015/glm/ext.hpp
 cmath
 -
 iostream
@@ -30,7 +30,7 @@ string
 vector
 -
 glm/glm.hpp
--
+/home/effi/projects/CG_2015/glm/glm.hpp
 math.h
 -
 
@@ -74,17 +74,19 @@ InitClass.h
 camera.h
 /home/effi/projects/CG_2015/camera.h
 glm/gtc/matrix_transform.hpp
--
+/home/effi/projects/CG_2015/glm/gtc/matrix_transform.hpp
 glm/ext.hpp
--
+/home/effi/projects/CG_2015/glm/ext.hpp
 cmath
 -
 GL/freeglut.h
 -
+iostream
+-
 
 /home/effi/projects/CG_2015/camera.h
 glm/glm.hpp
--
+/home/effi/projects/CG_2015/glm/glm.hpp
 
 /home/effi/projects/CG_2015/objloader.cpp
 objloader.h

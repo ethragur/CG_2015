@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 //#include "Matrix.h"
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
 #include <math.h>
 
 class GraphicsObject
@@ -26,6 +26,7 @@ public:
   std::vector<GLfloat> vertex_buffer_data;
   std::vector<GLfloat> color_buffer_data;
   std::vector<GLuint> index_buffer_data;
+  static float speed;
 
     
   //func

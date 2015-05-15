@@ -151,7 +151,7 @@ void Keyboard(unsigned char key, int x, int y)
       case 'd': cam.move(glm::vec3(-0.5,0.0,0.0)); break;
       case 's': cam.move(glm::vec3(0.0,0.0,-0.50)); break;
       case 'w': cam.move(glm::vec3(0.0,0.0,0.50)); break;
-      case '2': MODE1 = false; break;
+      case '2': MODE1 = false; cam.ViewMatrix = cam.initialViewMatrix; break;
       default: break;
     
     }
@@ -161,6 +161,10 @@ void Keyboard(unsigned char key, int x, int y)
     switch( key )
     {
        case '1': MODE1 = true; break;
+       case '+': cam.factor += 0.1; break;
+       case '-': cam.factor -= 0.1; break;
+       case 'q': GraphicsObject::speed *= 1.1; break;
+       case 'e': GraphicsObject::speed /= 1.1; break;
     }
     
   }
@@ -211,6 +215,21 @@ void mouseMovement(int x, int y)
   }
 }
 
+void acMouseMovement(int x, int y) 
+{   
+  if(MODE1)
+  {
+    int centx = glutGet(GLUT_WINDOW_WIDTH) / 2;
+    int centy = glutGet(GLUT_WINDOW_HEIGHT) / 2;
+    cam.rotateScreenMid(glm::vec3( (0.001*(y- centy))   , 0.001 * (x - centx) , 0));
+    //cam.rotate(glm::vec3());
+    if (x != centx || y != centy)
+    {
+      glutWarpPointer(centx, centy);
+    }
+  }
+}
+
 /******************************************************************
 *
 * main
@@ -225,7 +244,7 @@ int main(int argc, char** argv)
     /* Initialize GLUT; set double buffered window and RGBA color model */
     glutInit(&argc, argv);
     InitClass::USES_MESA = (USES_MESA_DRIVER == 1) ? 1 : 0;
-    allObjs = ObjLoader::loadObj("../merry.obj", "../");
+    allObjs = ObjLoader::loadObj("../res/merry.obj", "../res/");
     
     InitClass::setupIntelMesaConfiguration();
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
@@ -252,6 +271,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(Keyboard); 
     glutMouseFunc(Mouse);
     glutPassiveMotionFunc(mouseMovement);
+    glutMotionFunc(acMouseMovement);
     glutMainLoop();
 
     

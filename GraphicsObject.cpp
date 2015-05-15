@@ -1,17 +1,14 @@
 #include "GraphicsObject.h"
-#include <glm/ext.hpp>
+#include "glm/ext.hpp"
 #include <cmath>
 #include <iostream>
 
-
+float GraphicsObject::speed = 1.0;
 
 GraphicsObject::GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, const std::vector<GLfloat> & color_buffer_temp, const std::vector<GLuint> & index_buffer_temp, const std::string &name) :
 vertex_buffer_data(vertex_buffer_temp), color_buffer_data(color_buffer_temp), index_buffer_data(index_buffer_temp), name(name) 
 { 
-  if(name.compare("horse") == 1) 
-  {
-    //TODO horses shouldn't start at the same Z coord
-  }
+  
 }
 
 
@@ -63,9 +60,11 @@ void GraphicsObject::UpDown()
  * */
 void GraphicsObject::rotAroundCenter()
 {
-  float angle = (glutGet(GLUT_ELAPSED_TIME) / 1500.0) * (360.0/M_PI); 
+  float angle = (newtime/ (1500* (1/GraphicsObject::speed))) * (360.0/M_PI); 
+  
   glm::mat4 RotationMatrixAnim;
-  RotationMatrixAnim = glm::rotate((GLfloat)(angle*M_PI/180), glm::vec3(0,1,0));
+  RotationMatrixAnim = glm::rotate((GLfloat)(angle*M_PI/180)   , glm::vec3(0,1,0));
+  
   ModelMatrix = RotationMatrixAnim * InitialTransform;
 }
 
