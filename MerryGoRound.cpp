@@ -244,7 +244,7 @@ int main(int argc, char** argv)
     /* Initialize GLUT; set double buffered window and RGBA color model */
     glutInit(&argc, argv);
     InitClass::USES_MESA = (USES_MESA_DRIVER == 1) ? 1 : 0;
-    allObjs = ObjLoader::loadObj("res/merry.obj", "res/");
+    allObjs = ObjLoader::loadObj("../res/merry.obj", "../res/");
     
     InitClass::setupIntelMesaConfiguration();
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

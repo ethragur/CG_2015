@@ -5,8 +5,17 @@
 
 float GraphicsObject::speed = 1.0;
 
-GraphicsObject::GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, const std::vector<GLfloat> & color_buffer_temp, const std::vector<GLuint> & index_buffer_temp, const std::string &name) :
-vertex_buffer_data(vertex_buffer_temp), color_buffer_data(color_buffer_temp), index_buffer_data(index_buffer_temp), name(name) 
+GraphicsObject::GraphicsObject(
+  const std::vector<GLfloat> & vertex_buffer_temp, 
+  const std::vector<GLfloat> & color_buffer_temp, 
+  const std::vector<GLuint> & index_buffer_temp, 
+  const std::vector<GLfloat> & vertex_normal_temp,
+  const std::string &name) :
+vertex_buffer_data(vertex_buffer_temp),
+color_buffer_data(color_buffer_temp),
+index_buffer_data(index_buffer_temp),
+vertex_normal_data(vertex_normal_temp),
+name(name) 
 { 
   
 }
@@ -106,6 +115,9 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     glEnableVertexAttribArray(vColor);
     glBindBuffer(GL_ARRAY_BUFFER, CBO);
     glVertexAttribPointer(vColor, 3, GL_FLOAT,GL_FALSE, 0, 0);   
+    
+    glEnableVertexAttribArray(vNormals);
+    glVertexAttribPointer(vNormals,3,GL_FLOAT,GL_TRUE,0,0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     GLint size; 

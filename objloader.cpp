@@ -52,7 +52,7 @@ std::vector<GraphicsObject> ObjLoader::loadObj ( const std::string& objpath, con
 	  }
       }
       //push back to the vector     
-      retVec.push_back(GraphicsObject(shapes[i].mesh.positions, color, shapes[i].mesh.indices, shapes[i].name));
+      retVec.push_back(GraphicsObject(shapes[i].mesh.positions, color, shapes[i].mesh.indices, shapes[i].mesh.normals, shapes[i].name));
     }
   }   
   return retVec;

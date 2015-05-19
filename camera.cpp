@@ -65,7 +65,7 @@ void Camera::rotateScreenMid(glm::vec3 rotation)
 void Camera::lookAtCenter()
 {
   glm::mat4 oldView = ViewMatrix;
-  ViewMatrix = {{1,0,0,0}, {0,1,0,0}, {0,0,1,0},oldView[3]};
+  //ViewMatrix = {{1,0,0,0}, {0,1,0,0}, {0,0,1,0},oldView[3]};
   
 }
 
@@ -86,15 +86,6 @@ void Camera::freeFly()
   move(glm::vec3((sin((newtime/10)*(M_PI/180)) / 20) * factor, (sin((newtime/10)*(M_PI/180)) / 20) * factor ,0.0));
   
   move(glm::vec3(0.0,0.0,(sin((newtime/10)*(M_PI/180)) / 20) * factor ));
-
-  
-  
-  //lookAtCenter();
- 
-  
-  
-  std::cout << glm::to_string(ViewMatrix) << std::endl;
-  
 }
 
 

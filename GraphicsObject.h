@@ -25,16 +25,17 @@ public:
   std::vector<GLfloat> vertex_buffer_data;
   std::vector<GLfloat> color_buffer_data;
   std::vector<GLuint> index_buffer_data;
+  std::vector<GLfloat> vertex_normal_data;
   static float speed;
 
     
   //func
-  GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, const std::vector<GLfloat> & color_buffer_temp, const std::vector<GLuint> & index_buffer_temp, const std::string & name);
+  GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, const std::vector<GLfloat> & color_buffer_temp, const std::vector<GLuint> & index_buffer_temp, const std::vector<GLfloat> & vertex_normal_temp, const std::string & name);
   void Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm::mat4 ViewMatrix);
   void initobj(float x, float y, float z);
   void IdleWork(bool updown);
   
-  enum DataID {vPosition = 0, vColor = 1}; 
+  enum DataID {vPosition = 0, vColor = 1, vNormals = 2}; 
   
 private:
   //vars
