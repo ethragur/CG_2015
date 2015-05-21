@@ -6,6 +6,8 @@
 #include <GL/freeglut.h>
 #include <iostream>
 
+Camera *Camera::inst = NULL;
+
 Camera::Camera()
 {
  ViewMatrix = glm::mat4(1.0);
@@ -23,6 +25,16 @@ Camera::Camera()
   initialViewMatrix = ViewMatrix;
   factor = 1;
   
+}
+
+Camera* Camera::getInstance()
+{
+  if(inst == NULL)
+  {
+    inst = new Camera();
+    return inst;
+  }
+  return inst;
 }
 
 
@@ -44,6 +56,7 @@ void Camera::rotate(glm::vec3 rotation)
 	  mRotation = glm::rotate(mRotation, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
   if(rotation.z != 0.0f)
 	  mRotation = glm::rotate(mRotation, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+ 
   ViewMatrix = mRotation * ViewMatrix;
 }
 
@@ -64,9 +77,7 @@ void Camera::rotateScreenMid(glm::vec3 rotation)
 //lookAt the current ScreenMid
 void Camera::lookAtCenter()
 {
-  glm::mat4 oldView = ViewMatrix;
-  //ViewMatrix = {{1,0,0,0}, {0,1,0,0}, {0,0,1,0},oldView[3]};
-  
+  glm::mat4 oldView = ViewMatrix;  
 }
 
 
@@ -80,7 +91,6 @@ void Camera::freeFly()
   else
   {
     rotateScreenMid(glm::vec3(0,-0.002, 0));
-    //rotateScreenMid(glm::vec3(sin((newtime/10)*(M_PI/180)) / 20), 0, 0);
   }
  
   move(glm::vec3((sin((newtime/10)*(M_PI/180)) / 20) * factor, (sin((newtime/10)*(M_PI/180)) / 20) * factor ,0.0));

@@ -53,7 +53,6 @@ void GraphicsObject::IdleWork(bool updown)
 }
 
 
-
 /* Updown Movement Function for the Horses
  * 
  * */
@@ -127,7 +126,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     GLint projectionUniform = glGetUniformLocation(ShaderProgram, "ProjectionMatrix");
     if (projectionUniform == -1) 
     {
-        fprintf(stderr, "Could not bind uniform ProjectionMatrix\n");
+	std::cerr << "Could not bind uniform ProjectionMatrix " << std::endl;
 	exit(-1);
     }
     glUniformMatrix4fv(projectionUniform, 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
@@ -135,7 +134,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     GLint ViewUniform = glGetUniformLocation(ShaderProgram, "ViewMatrix");
     if (ViewUniform == -1) 
     {
-        fprintf(stderr, "Could not bind uniform ViewMatrix\n");
+        std::cerr << "Could not bind uniform ViewMatrix " << std::endl;
         exit(-1);
     }
     glUniformMatrix4fv(ViewUniform, 1, GL_FALSE, glm::value_ptr(ViewMatrix));
@@ -143,7 +142,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     GLint RotationUniform = glGetUniformLocation(ShaderProgram, "ModelMatrix");
     if (RotationUniform == -1) 
     {
-        fprintf(stderr, "Could not bind uniform ModelMatrix\n");
+        std::cerr << "Could not bind uniform ModelMatrix " << std::endl;
         exit(-1);
     }
     glUniformMatrix4fv(RotationUniform, 1, GL_FALSE, glm::value_ptr(ModelMatrix));  
@@ -153,5 +152,6 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
 
     /* Disable attributes */
     glDisableVertexAttribArray(vPosition);
-    glDisableVertexAttribArray(vColor);   
+    glDisableVertexAttribArray(vColor);
+    glDisableVertexAttribArray(vNormals);
 }

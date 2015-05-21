@@ -25,6 +25,7 @@ void InitClass::CreateShaderProgram()
   if (InitClass::ShaderProgram == 0) 
   {
       fprintf(stderr, "Error creating shader program\n");
+      //std::cerr()
       exit(1);
   }
 

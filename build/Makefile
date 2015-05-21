@@ -203,6 +203,30 @@ InitClass.cpp.s:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/InitClass.cpp.s
 .PHONY : InitClass.cpp.s
 
+InputManager.o: InputManager.cpp.o
+.PHONY : InputManager.o
+
+# target to build an object file
+InputManager.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/InputManager.cpp.o
+.PHONY : InputManager.cpp.o
+
+InputManager.i: InputManager.cpp.i
+.PHONY : InputManager.i
+
+# target to preprocess a source file
+InputManager.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/InputManager.cpp.i
+.PHONY : InputManager.cpp.i
+
+InputManager.s: InputManager.cpp.s
+.PHONY : InputManager.s
+
+# target to generate assembly for a file
+InputManager.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/InputManager.cpp.s
+.PHONY : InputManager.cpp.s
+
 MerryGoRound.o: MerryGoRound.cpp.o
 .PHONY : MerryGoRound.o
 
@@ -318,6 +342,9 @@ help:
 	@echo "... InitClass.o"
 	@echo "... InitClass.i"
 	@echo "... InitClass.s"
+	@echo "... InputManager.o"
+	@echo "... InputManager.i"
+	@echo "... InputManager.s"
 	@echo "... MerryGoRound.o"
 	@echo "... MerryGoRound.i"
 	@echo "... MerryGoRound.s"

@@ -5,6 +5,9 @@
 
 class Camera
 {
+
+private:
+  static Camera *inst;
 public:
   glm::mat4 ViewMatrix;
   glm::mat4 ProjectionMatrix;
@@ -25,6 +28,7 @@ public:
   void freeFly();
   void rotateScreenMid(glm::vec3);
   void lookAtCenter();
+  static Camera* getInstance();
   
 };
 

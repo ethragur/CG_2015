@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/cg_2015.dir/objloader.cpp.o"
   "CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o"
   "CMakeFiles/cg_2015.dir/camera.cpp.o"
+  "CMakeFiles/cg_2015.dir/InputManager.cpp.o"
   "cg_2015.pdb"
   "cg_2015"
 )
