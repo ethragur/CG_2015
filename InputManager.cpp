@@ -145,4 +145,8 @@ void InputManager::onIdle()
   {
     Camera::getInstance()->move(glm::vec3(-0.1,0,0));
   }
+  if(!MODE1)
+  {
+    Camera::getInstance()->freeFly();
+  }
 }

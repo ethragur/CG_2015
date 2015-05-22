@@ -153,5 +153,5 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     /* Disable attributes */
     glDisableVertexAttribArray(vPosition);
     glDisableVertexAttribArray(vColor);
-    glDisableVertexAttribArray(vNormals);
+   // glDisableVertexAttribArray(vNormals);
 }
