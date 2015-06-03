@@ -1,1 +1,0 @@
-/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir
