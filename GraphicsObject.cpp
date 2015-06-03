@@ -168,9 +168,11 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     glUniform3f(lightColorLoc,  1.0f, 1.0f, 1.0f); 
     
     GLint lightPosLoc = glGetUniformLocation(ShaderProgram, "lightPos");
-    glUniform3f(lightPosLoc, 7.0f, 2.0f, 0.0f);  
+    glUniform3f(lightPosLoc, 3.0f, 3.0f, 3.8f);  
     
+    GLint cameraPosShader = glGetUniformLocation(ShaderProgram, "camerPos");
     
+    glUniform3f(cameraPosShader, ViewMatrix[0][3], ViewMatrix[1][3], ViewMatrix[2][3]);
     
     
     

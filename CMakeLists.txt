@@ -36,7 +36,7 @@ endif()
 #########################################################
 # Include Files
 #########################################################
-add_executable(cg_2015 MerryGoRound.cpp InitClass.cpp GraphicsObject.cpp objloader.cpp tiny_obj_loader.cpp InitClass.cpp camera.cpp InputManager.cpp)
+add_executable(cg_2015 MerryGoRound.cpp InitClass.cpp GraphicsObject.cpp objloader.cpp tiny_obj_loader.cpp InitClass.cpp camera.cpp InputManager.cpp LightSource.cpp)
 
 ########################################################
 # Linking & stuff

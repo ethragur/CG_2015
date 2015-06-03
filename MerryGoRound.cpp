@@ -124,10 +124,13 @@ int main(int argc, char** argv)
     allObjs = ObjLoader::loadObj("../res/merry.obj", "../res/");
     
     InitClass::setupIntelMesaConfiguration();
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE);
     glutInitWindowSize(900, 900);
     glutInitWindowPosition(400, 400);
     glutCreateWindow("CG Proseminar - MerryGoRound");
+    
+    //enable FSAA
+    glEnable(GL_MULTISAMPLE);
 
     /* Initialize GL extension wrangler */
     GLenum res = glewInit();

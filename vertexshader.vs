@@ -14,11 +14,13 @@ out vec3 fragNormal;
 out vec3 world_pos;
 
 void main() {
-    // Pass some variables to the fragment shader
+    
     color = Color;
-    //fragNormal = 
+    
+    //fix when translating objects
     fragNormal = mat3(transpose(inverse(ModelMatrix))) * Normals;
     fragVert = Position;
+    //calculate world position of vertexes
     world_pos = vec3(ModelMatrix * vec4(Position, 1.0f));
     
     // Apply all matrix transformations to vert

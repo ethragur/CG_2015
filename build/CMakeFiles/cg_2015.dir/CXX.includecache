@@ -60,6 +60,14 @@ camera.h
 
 /home/effi/projects/CG_2015/InputManager.h
 
+/home/effi/projects/CG_2015/LightSource.cpp
+GraphicsObject.h
+/home/effi/projects/CG_2015/GraphicsObject.h
+vector
+-
+iostream
+-
+
 /home/effi/projects/CG_2015/MerryGoRound.cpp
 stdio.h
 -

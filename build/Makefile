@@ -222,6 +222,30 @@ InputManager.cpp.s:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/InputManager.cpp.s
 .PHONY : InputManager.cpp.s
 
+LightSource.o: LightSource.cpp.o
+.PHONY : LightSource.o
+
+# target to build an object file
+LightSource.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/LightSource.cpp.o
+.PHONY : LightSource.cpp.o
+
+LightSource.i: LightSource.cpp.i
+.PHONY : LightSource.i
+
+# target to preprocess a source file
+LightSource.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/LightSource.cpp.i
+.PHONY : LightSource.cpp.i
+
+LightSource.s: LightSource.cpp.s
+.PHONY : LightSource.s
+
+# target to generate assembly for a file
+LightSource.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/LightSource.cpp.s
+.PHONY : LightSource.cpp.s
+
 MerryGoRound.o: MerryGoRound.cpp.o
 .PHONY : MerryGoRound.o
 
@@ -339,6 +363,9 @@ help:
 	@echo "... InputManager.o"
 	@echo "... InputManager.i"
 	@echo "... InputManager.s"
+	@echo "... LightSource.o"
+	@echo "... LightSource.i"
+	@echo "... LightSource.s"
 	@echo "... MerryGoRound.o"
 	@echo "... MerryGoRound.i"
 	@echo "... MerryGoRound.s"

@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/effi/projects/CG_2015/GraphicsObject.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
   "/home/effi/projects/CG_2015/InitClass.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/InitClass.cpp.o"
   "/home/effi/projects/CG_2015/InputManager.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/InputManager.cpp.o"
+  "/home/effi/projects/CG_2015/LightSource.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/LightSource.cpp.o"
   "/home/effi/projects/CG_2015/MerryGoRound.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o"
   "/home/effi/projects/CG_2015/camera.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/camera.cpp.o"
   "/home/effi/projects/CG_2015/objloader.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/objloader.cpp.o"
