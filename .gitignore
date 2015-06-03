@@ -1,0 +1,6 @@
+build/
+cmake_install.cmake
+CMakeFiles/
+abgabe/
+CG_2015.kde4
+CMakeCache.txt

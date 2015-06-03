@@ -87,6 +87,7 @@ void GraphicsObject::rotAroundCenter()
 void GraphicsObject::SetupDataBuffers()
 {
   
+  
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(GLfloat), &vertex_buffer_data[0], GL_STATIC_DRAW);
@@ -107,6 +108,13 @@ void GraphicsObject::SetupDataBuffers()
  * */
 void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm::mat4 ViewMatrix)
 {
+    glUseProgram(ShaderProgram);
+    GLuint LightID = glGetUniformLocation(ShaderProgram, "LightPosition_worldspace");
+  
+    glm::vec3 lightPos = glm::vec3(0,15,0);
+    glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
+    
+ 
     glEnableVertexAttribArray(vPosition);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, 0);
