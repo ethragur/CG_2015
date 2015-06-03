@@ -19,6 +19,7 @@ public:
   GLuint VBO;
   GLuint CBO;
   GLuint IBO;
+  GLuint NBO;
   glm::mat4 TranslateOrigin;
   glm::mat4 InitialTransform;
   glm::mat4 ModelMatrix;

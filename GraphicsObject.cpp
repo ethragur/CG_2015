@@ -14,9 +14,33 @@ GraphicsObject::GraphicsObject(
 vertex_buffer_data(vertex_buffer_temp),
 color_buffer_data(color_buffer_temp),
 index_buffer_data(index_buffer_temp),
-vertex_normal_data(vertex_normal_temp),
 name(name) 
 { 
+  std::vector<glm::vec3> norm(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
+  
+  for(int i = 0; i < index_buffer_temp.size() ; i+=3)
+  {
+    glm::vec3 v1 = glm::vec3(vertex_buffer_temp[index_buffer_temp[i+0]*3+0], vertex_buffer_temp[index_buffer_temp[i+0]*3+1],vertex_buffer_temp[index_buffer_temp[i+0]*3+2]);
+    glm::vec3 v2 = glm::vec3(vertex_buffer_temp[index_buffer_temp[i+1]*3+0], vertex_buffer_temp[index_buffer_temp[i+1]*3+1],vertex_buffer_temp[index_buffer_temp[i+1]*3+2]);
+    glm::vec3 v3 = glm::vec3(vertex_buffer_temp[index_buffer_temp[i+2]*3+0], vertex_buffer_temp[index_buffer_temp[i+2]*3+1],vertex_buffer_temp[index_buffer_temp[i+2]*3+2]);
+    glm::vec3 fn = glm::normalize(glm::cross(v3-v2,v1-v2));
+    norm[(index_buffer_temp[i])+0] += fn; 
+    norm[(index_buffer_temp[i])+1] += fn;
+    norm[(index_buffer_temp[i])+2] += fn;
+  }
+  
+  std::vector<GLfloat> resNorm(vertex_buffer_temp.size(), 0);
+  
+  for(int i = 0; i < norm.size(); i++)
+  {
+    resNorm[i*3+0] = norm[i].x;
+    resNorm[i*3+1] = norm[i].y;
+    resNorm[i*3+2] = norm[i].z;
+  }
+  
+  vertex_normal_data = resNorm;
+  
+  
   
 }
 
@@ -85,8 +109,7 @@ void GraphicsObject::rotAroundCenter()
 *
 *******************************************************************/
 void GraphicsObject::SetupDataBuffers()
-{
-  
+{  
   
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -98,8 +121,11 @@ void GraphicsObject::SetupDataBuffers()
 
     glGenBuffers(1, &CBO);
     glBindBuffer(GL_ARRAY_BUFFER, CBO);
-    glBufferData(GL_ARRAY_BUFFER, color_buffer_data.size() * sizeof(GLfloat), &color_buffer_data[0], GL_STATIC_DRAW);
-   
+    glBufferData(GL_ARRAY_BUFFER, color_buffer_data.size() * sizeof(GLfloat), &color_buffer_data[0], GL_STATIC_DRAW);  
+    
+    glGenBuffers(1, &NBO);
+    glBindBuffer(GL_ARRAY_BUFFER, NBO);
+    glBufferData(GL_ARRAY_BUFFER, vertex_normal_data.size() * sizeof(GLfloat), &vertex_normal_data[0], GL_STATIC_DRAW);
 }
 
 
@@ -108,12 +134,9 @@ void GraphicsObject::SetupDataBuffers()
  * */
 void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm::mat4 ViewMatrix)
 {
-    glUseProgram(ShaderProgram);
-    GLuint LightID = glGetUniformLocation(ShaderProgram, "LightPosition_worldspace");
-  
-    glm::vec3 lightPos = glm::vec3(0,15,0);
-    glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
+   
     
+
  
     glEnableVertexAttribArray(vPosition);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -124,13 +147,39 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     glVertexAttribPointer(vColor, 3, GL_FLOAT,GL_FALSE, 0, 0);   
     
     glEnableVertexAttribArray(vNormals);
-    glVertexAttribPointer(vNormals,3,GL_FLOAT,GL_TRUE,0,0);
+    glBindBuffer(GL_ARRAY_BUFFER, NBO);
+    glVertexAttribPointer(vNormals,3,GL_FLOAT,GL_FALSE,0,0);
 
+   
+    
+    
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     GLint size; 
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
 
-    /* Associate program with shader matrices */
+
+    
+    
+    
+    
+
+    GLint lightColorLoc  = glGetUniformLocation(ShaderProgram, "lightColor");
+    //glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
+    glUniform3f(lightColorLoc,  1.0f, 1.0f, 1.0f); 
+    
+    GLint lightPosLoc = glGetUniformLocation(ShaderProgram, "lightPos");
+    glUniform3f(lightPosLoc, 7.0f, 2.0f, 0.0f);  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     GLint projectionUniform = glGetUniformLocation(ShaderProgram, "ProjectionMatrix");
     if (projectionUniform == -1) 
     {
@@ -161,5 +210,5 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
     /* Disable attributes */
     glDisableVertexAttribArray(vPosition);
     glDisableVertexAttribArray(vColor);
-   // glDisableVertexAttribArray(vNormals);
+    glDisableVertexAttribArray(vNormals);
 }
