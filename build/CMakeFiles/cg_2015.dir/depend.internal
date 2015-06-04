@@ -4,6 +4,8 @@
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.cpp
  /home/effi/projects/CG_2015/GraphicsObject.h
+ /home/effi/projects/CG_2015/LightSource.h
+ /home/effi/projects/CG_2015/camera.h
  /home/effi/projects/CG_2015/glm/./common.hpp
  /home/effi/projects/CG_2015/glm/./detail/_fixes.hpp
  /home/effi/projects/CG_2015/glm/./detail/_noise.hpp
@@ -262,6 +264,7 @@ CMakeFiles/cg_2015.dir/InputManager.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.h
  /home/effi/projects/CG_2015/InputManager.cpp
  /home/effi/projects/CG_2015/InputManager.h
+ /home/effi/projects/CG_2015/LightSource.h
  /home/effi/projects/CG_2015/camera.h
  /home/effi/projects/CG_2015/glm/common.hpp
  /home/effi/projects/CG_2015/glm/detail/_fixes.hpp
@@ -345,6 +348,8 @@ CMakeFiles/cg_2015.dir/InputManager.cpp.o
 CMakeFiles/cg_2015.dir/LightSource.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.h
  /home/effi/projects/CG_2015/LightSource.cpp
+ /home/effi/projects/CG_2015/LightSource.h
+ /home/effi/projects/CG_2015/camera.h
  /home/effi/projects/CG_2015/glm/common.hpp
  /home/effi/projects/CG_2015/glm/detail/_fixes.hpp
  /home/effi/projects/CG_2015/glm/detail/_swizzle.hpp
@@ -407,6 +412,14 @@ CMakeFiles/cg_2015.dir/LightSource.cpp.o
  /home/effi/projects/CG_2015/glm/fwd.hpp
  /home/effi/projects/CG_2015/glm/geometric.hpp
  /home/effi/projects/CG_2015/glm/glm.hpp
+ /home/effi/projects/CG_2015/glm/gtc/constants.hpp
+ /home/effi/projects/CG_2015/glm/gtc/constants.inl
+ /home/effi/projects/CG_2015/glm/gtc/matrix_transform.hpp
+ /home/effi/projects/CG_2015/glm/gtc/matrix_transform.inl
+ /home/effi/projects/CG_2015/glm/gtx/rotate_vector.hpp
+ /home/effi/projects/CG_2015/glm/gtx/rotate_vector.inl
+ /home/effi/projects/CG_2015/glm/gtx/transform.hpp
+ /home/effi/projects/CG_2015/glm/gtx/transform.inl
  /home/effi/projects/CG_2015/glm/integer.hpp
  /home/effi/projects/CG_2015/glm/mat2x2.hpp
  /home/effi/projects/CG_2015/glm/mat2x3.hpp
@@ -428,6 +441,7 @@ CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.h
  /home/effi/projects/CG_2015/InitClass.h
  /home/effi/projects/CG_2015/InputManager.h
+ /home/effi/projects/CG_2015/LightSource.h
  /home/effi/projects/CG_2015/MerryGoRound.cpp
  /home/effi/projects/CG_2015/camera.h
  /home/effi/projects/CG_2015/glm/common.hpp
@@ -492,6 +506,16 @@ CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o
  /home/effi/projects/CG_2015/glm/fwd.hpp
  /home/effi/projects/CG_2015/glm/geometric.hpp
  /home/effi/projects/CG_2015/glm/glm.hpp
+ /home/effi/projects/CG_2015/glm/gtc/constants.hpp
+ /home/effi/projects/CG_2015/glm/gtc/constants.inl
+ /home/effi/projects/CG_2015/glm/gtc/quaternion.hpp
+ /home/effi/projects/CG_2015/glm/gtc/quaternion.inl
+ /home/effi/projects/CG_2015/glm/gtc/type_precision.hpp
+ /home/effi/projects/CG_2015/glm/gtc/type_precision.inl
+ /home/effi/projects/CG_2015/glm/gtc/vec1.hpp
+ /home/effi/projects/CG_2015/glm/gtc/vec1.inl
+ /home/effi/projects/CG_2015/glm/gtx/string_cast.hpp
+ /home/effi/projects/CG_2015/glm/gtx/string_cast.inl
  /home/effi/projects/CG_2015/glm/integer.hpp
  /home/effi/projects/CG_2015/glm/mat2x2.hpp
  /home/effi/projects/CG_2015/glm/mat2x3.hpp
@@ -758,6 +782,8 @@ CMakeFiles/cg_2015.dir/camera.cpp.o
  /home/effi/projects/CG_2015/glm/vector_relational.hpp
 CMakeFiles/cg_2015.dir/objloader.cpp.o
  /home/effi/projects/CG_2015/GraphicsObject.h
+ /home/effi/projects/CG_2015/LightSource.h
+ /home/effi/projects/CG_2015/camera.h
  /home/effi/projects/CG_2015/glm/common.hpp
  /home/effi/projects/CG_2015/glm/detail/_fixes.hpp
  /home/effi/projects/CG_2015/glm/detail/_swizzle.hpp

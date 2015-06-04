@@ -3,17 +3,24 @@
 #include <cmath>
 #include <iostream>
 
+
 float GraphicsObject::speed = 1.0;
+bool GraphicsObject::disableSpec = false;
+bool GraphicsObject::disableDiff = false;
+bool GraphicsObject::disableAmbient = false;
 
 GraphicsObject::GraphicsObject(
   const std::vector<GLfloat> & vertex_buffer_temp, 
-  const std::vector<GLfloat> & color_buffer_temp, 
-  const std::vector<GLuint> & index_buffer_temp, 
-  const std::vector<GLfloat> & vertex_normal_temp,
+  const std::vector<GLuint> & index_buffer_temp,
+  const glm::vec3 & diff_tmp, 
+  const glm::vec3 & spec_tmp,
+  GLfloat shiny,
   const std::string &name) :
 vertex_buffer_data(vertex_buffer_temp),
-color_buffer_data(color_buffer_temp),
 index_buffer_data(index_buffer_temp),
+diffuse(diff_tmp),
+specular(spec_tmp),
+shininess(shiny),
 name(name) 
 { 
   std::vector<glm::vec3> norm(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
@@ -64,7 +71,7 @@ void GraphicsObject::IdleWork(bool updown)
 {
   //compute FPS independent TIME
   oldtime = newtime;
-  newtime = glutGet(GLUT_ELAPSED_TIME); 
+  newtime = glutGet(GLUT_ELAPSED_TIME) ; 
   if(!(name.compare("back1") == 0 || name.compare("Plane") == 0))
   {
     rotAroundCenter();
@@ -82,7 +89,7 @@ void GraphicsObject::IdleWork(bool updown)
  * */
 void GraphicsObject::UpDown()
 {
-  TranslateOrigin = glm::translate(glm::vec3(0,sin((newtime/10)*(M_PI/180)),0));
+  TranslateOrigin = glm::translate(glm::vec3(0,sin(((newtime)/10)*(M_PI/180)),0));
   ModelMatrix = TranslateOrigin * ModelMatrix;
 }
 
@@ -92,7 +99,7 @@ void GraphicsObject::UpDown()
  * */
 void GraphicsObject::rotAroundCenter()
 {
-  float angle = (newtime/ (1500* (1/GraphicsObject::speed))) * (360.0/M_PI); 
+  float angle = ((newtime) / (1500* (1/GraphicsObject::speed))) * (360.0/M_PI); 
   
   glm::mat4 RotationMatrixAnim;
   RotationMatrixAnim = glm::rotate((GLfloat)(angle*M_PI/180)   , glm::vec3(0,1,0));
@@ -119,10 +126,6 @@ void GraphicsObject::SetupDataBuffers()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 
-    glGenBuffers(1, &CBO);
-    glBindBuffer(GL_ARRAY_BUFFER, CBO);
-    glBufferData(GL_ARRAY_BUFFER, color_buffer_data.size() * sizeof(GLfloat), &color_buffer_data[0], GL_STATIC_DRAW);  
-    
     glGenBuffers(1, &NBO);
     glBindBuffer(GL_ARRAY_BUFFER, NBO);
     glBufferData(GL_ARRAY_BUFFER, vertex_normal_data.size() * sizeof(GLfloat), &vertex_normal_data[0], GL_STATIC_DRAW);
@@ -132,52 +135,72 @@ void GraphicsObject::SetupDataBuffers()
 /*
  * Draw Object to screen
  * */
-void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm::mat4 ViewMatrix)
+void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSources)
 {
-   
     
-
- 
     glEnableVertexAttribArray(vPosition);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    glEnableVertexAttribArray(vColor);
-    glBindBuffer(GL_ARRAY_BUFFER, CBO);
-    glVertexAttribPointer(vColor, 3, GL_FLOAT,GL_FALSE, 0, 0);   
     
     glEnableVertexAttribArray(vNormals);
     glBindBuffer(GL_ARRAY_BUFFER, NBO);
     glVertexAttribPointer(vNormals,3,GL_FLOAT,GL_FALSE,0,0);
-
-   
-    
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     GLint size; 
-    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);  
 
-
     
+    std::vector<GLfloat> lightPositionMat(lightSources.size() * 3, 0);
+    std::vector<GLfloat> lightColorMat(lightSources.size() * 3, 0);
+    std::vector<GLfloat> lightIntensity(lightSources.size(), 0);
     
+    for(int i = 0; i < lightSources.size() * 3; i += 3)
+    {    
+	
+	lightPositionMat[i] = lightSources.at(i/3).position.x;
+	lightPositionMat[i+1] = lightSources.at(i/3).position.y;
+	lightPositionMat[i+2] = lightSources.at(i/3).position.z;
+	
+	lightColorMat[i] = lightSources.at(i/3).color.r;
+	lightColorMat[i+1] = lightSources.at(i/3).color.g;
+	lightColorMat[i+2] = lightSources.at(i/3).color.b;
+	
+	lightIntensity[i/3] = lightSources.at(i/3).intensity;
+    }
     
-    
-
     GLint lightColorLoc  = glGetUniformLocation(ShaderProgram, "lightColor");
-    //glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-    glUniform3f(lightColorLoc,  1.0f, 1.0f, 1.0f); 
+    glUniform3fv(lightColorLoc,  lightSources.size(), &lightColorMat[0]); 
     
     GLint lightPosLoc = glGetUniformLocation(ShaderProgram, "lightPos");
-    glUniform3f(lightPosLoc, 3.0f, 3.0f, 3.8f);  
+    glUniform3fv(lightPosLoc, lightSources.size(), &lightPositionMat[0]);
     
-    GLint cameraPosShader = glGetUniformLocation(ShaderProgram, "camerPos");
+    GLint lightIntensitLoc = glGetUniformLocation(ShaderProgram, "lightIntensity");
+    glUniform1fv(lightIntensitLoc, lightSources.size(),  &lightIntensity[0]);
+  
     
-    glUniform3f(cameraPosShader, ViewMatrix[0][3], ViewMatrix[1][3], ViewMatrix[2][3]);
+    GLint cameraPosShader = glGetUniformLocation(ShaderProgram, "camerPos"); 
+    glUniform3f(cameraPosShader, Camera::getInstance()->cameraPos.x, Camera::getInstance()->cameraPos.y, Camera::getInstance()->cameraPos.z);
+ 
+
+    GLint diffColor = glGetUniformLocation(ShaderProgram, "objectColor");
+    glUniform3f(diffColor, diffuse.r, diffuse.g, diffuse.b);
     
+    GLint shiny = glGetUniformLocation(ShaderProgram, "shininess");
+    glUniform1f(shiny, shininess);
     
+    GLint specColor = glGetUniformLocation(ShaderProgram, "specColor");
+    glUniform3f(specColor, specular.r, specular.g, specular.b);
+  
     
+    GLint specLightning = glGetUniformLocation(ShaderProgram, "disableSpec");
+    glUniform1i(specLightning, GraphicsObject::disableSpec);
     
+    GLint diffLightning = glGetUniformLocation(ShaderProgram, "disableDiff");
+    glUniform1i(diffLightning, GraphicsObject::disableDiff);
     
+    GLint ambiLightning = glGetUniformLocation(ShaderProgram, "disableAmbi");
+    glUniform1i(ambiLightning,  GraphicsObject::disableAmbient);
     
     
     
@@ -188,7 +211,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
 	std::cerr << "Could not bind uniform ProjectionMatrix " << std::endl;
 	exit(-1);
     }
-    glUniformMatrix4fv(projectionUniform, 1, GL_FALSE, glm::value_ptr(ProjectionMatrix));
+    glUniformMatrix4fv(projectionUniform, 1, GL_FALSE, glm::value_ptr(Camera::getInstance()->ProjectionMatrix));
     
     GLint ViewUniform = glGetUniformLocation(ShaderProgram, "ViewMatrix");
     if (ViewUniform == -1) 
@@ -196,7 +219,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
         std::cerr << "Could not bind uniform ViewMatrix " << std::endl;
         exit(-1);
     }
-    glUniformMatrix4fv(ViewUniform, 1, GL_FALSE, glm::value_ptr(ViewMatrix));
+    glUniformMatrix4fv(ViewUniform, 1, GL_FALSE, glm::value_ptr(Camera::getInstance()->ViewMatrix));
    
     GLint RotationUniform = glGetUniformLocation(ShaderProgram, "ModelMatrix");
     if (RotationUniform == -1) 
@@ -211,6 +234,5 @@ void GraphicsObject::Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm:
 
     /* Disable attributes */
     glDisableVertexAttribArray(vPosition);
-    glDisableVertexAttribArray(vColor);
     glDisableVertexAttribArray(vNormals);
 }

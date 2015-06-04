@@ -3,6 +3,8 @@
 
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../GraphicsObject.cpp
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../GraphicsObject.h
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../LightSource.h
+CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../camera.h
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../glm/./common.hpp
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../glm/./detail/_fixes.hpp
 CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o: ../glm/./detail/_noise.hpp
@@ -261,6 +263,7 @@ CMakeFiles/cg_2015.dir/InitClass.cpp.o: ../InitClass.h
 CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../GraphicsObject.h
 CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../InputManager.cpp
 CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../InputManager.h
+CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../LightSource.h
 CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../camera.h
 CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../glm/common.hpp
 CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../glm/detail/_fixes.hpp
@@ -344,6 +347,8 @@ CMakeFiles/cg_2015.dir/InputManager.cpp.o: ../glm/vector_relational.hpp
 
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../GraphicsObject.h
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../LightSource.cpp
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../LightSource.h
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../camera.h
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/common.hpp
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/detail/_fixes.hpp
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/detail/_swizzle.hpp
@@ -406,6 +411,14 @@ CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/exponential.hpp
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/fwd.hpp
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/geometric.hpp
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/glm.hpp
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtc/constants.hpp
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtc/constants.inl
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtc/matrix_transform.hpp
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtc/matrix_transform.inl
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtx/rotate_vector.hpp
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtx/rotate_vector.inl
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtx/transform.hpp
+CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/gtx/transform.inl
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/integer.hpp
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/mat2x2.hpp
 CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/mat2x3.hpp
@@ -427,6 +440,7 @@ CMakeFiles/cg_2015.dir/LightSource.cpp.o: ../glm/vector_relational.hpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../GraphicsObject.h
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../InitClass.h
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../InputManager.h
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../LightSource.h
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../MerryGoRound.cpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../camera.h
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/common.hpp
@@ -491,6 +505,16 @@ CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/exponential.hpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/fwd.hpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/geometric.hpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/glm.hpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/constants.hpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/constants.inl
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/quaternion.hpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/quaternion.inl
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/type_precision.hpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/type_precision.inl
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/vec1.hpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtc/vec1.inl
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtx/string_cast.hpp
+CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/gtx/string_cast.inl
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/integer.hpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/mat2x2.hpp
 CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o: ../glm/mat2x3.hpp
@@ -757,6 +781,8 @@ CMakeFiles/cg_2015.dir/camera.cpp.o: ../glm/vec4.hpp
 CMakeFiles/cg_2015.dir/camera.cpp.o: ../glm/vector_relational.hpp
 
 CMakeFiles/cg_2015.dir/objloader.cpp.o: ../GraphicsObject.h
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../LightSource.h
+CMakeFiles/cg_2015.dir/objloader.cpp.o: ../camera.h
 CMakeFiles/cg_2015.dir/objloader.cpp.o: ../glm/common.hpp
 CMakeFiles/cg_2015.dir/objloader.cpp.o: ../glm/detail/_fixes.hpp
 CMakeFiles/cg_2015.dir/objloader.cpp.o: ../glm/detail/_swizzle.hpp

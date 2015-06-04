@@ -1,16 +1,26 @@
-#ifndef LIGHTSOURCE_H
-#define LIGHTSOURCE_H
-
+#include "LightSource.h"
+#include "glm/gtx/rotate_vector.hpp"
 #include "GraphicsObject.h"
-#include <vector>
-#include <iostream>
 
-class LightSource : GraphicsObject
+
+LightSource::LightSource(const glm::vec3 & pos, const glm::vec3 & col, float inten, bool move) :
+position(pos),
+color(col),
+intensity(inten),
+moving(move)
 {
-public:
-  glm::vec3 position;
-  glm::vec3 color;
-};
+  
+}
 
-
-#endif //LIGHTSOURCE_H
+void LightSource::move()
+{
+  float newtime = glutGet(GLUT_ELAPSED_TIME); 
+  float angle = (newtime/ (1500* (1/GraphicsObject::speed))) * (360.0/M_PI); 
+  position = glm::rotateX(position, (GLfloat)(angle*M_PI/180) / 1000);
+  
+}
+void LightSource::changeColors()
+{
+    
+}
+  

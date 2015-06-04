@@ -12,6 +12,7 @@ public:
   glm::mat4 ViewMatrix;
   glm::mat4 ProjectionMatrix;
   glm::mat4 initialViewMatrix;
+  glm::vec3 cameraPos;
   float fovy ;
   float aspect ; 
   float nearPlane ; 

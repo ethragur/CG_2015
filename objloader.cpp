@@ -1,5 +1,7 @@
 #include "objloader.h"
 #include "tiny_obj_loader.hpp"
+#include "glm/glm.hpp"
+
 
 /*	Creates GraphicsObjects from an Obj file and stores them in a vector
  * 	@path Path to the Obj file
@@ -23,37 +25,11 @@ std::vector<GraphicsObject> ObjLoader::loadObj ( const std::string& objpath, con
   
   for(int i = 0; i < shapes.size(); i++)
   {
-    std::vector<GLfloat> color;
-    if(mats.empty())
-    {
-      //when the material is empty just make everything white
-      color = std::vector<GLfloat>(shapes[i].mesh.positions.size()/3, 1.0);
-    }
-    else
-    {
-      for (int j = 0; j < shapes[i].mesh.indices.size(); j++)
-      {
-	//run through all the indicies and assign the color which is defined in the material_ids.diffuse to them 
-	if (mats.size() > 0 && shapes[i].mesh.material_ids.size() > 0)
-	{
-	  if(shapes[i].mesh.material_ids.size() > j)
-	  {
-	    color.push_back(mats[shapes[i].mesh.material_ids[j]].diffuse[0]);
-	    color.push_back(mats[shapes[i].mesh.material_ids[j]].diffuse[1]);
-	    color.push_back(mats[shapes[i].mesh.material_ids[j]].diffuse[2]);
-	  }
-	  else //bug fix for the last mats
-	  {
-	    color.push_back(mats[shapes[i].mesh.material_ids[0]].diffuse[0]);
-	    color.push_back(mats[shapes[i].mesh.material_ids[0]].diffuse[1]);
-	    color.push_back(mats[shapes[i].mesh.material_ids[0]].diffuse[2]);
-	  }
-	    
-	  }
-      }
+      glm::vec3 diff = glm::vec3(mats[shapes[i].mesh.material_ids[0]].diffuse[0], mats[shapes[i].mesh.material_ids[0]].diffuse[1], mats[shapes[i].mesh.material_ids[0]].diffuse[2]);
+      glm::vec3 spec = glm::vec3(mats[shapes[i].mesh.material_ids[0]].specular[0], mats[shapes[i].mesh.material_ids[0]].specular[1],mats[shapes[i].mesh.material_ids[0]].specular[2]);
+      GLfloat shiny = mats[shapes[i].mesh.material_ids[0]].shininess;
       //push back to the vector     
-      retVec.push_back(GraphicsObject(shapes[i].mesh.positions, color, shapes[i].mesh.indices, shapes[i].mesh.normals, shapes[i].name));
-    }
+      retVec.push_back(GraphicsObject(shapes[i].mesh.positions, shapes[i].mesh.indices ,diff, spec, shiny, shapes[i].name));
   }   
   return retVec;
 }

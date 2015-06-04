@@ -9,6 +9,8 @@
 #include <vector>
 #include "glm/glm.hpp"
 #include <math.h>
+#include "camera.h"
+#include "LightSource.h"
 
 class GraphicsObject
 {
@@ -24,19 +26,31 @@ public:
   glm::mat4 InitialTransform;
   glm::mat4 ModelMatrix;
   std::vector<GLfloat> vertex_buffer_data;
-  std::vector<GLfloat> color_buffer_data;
   std::vector<GLuint> index_buffer_data;
   std::vector<GLfloat> vertex_normal_data;
+  
+  glm::vec3 diffuse;
+  glm::vec3 specular;
+  GLfloat shininess;
+  
   static float speed;
+  static bool disableSpec;
+  static bool disableAmbient;
+  static bool disableDiff;
 
     
   //func
-  GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, const std::vector<GLfloat> & color_buffer_temp, const std::vector<GLuint> & index_buffer_temp, const std::vector<GLfloat> & vertex_normal_temp, const std::string & name);
-  void Draw(GLuint ShaderProgram, glm::mat4 ProjectionMatrix, glm::mat4 ViewMatrix);
+  GraphicsObject(const std::vector<GLfloat> & vertex_buffer_temp, 
+		 const std::vector<GLuint> & index_buffer_temp, 
+		 const glm::vec3 & diff_tmp, 
+		 const glm::vec3 & spec_tmp,
+		 GLfloat shiny,
+		 const std::string & name);
+  void Draw(GLuint ShaderProgram, std::vector<LightSource> lightSources);
   void initobj(float x, float y, float z);
   void IdleWork(bool updown);
   
-  enum DataID {vPosition = 0, vColor = 1, vNormals = 2}; 
+  enum DataID {vPosition = 0, vNormals = 1}; 
   
 private:
   //vars

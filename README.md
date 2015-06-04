@@ -27,6 +27,12 @@ Mode1: Free movement Mode1
     
     Scrool Wheel: Zoom
     
+    'b': Turn Specular Lightning on/off (default On)
+    
+    'v': Turn Diffuse Lightning on/off (default On)
+    
+    'c': Turn Ambient Lightning on/off (default On)
+    
     
 Mode2: Rotate around in a fixed pattern
 

@@ -2,7 +2,7 @@
 * 
 * Computer Graphics Project 2015
 * 
-* by Stefan Kuhnert, Philipp Pobitzer, Tobias Raggl
+* by Stefan Kuhnert, Philipp Pobitzer, Felix Putz
 * 
 *******************************************************************/
 
@@ -23,12 +23,16 @@
 #include "camera.h"
 #include "InitClass.h"
 #include "InputManager.h"
+#include "LightSource.h"
+
+#include "glm/gtx/string_cast.hpp"
 
 //set to 1 when using the opensource intel or amd driver
-#define USES_MESA_DRIVER 1
+#define USES_MESA_DRIVER 0
 
 //storage for all the modles loaded from the obj
 std::vector<GraphicsObject> allObjs;
+std::vector<LightSource> lightSources;
 
 /******************************************************************
 *
@@ -47,7 +51,7 @@ void Display()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for(int i = 0; i < allObjs.size(); i ++)
     {
-      allObjs[i].Draw(InitClass::ShaderProgram, Camera::getInstance()->ProjectionMatrix, Camera::getInstance()->ViewMatrix);
+      allObjs[i].Draw(InitClass::ShaderProgram, lightSources);
     }
     /* Swap between front and back buffer */ 
     glutSwapBuffers();
@@ -62,15 +66,21 @@ void Display()
 
 void OnIdle()
 {
-  for(int i = 0; i < allObjs.size(); i ++)
+  for(int i = 0; i < allObjs.size(); i++)
   {
     if(allObjs[i].name.compare("horse") == 1)
     {
       //horses move up and down
       allObjs[i].IdleWork(true);
+     
       continue;
     }
     allObjs[i].IdleWork(false);
+  }
+  
+  for(int i = 0; i < lightSources.size(); i++)
+  {
+   // lightSources[i].move();
   }
   InputManager::onIdle();
   glutPostRedisplay();
@@ -104,7 +114,30 @@ void Initialize(void)
     for(int i = 0; i < allObjs.size(); i ++)
     {
       allObjs[i].initobj(0,0,0);
+      
+      if(allObjs[i].name.compare("Light1") == 0)
+      {
+	 LightSource tmp(glm::vec3(0,8,0), glm::vec3(1,1,1), 1.0f, true);
+	 lightSources.push_back(tmp);
+      }
+      if(allObjs[i].name.compare("Light2") == 0)
+      {
+	 LightSource tmp(glm::vec3(0,2,0), glm::vec3(1,0,0), 0.0f, true);
+	 lightSources.push_back(tmp);
+      }
+      if(allObjs[i].name.compare("Light3") == 0)
+      {
+ 	 LightSource tmp(glm::vec3(-7,2,0), glm::vec3(1,1,1), 0.0f, true);
+	 lightSources.push_back(tmp);
+      }
+      if(allObjs[i].name.compare("Light4") == 0)
+      {
+	 LightSource tmp(glm::vec3(7,2,0), glm::vec3(1,1,1), 0.0f, true);	 
+	 lightSources.push_back(tmp);
+      }
+      
     }
+   
   
 }
 

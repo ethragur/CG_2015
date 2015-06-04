@@ -21,6 +21,7 @@ Camera::Camera()
   /* Set viewing transform */
   camera_disp = -15.0;
   ViewMatrix = glm::translate(glm::vec3(0.0,0.0, camera_disp));
+  cameraPos = glm::vec3(0.0,0.0, camera_disp);
   move(glm::vec3(0,-2,0));
   initialViewMatrix = ViewMatrix;
   factor = 1;
@@ -44,6 +45,7 @@ void Camera::move(glm::vec3 transVec)
     glm::mat4 translation(1.0f);
     translation = glm::translate(transVec);
     ViewMatrix = translation * ViewMatrix;
+    cameraPos += transVec;
 }
 
 //rotates the Camera by a vec3
