@@ -28,7 +28,7 @@
 #include "glm/gtx/string_cast.hpp"
 
 //set to 1 when using the opensource intel or amd driver
-#define USES_MESA_DRIVER 0
+#define USES_MESA_DRIVER 1
 
 //storage for all the modles loaded from the obj
 std::vector<GraphicsObject> allObjs;
@@ -66,21 +66,25 @@ void Display()
 
 void OnIdle()
 {
-  /*for(int i = 0; i < allObjs.size(); i++)
+  for(int i = 0; i < allObjs.size(); i++)
   {
-    if(allObjs[i].name.compare("horse") == 1)
+    
+    if(allObjs[i].name[0] == 'h')
     {
-      //horses move up and down
       allObjs[i].IdleWork(true);
      
       continue;
     }
     allObjs[i].IdleWork(false);
-  }*/
+  }
   
   for(int i = 0; i < lightSources.size(); i++)
   {
-    //lightSources[i].move();
+    if(lightSources[i].moving)
+    {
+      lightSources[i].move();
+    }
+      
   }
   InputManager::onIdle();
   glutPostRedisplay();
@@ -117,12 +121,12 @@ void Initialize(void)
       
       if(allObjs[i].name.compare("Light1") == 0)
       {
-	 LightSource tmp(glm::vec3(0,10,0), glm::vec3(1,1,1), true);
+	 LightSource tmp(glm::vec3(0,10,0), glm::vec3(1,1,1), false);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light2") == 0)
       {
-	 LightSource tmp(glm::vec3(0,2,0), glm::vec3(1,0,0), true);
+	 LightSource tmp(glm::vec3(-3,3.8,-3), glm::vec3(1,1,1), true);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light3") == 0)
@@ -132,7 +136,7 @@ void Initialize(void)
       }
       if(allObjs[i].name.compare("Light4") == 0)
       {
-	 LightSource tmp(glm::vec3(0,-10,0), glm::vec3(1,1,1), true);	 
+	 LightSource tmp(glm::vec3(0,-10,0), glm::vec3(1,1,1), false);	 
 	 lightSources.push_back(tmp);
       }
       

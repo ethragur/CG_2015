@@ -37,6 +37,7 @@ void main()
     ambient = ambientIntensity * vec3(1,1,1);
   }
   result = result + (ambient *objectColor);
+  
   vec3 norm = normalize(fragNormal);
   for(int i = 0; i < numberOfLights; i++)
   {
@@ -55,7 +56,7 @@ void main()
     if(!disableSpec)
     { 
       //specular intensity
-      float specularStrength = 10.0f;
+      float specularStrength = 16.0f;
     
       float spec;
       //fix so that specular is only shown on the right side 

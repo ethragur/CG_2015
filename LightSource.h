@@ -13,6 +13,9 @@ public:
   glm::vec3 color;
   static GLfloat intensity;
   
+  float newtime;
+  float oldtime;
+  
   bool moving;
   
   LightSource(const glm::vec3 & pos, const glm::vec3 & col, bool move);

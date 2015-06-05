@@ -15,15 +15,16 @@ moving(move)
 
 void LightSource::move()
 {
-  float newtime = glutGet(GLUT_ELAPSED_TIME); 
-  //float angle = ((newtime/ (1500* (1/GraphicsObject::speed))) * (360.0/M_PI)) %360;
-  float x = position.x;
-  float z = position.z;
+  oldtime = newtime;
+  newtime = glutGet(GLUT_ELAPSED_TIME); 
+  float angle = ((newtime-oldtime) / (1500* (1/GraphicsObject::speed))) * (360.0/M_PI); 
   
-  position.z = z*cos(newtime) + x * sin(newtime);
-  position.x = z*sin(newtime) + x * cos(newtime);
+  glm::mat4 RotationMatrixAnim;
+  RotationMatrixAnim = glm::rotate((GLfloat)(angle*M_PI/180)   , glm::vec3(0,1,0));
   
-  std::cout << x << " " << z << std::endl;
+  glm::vec4 test = RotationMatrixAnim * glm::vec4(position, 0);
+  
+  position = glm::vec3(test.x, test.y, test.z);
   
 }
 void LightSource::changeColors()

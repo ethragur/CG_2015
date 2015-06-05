@@ -10,6 +10,14 @@ Used TinyObjLoader: http://syoyo.github.io/tinyobjloader/
 HorseModel from: http://3delicious.net/index.php?a=detail&id=14190
 
 ------------------
+About
+
+ There are 4 LightSources int the Scene
+ 1 on the top
+ 1 on the bottom
+ 2 LightSources in the MerryGoRound which are rotating
+
+------------------
 Controls
 
     
