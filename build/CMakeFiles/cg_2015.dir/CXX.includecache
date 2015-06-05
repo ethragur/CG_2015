@@ -71,6 +71,8 @@ glm/gtx/rotate_vector.hpp
 /home/effi/projects/CG_2015/glm/gtx/rotate_vector.hpp
 GraphicsObject.h
 /home/effi/projects/CG_2015/GraphicsObject.h
+iostream
+-
 
 /home/effi/projects/CG_2015/LightSource.h
 GL/glew.h

@@ -12,7 +12,17 @@ HorseModel from: http://3delicious.net/index.php?a=detail&id=14190
 ------------------
 Controls
 
-
+    
+    'b': Turn Specular Lightning on/off (default On)
+    
+    'v': Turn Diffuse Lightning on/off (default On)
+    
+    'c': Turn Ambient Lightning on/off (default On)
+    
+    'h': Increase Lightning Intensity
+    
+    'l': Decrease Lightning Intensity
+    
 2 Modes: switch with '1' and '2'
 
 Mode1: Free movement Mode1
@@ -26,12 +36,9 @@ Mode1: Free movement Mode1
     Mouse + LM: Rotate camera around current center
     
     Scrool Wheel: Zoom
+
     
-    'b': Turn Specular Lightning on/off (default On)
     
-    'v': Turn Diffuse Lightning on/off (default On)
-    
-    'c': Turn Ambient Lightning on/off (default On)
     
     
 Mode2: Rotate around in a fixed pattern

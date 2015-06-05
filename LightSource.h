@@ -11,11 +11,11 @@ class LightSource
 public:
   glm::vec3 position;
   glm::vec3 color;
-  GLfloat intensity;
+  static GLfloat intensity;
   
   bool moving;
   
-  LightSource(const glm::vec3 & pos, const glm::vec3 & col, float inten, bool move);
+  LightSource(const glm::vec3 & pos, const glm::vec3 & col, bool move);
   void move();
   void changeColors();
   

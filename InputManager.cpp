@@ -32,9 +32,7 @@ void InputManager::keyboard(unsigned char key, int x, int y)
       case 's': BACK = true; break;
       case 'w': FORWARD = true; break;
       case '2': MODE1 = false; Camera::getInstance()->ViewMatrix = Camera::getInstance()->initialViewMatrix; break;
-      case 'b': GraphicsObject::disableSpec = !GraphicsObject::disableSpec; break;
-      case 'v': GraphicsObject::disableDiff = !GraphicsObject::disableDiff; break;
-      case 'c': GraphicsObject::disableAmbient = !GraphicsObject::disableAmbient; break;
+     
       default: break;  
     }
   }
@@ -50,6 +48,16 @@ void InputManager::keyboard(unsigned char key, int x, int y)
     }
     
   }
+  switch (key)
+  {
+     case 'b': GraphicsObject::disableSpec = !GraphicsObject::disableSpec; break;
+     case 'v': GraphicsObject::disableDiff = !GraphicsObject::disableDiff; break;
+     case 'c': GraphicsObject::disableAmbient = !GraphicsObject::disableAmbient; break;
+     case 'h': LightSource::intensity += 0.1f; break;
+     case 'l': LightSource::intensity -= 0.1f; break;
+     default: break;
+  }
+  
     glutPostRedisplay();
 }
 

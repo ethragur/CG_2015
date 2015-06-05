@@ -66,7 +66,7 @@ void Display()
 
 void OnIdle()
 {
-  for(int i = 0; i < allObjs.size(); i++)
+  /*for(int i = 0; i < allObjs.size(); i++)
   {
     if(allObjs[i].name.compare("horse") == 1)
     {
@@ -76,11 +76,11 @@ void OnIdle()
       continue;
     }
     allObjs[i].IdleWork(false);
-  }
+  }*/
   
   for(int i = 0; i < lightSources.size(); i++)
   {
-   // lightSources[i].move();
+    //lightSources[i].move();
   }
   InputManager::onIdle();
   glutPostRedisplay();
@@ -117,22 +117,22 @@ void Initialize(void)
       
       if(allObjs[i].name.compare("Light1") == 0)
       {
-	 LightSource tmp(glm::vec3(0,8,0), glm::vec3(1,1,1), 1.0f, true);
+	 LightSource tmp(glm::vec3(0,10,0), glm::vec3(1,1,1), true);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light2") == 0)
       {
-	 LightSource tmp(glm::vec3(0,2,0), glm::vec3(1,0,0), 0.0f, true);
+	 LightSource tmp(glm::vec3(0,2,0), glm::vec3(1,0,0), true);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light3") == 0)
       {
- 	 LightSource tmp(glm::vec3(-7,2,0), glm::vec3(1,1,1), 0.0f, true);
+ 	 LightSource tmp(glm::vec3(3,3.8,3), glm::vec3(1,1,1), true);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light4") == 0)
       {
-	 LightSource tmp(glm::vec3(7,2,0), glm::vec3(1,1,1), 0.0f, true);	 
+	 LightSource tmp(glm::vec3(0,-10,0), glm::vec3(1,1,1), true);	 
 	 lightSources.push_back(tmp);
       }
       
