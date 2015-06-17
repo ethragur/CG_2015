@@ -115,9 +115,10 @@ void Initialize(void)
     InitClass::CreateShaderProgram();  
     
     /* Init all Objects in the Obj file */
+    
     for(int i = 0; i < allObjs.size(); i ++)
     {
-      allObjs[i].initobj(0,0,0);
+      allObjs[i].initobj(0,0,0, "../res/grass.bmp");
       
       if(allObjs[i].name.compare("Light1") == 0)
       {
@@ -159,7 +160,6 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     InitClass::USES_MESA = (USES_MESA_DRIVER == 1) ? 1 : 0;
     allObjs = ObjLoader::loadObj("../res/merry.obj", "../res/");
-    
     InitClass::setupIntelMesaConfiguration();
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE);
     glutInitWindowSize(900, 900);

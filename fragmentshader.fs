@@ -3,6 +3,9 @@
 in vec3 fragNormal;
 in vec3 world_pos;
 in vec3 world_posM;
+in vec2 vUV;
+
+uniform sampler2D texSampler;
 out vec4 finalColor;
 
 uniform vec3 objectColor;
@@ -29,7 +32,9 @@ void main()
   vec3 specular = vec3(0,0,0);
   vec3 result = vec3(0,0,0);
   
-  
+  vec3 texColor = texture(texSampler, vUV).rgb;
+  finalColor = vec4(texColor,1.0f);
+  /*
   //ambient
   if(!disableAmbi)
   {
@@ -81,7 +86,7 @@ void main()
   }
 
   
-     finalColor = vec4(result, 1.0f);
+  //   finalColor = vec4(result, 1.0f);*/
   //see normals for debug
  //     finalColor = vec4(norm, 1.0f);
     

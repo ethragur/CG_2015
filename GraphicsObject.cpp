@@ -14,12 +14,14 @@ GraphicsObject::GraphicsObject(
   const std::vector<GLuint> & index_buffer_temp,
   const glm::vec3 & diff_tmp, 
   const glm::vec3 & spec_tmp,
+  const std::vector<GLfloat> & tex_tmp,
   GLfloat shiny,
   const std::string &name) :
 vertex_buffer_data(vertex_buffer_temp),
 index_buffer_data(index_buffer_temp),
 diffuse(diff_tmp),
 specular(spec_tmp),
+texture_vertex_data(tex_tmp),
 shininess(shiny),
 name(name) 
 { 
@@ -57,12 +59,13 @@ name(name)
  * starting Pos, Rotation....
  * 
 *****++++++++++++++++++++++++++++++++++++++++*/
-void GraphicsObject::initobj(float x, float y, float z)
+void GraphicsObject::initobj(float x, float y, float z, const std::string & texfile)
 {
   SetupDataBuffers();
   ModelMatrix = glm::mat4(1.0);
   TranslateOrigin = glm::translate(glm::vec3(x,y,z));
   ModelMatrix = TranslateOrigin * ModelMatrix;
+  textureID = LoadTexture(texfile);
 
 }
 
@@ -129,6 +132,11 @@ void GraphicsObject::SetupDataBuffers()
     glGenBuffers(1, &NBO);
     glBindBuffer(GL_ARRAY_BUFFER, NBO);
     glBufferData(GL_ARRAY_BUFFER, vertex_normal_data.size() * sizeof(GLfloat), &vertex_normal_data[0], GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &UBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, UBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, texture_vertex_data.size() * sizeof(GLfloat), &texture_vertex_data[0], GL_STATIC_DRAW);
+ 
 }
 
 
@@ -145,6 +153,10 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     glEnableVertexAttribArray(vNormals);
     glBindBuffer(GL_ARRAY_BUFFER, NBO);
     glVertexAttribPointer(vNormals,3,GL_FLOAT,GL_FALSE,0,0);
+    
+    glEnableVertexAttribArray(vUV);
+    glBindBuffer(GL_ARRAY_BUFFER, UBO);
+    glVertexAttribPointer(vUV,2, GL_FLOAT, GL_FALSE,0,0);
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     GLint size; 
@@ -202,6 +214,11 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     GLint ambiLightning = glGetUniformLocation(ShaderProgram, "disableAmbi");
     glUniform1i(ambiLightning,  GraphicsObject::disableAmbient);
     
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    GLint texSampler = glGetUniformLocation(ShaderProgram, "texSampler");
+    glUniform1i(texSampler, 0);
+    
     
     
     
@@ -235,4 +252,69 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     /* Disable attributes */
     glDisableVertexAttribArray(vPosition);
     glDisableVertexAttribArray(vNormals);
+    glDisableVertexAttribArray(vUV);
+}
+
+
+GLint GraphicsObject::LoadTexture(const std::string & filename)
+{
+  GLuint texture;
+
+  int width, height;
+
+  unsigned char * data;
+
+  FILE * file;
+
+  file = fopen( filename.c_str(), "rb" );
+
+  if ( file == NULL ) return 0;
+  width = 1080;
+  height = 1080;
+  data = (unsigned char *)malloc( width * height * 3 );
+  //int size = fseek(file,);
+  fread( data, width * height * 3, 1, file );
+  fclose( file );
+
+  for(int i = 0; i < width * height ; ++i)
+  {
+    int index = i*3;
+    unsigned char B,R;
+    B = data[index];
+    R = data[index+2];
+
+    data[index] = R;
+    data[index+2] = B;
+
+  }
+
+
+  glGenTextures( 1, &texture );
+  glBindTexture( GL_TEXTURE_2D, texture );
+/* Load texture image into memory */
+    glTexImage2D(GL_TEXTURE_2D,     /* Target texture */
+		 0,                 /* Base level */
+		 GL_RGB,            /* Each element is RGB triple */ 
+		 width,    /* Texture dimensions */ 
+                 height, 
+		 0,                 /* Border should be zero */
+		 GL_BGR,            /* Data storage format for BMP file */
+		 GL_UNSIGNED_BYTE,  /* Type of pixel data, one byte per channel */
+		 data);    /* Pointer to image data  */
+ 
+    /* Next set up texturing parameters */
+
+    /* Repeat texture on edges when tiling */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    /* Linear interpolation for magnification */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    /* Trilinear MIP mapping for minification */ 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); 
+    glGenerateMipmap(GL_TEXTURE_2D); 
+  free( data );
+
+  return texture;
 }

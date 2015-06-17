@@ -7,11 +7,14 @@ uniform mat4 ModelMatrix;
 
 layout (location = 0) in vec3 Position;
 layout (location = 1) in vec3 Normals;
+layout (location = 2) in vec2 UV;
 
 out vec3 fragVert;
 out vec3 fragNormal;
 out vec3 world_posM;
 out vec3 world_pos;
+
+out vec2 vUV;
 
 void main() 
 {
@@ -25,4 +28,6 @@ void main()
     
     // Apply all matrix transformations to vert
     gl_Position = ProjectionMatrix* ViewMatrix * ModelMatrix * vec4(Position, 1);
+    
+    vUV = UV;
 }
