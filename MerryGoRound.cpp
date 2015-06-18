@@ -28,7 +28,7 @@
 #include "glm/gtx/string_cast.hpp"
 
 //set to 1 when using the opensource intel or amd driver
-#define USES_MESA_DRIVER 1
+#define USES_MESA_DRIVER 0
 
 //storage for all the modles loaded from the obj
 std::vector<GraphicsObject> allObjs;
@@ -47,6 +47,7 @@ std::vector<LightSource> lightSources;
 
 void Display()
 {
+    
     /* Clear window; color specified in 'Initialize()' */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for(int i = 0; i < allObjs.size(); i ++)
@@ -118,7 +119,7 @@ void Initialize(void)
     
     for(int i = 0; i < allObjs.size(); i ++)
     {
-      allObjs[i].initobj(0,0,0, "../res/grass.bmp");
+      allObjs[i].initobj(0,0,0);
       
       if(allObjs[i].name.compare("Light1") == 0)
       {

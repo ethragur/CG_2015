@@ -32,16 +32,15 @@ void main()
   vec3 specular = vec3(0,0,0);
   vec3 result = vec3(0,0,0);
   
-  vec3 texColor = texture(texSampler, vUV).rgb;
-  finalColor = vec4(texColor,1.0f);
-  /*
+  vec3 texColor = texture(texSampler, vUV.st).rgb;
+  
   //ambient
   if(!disableAmbi)
   {
     float ambientIntensity = 0.2f;
     ambient = ambientIntensity * vec3(1,1,1);
   }
-  result = result + (ambient *objectColor);
+  result = result + (ambient *texColor);
   
   vec3 norm = normalize(fragNormal);
   for(int i = 0; i < numberOfLights; i++)
@@ -82,11 +81,11 @@ void main()
       specular = specularStrength *  spec * specColor * lightColor[i]  ;  
       
     }
-    result = result + (specular + diffuse) * objectColor * lightIntensity[i];
+    result = result + (specular + diffuse) * texColor * lightIntensity[i];
   }
 
   
-  //   finalColor = vec4(result, 1.0f);*/
+     finalColor = vec4(result, 1.0f);
   //see normals for debug
  //     finalColor = vec4(norm, 1.0f);
     

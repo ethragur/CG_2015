@@ -16,15 +16,18 @@ GraphicsObject::GraphicsObject(
   const glm::vec3 & spec_tmp,
   const std::vector<GLfloat> & tex_tmp,
   GLfloat shiny,
-  const std::string &name) :
+  const std::string &name,
+  const std::string &texname) :
 vertex_buffer_data(vertex_buffer_temp),
 index_buffer_data(index_buffer_temp),
 diffuse(diff_tmp),
 specular(spec_tmp),
 texture_vertex_data(tex_tmp),
 shininess(shiny),
-name(name) 
+name(name),
+texname(texname)
 { 
+  //calculations of vertex normals
   std::vector<glm::vec3> norm(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
   
   for(int i = 0; i < index_buffer_temp.size() ; i+=3)
@@ -59,14 +62,16 @@ name(name)
  * starting Pos, Rotation....
  * 
 *****++++++++++++++++++++++++++++++++++++++++*/
-void GraphicsObject::initobj(float x, float y, float z, const std::string & texfile)
+void GraphicsObject::initobj(float x, float y, float z)
 {
   SetupDataBuffers();
   ModelMatrix = glm::mat4(1.0);
   TranslateOrigin = glm::translate(glm::vec3(x,y,z));
   ModelMatrix = TranslateOrigin * ModelMatrix;
-  textureID = LoadTexture(texfile);
-
+  
+  //load texture from materials
+  std::string texpath = "../res/" + texname;
+  textureID = LoadTexture("../res/fur4.bmp");
 }
 
 
@@ -142,6 +147,8 @@ void GraphicsObject::SetupDataBuffers()
 
 /*
  * Draw Object to screen
+ * intialize UNIFORMS
+ * and ATTRIBUTES
  * */
 void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSources)
 {
@@ -162,7 +169,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     GLint size; 
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);  
 
-    
+    //create Lightning vectors for FragmentShader
     std::vector<GLfloat> lightPositionMat(lightSources.size() * 3, 0);
     std::vector<GLfloat> lightColorMat(lightSources.size() * 3, 0);
     std::vector<GLfloat> lightIntensity(lightSources.size(), 0);
@@ -256,6 +263,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
 }
 
 
+//Load BMP file and give it to OPENGL
 GLint GraphicsObject::LoadTexture(const std::string & filename)
 {
   GLuint texture;
@@ -269,8 +277,8 @@ GLint GraphicsObject::LoadTexture(const std::string & filename)
   file = fopen( filename.c_str(), "rb" );
 
   if ( file == NULL ) return 0;
-  width = 1080;
-  height = 1080;
+  width = 256;
+  height = 256;
   data = (unsigned char *)malloc( width * height * 3 );
   //int size = fseek(file,);
   fread( data, width * height * 3, 1, file );
@@ -291,29 +299,36 @@ GLint GraphicsObject::LoadTexture(const std::string & filename)
 
   glGenTextures( 1, &texture );
   glBindTexture( GL_TEXTURE_2D, texture );
-/* Load texture image into memory */
-    glTexImage2D(GL_TEXTURE_2D,     /* Target texture */
-		 0,                 /* Base level */
-		 GL_RGB,            /* Each element is RGB triple */ 
-		 width,    /* Texture dimensions */ 
-                 height, 
-		 0,                 /* Border should be zero */
-		 GL_BGR,            /* Data storage format for BMP file */
-		 GL_UNSIGNED_BYTE,  /* Type of pixel data, one byte per channel */
-		 data);    /* Pointer to image data  */
- 
-    /* Next set up texturing parameters */
+  
+  /* Load texture image into memory */
+  glTexImage2D(GL_TEXTURE_2D,     /* Target texture */
+		0,                 /* Base level */
+		GL_RGB,           /* Each element is RGB triple */ 
+		width,    /* Texture dimensions */ 
+		height, 
+		0,                 /* Border should be zero */
+		GL_RGB,            /* Data storage format for BMP file */
+		GL_UNSIGNED_BYTE,  /* Type of pixel data, one byte per channel */
+		data);    /* Pointer to image data  */
 
-    /* Repeat texture on edges when tiling */
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    
-    /* Linear interpolation for magnification */
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  
+  
+  /* Next set up texturing parameters */
 
-    /* Trilinear MIP mapping for minification */ 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); 
-    glGenerateMipmap(GL_TEXTURE_2D); 
+  /* Repeat texture on edges when tiling */
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  
+  /* Linear interpolation for magnification */
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+  /* Trilinear MIP mapping for minification */ 
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); 
+  
+  glGenerateMipmap(GL_TEXTURE_2D);
+  
+  
+  glBindTexture( GL_TEXTURE_2D, 0 );
   free( data );
 
   return texture;

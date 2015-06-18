@@ -18,6 +18,7 @@ class GraphicsObject
 public:
   //vars
   std::string name;
+  std::string texname;
   GLuint VBO;
   GLuint CBO;
   GLuint IBO;
@@ -50,9 +51,10 @@ public:
 		 const glm::vec3 & spec_tmp,
 		 const std::vector<GLfloat> & tex_tmp,
 		 GLfloat shiny,
-		 const std::string & name);
+		 const std::string & name,
+		 const std::string & texname);
   void Draw(GLuint ShaderProgram, std::vector<LightSource> lightSources);
-  void initobj(float x, float y, float z, const std::string & texfile);
+  void initobj(float x, float y, float z);
   void IdleWork(bool updown);
   
   GLint LoadTexture(const std::string & filename);

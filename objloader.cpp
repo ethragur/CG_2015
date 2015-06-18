@@ -27,9 +27,19 @@ std::vector<GraphicsObject> ObjLoader::loadObj ( const std::string& objpath, con
   {
       glm::vec3 diff = glm::vec3(mats[shapes[i].mesh.material_ids[0]].diffuse[0], mats[shapes[i].mesh.material_ids[0]].diffuse[1], mats[shapes[i].mesh.material_ids[0]].diffuse[2]);
       glm::vec3 spec = glm::vec3(mats[shapes[i].mesh.material_ids[0]].specular[0], mats[shapes[i].mesh.material_ids[0]].specular[1],mats[shapes[i].mesh.material_ids[0]].specular[2]);
+      std::string texname = mats[shapes[i].mesh.material_ids[0]].diffuse_texname;
       GLfloat shiny = mats[shapes[i].mesh.material_ids[0]].shininess;
       //push back to the vector     
-      retVec.push_back(GraphicsObject(shapes[i].mesh.positions, shapes[i].mesh.indices ,diff, spec, shapes[i].mesh.texcoords ,shiny, shapes[i].name));
+      std::cout << texname << std::endl;
+      retVec.push_back(GraphicsObject(shapes[i].mesh.positions, 
+				      shapes[i].mesh.indices ,
+				      diff, 
+				      spec,
+				      shapes[i].mesh.texcoords ,
+				      shiny, 
+				      shapes[i].name,
+				      texname
+ 				    ));
   }   
   return retVec;
 }
