@@ -72,7 +72,14 @@ void GraphicsObject::initobj(float x, float y, float z)
   
   //load texture from materials
   std::string texpath = "../res/" + texname;
-  textureID = LoadTexture(texpath);
+  if(texname.size() == 0)
+  {
+    textureID = LoadTexture("../res/default.png");
+  }
+  else
+  {
+    textureID = LoadTexture(texname);
+  }
 }
 
 
