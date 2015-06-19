@@ -33,7 +33,7 @@ void main()
   vec3 result = vec3(0,0,0);
   
   vec3 texColor = texture(texSampler, vUV.st).rgb;
-  
+  vec4 texColorA = texture(texSampler, vUV.st).rgba;
   //ambient
   if(!disableAmbi)
   {
@@ -85,7 +85,7 @@ void main()
   }
 
   
-     finalColor = vec4(result, 1.0f);
+     finalColor = texColorA;
   //see normals for debug
  //     finalColor = vec4(norm, 1.0f);
     

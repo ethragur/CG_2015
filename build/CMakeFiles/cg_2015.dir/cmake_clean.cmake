@@ -7,6 +7,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/cg_2015.dir/camera.cpp.o"
   "CMakeFiles/cg_2015.dir/InputManager.cpp.o"
   "CMakeFiles/cg_2015.dir/LightSource.cpp.o"
+  "CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o"
+  "CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o"
+  "CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o"
+  "CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o"
   "cg_2015.pdb"
   "cg_2015"
   "cg_2015.pdb"
@@ -14,6 +18,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang C CXX)
   include(CMakeFiles/cg_2015.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

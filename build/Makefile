@@ -270,6 +270,102 @@ MerryGoRound.cpp.s:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/MerryGoRound.cpp.s
 .PHONY : MerryGoRound.cpp.s
 
+SOIL/SOIL.o: SOIL/SOIL.c.o
+.PHONY : SOIL/SOIL.o
+
+# target to build an object file
+SOIL/SOIL.c.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o
+.PHONY : SOIL/SOIL.c.o
+
+SOIL/SOIL.i: SOIL/SOIL.c.i
+.PHONY : SOIL/SOIL.i
+
+# target to preprocess a source file
+SOIL/SOIL.c.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/SOIL.c.i
+.PHONY : SOIL/SOIL.c.i
+
+SOIL/SOIL.s: SOIL/SOIL.c.s
+.PHONY : SOIL/SOIL.s
+
+# target to generate assembly for a file
+SOIL/SOIL.c.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/SOIL.c.s
+.PHONY : SOIL/SOIL.c.s
+
+SOIL/image_DXT.o: SOIL/image_DXT.c.o
+.PHONY : SOIL/image_DXT.o
+
+# target to build an object file
+SOIL/image_DXT.c.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o
+.PHONY : SOIL/image_DXT.c.o
+
+SOIL/image_DXT.i: SOIL/image_DXT.c.i
+.PHONY : SOIL/image_DXT.i
+
+# target to preprocess a source file
+SOIL/image_DXT.c.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.i
+.PHONY : SOIL/image_DXT.c.i
+
+SOIL/image_DXT.s: SOIL/image_DXT.c.s
+.PHONY : SOIL/image_DXT.s
+
+# target to generate assembly for a file
+SOIL/image_DXT.c.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.s
+.PHONY : SOIL/image_DXT.c.s
+
+SOIL/image_helper.o: SOIL/image_helper.c.o
+.PHONY : SOIL/image_helper.o
+
+# target to build an object file
+SOIL/image_helper.c.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o
+.PHONY : SOIL/image_helper.c.o
+
+SOIL/image_helper.i: SOIL/image_helper.c.i
+.PHONY : SOIL/image_helper.i
+
+# target to preprocess a source file
+SOIL/image_helper.c.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_helper.c.i
+.PHONY : SOIL/image_helper.c.i
+
+SOIL/image_helper.s: SOIL/image_helper.c.s
+.PHONY : SOIL/image_helper.s
+
+# target to generate assembly for a file
+SOIL/image_helper.c.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_helper.c.s
+.PHONY : SOIL/image_helper.c.s
+
+SOIL/stb_image_aug.o: SOIL/stb_image_aug.c.o
+.PHONY : SOIL/stb_image_aug.o
+
+# target to build an object file
+SOIL/stb_image_aug.c.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o
+.PHONY : SOIL/stb_image_aug.c.o
+
+SOIL/stb_image_aug.i: SOIL/stb_image_aug.c.i
+.PHONY : SOIL/stb_image_aug.i
+
+# target to preprocess a source file
+SOIL/stb_image_aug.c.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.i
+.PHONY : SOIL/stb_image_aug.c.i
+
+SOIL/stb_image_aug.s: SOIL/stb_image_aug.c.s
+.PHONY : SOIL/stb_image_aug.s
+
+# target to generate assembly for a file
+SOIL/stb_image_aug.c.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.s
+.PHONY : SOIL/stb_image_aug.c.s
+
 camera.o: camera.cpp.o
 .PHONY : camera.o
 
@@ -369,6 +465,18 @@ help:
 	@echo "... MerryGoRound.o"
 	@echo "... MerryGoRound.i"
 	@echo "... MerryGoRound.s"
+	@echo "... SOIL/SOIL.o"
+	@echo "... SOIL/SOIL.i"
+	@echo "... SOIL/SOIL.s"
+	@echo "... SOIL/image_DXT.o"
+	@echo "... SOIL/image_DXT.i"
+	@echo "... SOIL/image_DXT.s"
+	@echo "... SOIL/image_helper.o"
+	@echo "... SOIL/image_helper.i"
+	@echo "... SOIL/image_helper.s"
+	@echo "... SOIL/stb_image_aug.o"
+	@echo "... SOIL/stb_image_aug.i"
+	@echo "... SOIL/stb_image_aug.s"
 	@echo "... camera.o"
 	@echo "... camera.i"
 	@echo "... camera.s"

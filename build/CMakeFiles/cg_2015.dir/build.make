@@ -233,6 +233,98 @@ CMakeFiles/cg_2015.dir/LightSource.cpp.o.provides: CMakeFiles/cg_2015.dir/LightS
 
 CMakeFiles/cg_2015.dir/LightSource.cpp.o.provides.build: CMakeFiles/cg_2015.dir/LightSource.cpp.o
 
+CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o: ../SOIL/SOIL.c
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o   -c /home/effi/projects/CG_2015/SOIL/SOIL.c
+
+CMakeFiles/cg_2015.dir/SOIL/SOIL.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cg_2015.dir/SOIL/SOIL.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/effi/projects/CG_2015/SOIL/SOIL.c > CMakeFiles/cg_2015.dir/SOIL/SOIL.c.i
+
+CMakeFiles/cg_2015.dir/SOIL/SOIL.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cg_2015.dir/SOIL/SOIL.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/effi/projects/CG_2015/SOIL/SOIL.c -o CMakeFiles/cg_2015.dir/SOIL/SOIL.c.s
+
+CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.requires
+
+CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.provides: CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.provides
+
+CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.provides.build: CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o
+
+CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o: ../SOIL/image_helper.c
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o   -c /home/effi/projects/CG_2015/SOIL/image_helper.c
+
+CMakeFiles/cg_2015.dir/SOIL/image_helper.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cg_2015.dir/SOIL/image_helper.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/effi/projects/CG_2015/SOIL/image_helper.c > CMakeFiles/cg_2015.dir/SOIL/image_helper.c.i
+
+CMakeFiles/cg_2015.dir/SOIL/image_helper.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cg_2015.dir/SOIL/image_helper.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/effi/projects/CG_2015/SOIL/image_helper.c -o CMakeFiles/cg_2015.dir/SOIL/image_helper.c.s
+
+CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.requires
+
+CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.provides: CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.provides
+
+CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.provides.build: CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o
+
+CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o: ../SOIL/image_DXT.c
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o   -c /home/effi/projects/CG_2015/SOIL/image_DXT.c
+
+CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/effi/projects/CG_2015/SOIL/image_DXT.c > CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.i
+
+CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/effi/projects/CG_2015/SOIL/image_DXT.c -o CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.s
+
+CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.requires
+
+CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.provides: CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.provides
+
+CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.provides.build: CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o
+
+CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o: CMakeFiles/cg_2015.dir/flags.make
+CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o: ../SOIL/stb_image_aug.c
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/effi/projects/CG_2015/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o   -c /home/effi/projects/CG_2015/SOIL/stb_image_aug.c
+
+CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/effi/projects/CG_2015/SOIL/stb_image_aug.c > CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.i
+
+CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/effi/projects/CG_2015/SOIL/stb_image_aug.c -o CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.s
+
+CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.requires:
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.requires
+
+CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.provides: CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.requires
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.provides.build
+.PHONY : CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.provides
+
+CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.provides.build: CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o
+
 # Object files for target cg_2015
 cg_2015_OBJECTS = \
 "CMakeFiles/cg_2015.dir/MerryGoRound.cpp.o" \
@@ -242,7 +334,11 @@ cg_2015_OBJECTS = \
 "CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o" \
 "CMakeFiles/cg_2015.dir/camera.cpp.o" \
 "CMakeFiles/cg_2015.dir/InputManager.cpp.o" \
-"CMakeFiles/cg_2015.dir/LightSource.cpp.o"
+"CMakeFiles/cg_2015.dir/LightSource.cpp.o" \
+"CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o" \
+"CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o" \
+"CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o" \
+"CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o"
 
 # External object files for target cg_2015
 cg_2015_EXTERNAL_OBJECTS =
@@ -255,6 +351,10 @@ cg_2015: CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/camera.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/InputManager.cpp.o
 cg_2015: CMakeFiles/cg_2015.dir/LightSource.cpp.o
+cg_2015: CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o
+cg_2015: CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o
+cg_2015: CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o
+cg_2015: CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o
 cg_2015: CMakeFiles/cg_2015.dir/build.make
 cg_2015: /usr/lib64/libGLEW.so
 cg_2015: /usr/lib64/libGLU.so
@@ -285,7 +385,11 @@ cg_2015_OBJECTS = \
 "CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o" \
 "CMakeFiles/cg_2015.dir/camera.cpp.o" \
 "CMakeFiles/cg_2015.dir/InputManager.cpp.o" \
-"CMakeFiles/cg_2015.dir/LightSource.cpp.o"
+"CMakeFiles/cg_2015.dir/LightSource.cpp.o" \
+"CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o" \
+"CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o" \
+"CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o" \
+"CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o"
 
 # External object files for target cg_2015
 cg_2015_EXTERNAL_OBJECTS =
@@ -298,6 +402,10 @@ CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o
 CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/camera.cpp.o
 CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/InputManager.cpp.o
 CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/LightSource.cpp.o
+CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o
+CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o
+CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o
+CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o
 CMakeFiles/CMakeRelink.dir/cg_2015: CMakeFiles/cg_2015.dir/build.make
 CMakeFiles/CMakeRelink.dir/cg_2015: /usr/lib64/libGLEW.so
 CMakeFiles/CMakeRelink.dir/cg_2015: /usr/lib64/libGLU.so
@@ -327,6 +435,10 @@ CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o.re
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/camera.cpp.o.requires
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/InputManager.cpp.o.requires
 CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/LightSource.cpp.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o.requires
+CMakeFiles/cg_2015.dir/requires: CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o.requires
 .PHONY : CMakeFiles/cg_2015.dir/requires
 
 CMakeFiles/cg_2015.dir/clean:

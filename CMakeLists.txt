@@ -36,7 +36,7 @@ endif()
 #########################################################
 # Include Files
 #########################################################
-add_executable(cg_2015 MerryGoRound.cpp InitClass.cpp GraphicsObject.cpp objloader.cpp tiny_obj_loader.cpp InitClass.cpp camera.cpp InputManager.cpp LightSource.cpp)
+add_executable(cg_2015 MerryGoRound.cpp InitClass.cpp GraphicsObject.cpp objloader.cpp tiny_obj_loader.cpp InitClass.cpp camera.cpp InputManager.cpp LightSource.cpp SOIL/SOIL.c SOIL/image_helper.c SOIL/image_DXT.c SOIL/stb_image_aug.c)
 
 ########################################################
 # Linking & stuff

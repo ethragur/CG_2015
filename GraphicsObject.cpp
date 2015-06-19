@@ -1,6 +1,7 @@
 #include "GraphicsObject.h"
 #include "glm/ext.hpp"
 #include <cmath>
+#include "SOIL/SOIL.h"
 #include <iostream>
 
 
@@ -71,7 +72,7 @@ void GraphicsObject::initobj(float x, float y, float z)
   
   //load texture from materials
   std::string texpath = "../res/" + texname;
-  textureID = LoadTexture("../res/fur4.bmp");
+  textureID = LoadTexture(texpath);
 }
 
 
@@ -272,30 +273,12 @@ GLint GraphicsObject::LoadTexture(const std::string & filename)
 
   unsigned char * data;
 
-  FILE * file;
-
-  file = fopen( filename.c_str(), "rb" );
-
-  if ( file == NULL ) return 0;
-  width = 256;
-  height = 256;
-  data = (unsigned char *)malloc( width * height * 3 );
-  //int size = fseek(file,);
-  fread( data, width * height * 3, 1, file );
-  fclose( file );
-
-  for(int i = 0; i < width * height ; ++i)
-  {
-    int index = i*3;
-    unsigned char B,R;
-    B = data[index];
-    R = data[index+2];
-
-    data[index] = R;
-    data[index+2] = B;
-
-  }
-
+  
+  width = 512;
+  height = 512;
+  
+  
+  data = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGBA );
 
   glGenTextures( 1, &texture );
   glBindTexture( GL_TEXTURE_2D, texture );
@@ -303,11 +286,11 @@ GLint GraphicsObject::LoadTexture(const std::string & filename)
   /* Load texture image into memory */
   glTexImage2D(GL_TEXTURE_2D,     /* Target texture */
 		0,                 /* Base level */
-		GL_RGB,           /* Each element is RGB triple */ 
+		GL_RGBA,           /* Each element is RGB triple */ 
 		width,    /* Texture dimensions */ 
 		height, 
 		0,                 /* Border should be zero */
-		GL_RGB,            /* Data storage format for BMP file */
+		GL_RGBA,            /* Data storage format for BMP file */
 		GL_UNSIGNED_BYTE,  /* Type of pixel data, one byte per channel */
 		data);    /* Pointer to image data  */
 

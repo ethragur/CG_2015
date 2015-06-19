@@ -1,8 +1,16 @@
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
+  "C"
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_C
+  "/home/effi/projects/CG_2015/SOIL/SOIL.c" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o"
+  "/home/effi/projects/CG_2015/SOIL/image_DXT.c" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/SOIL/image_DXT.c.o"
+  "/home/effi/projects/CG_2015/SOIL/image_helper.c" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o"
+  "/home/effi/projects/CG_2015/SOIL/stb_image_aug.c" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o"
+  )
+set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/effi/projects/CG_2015/GraphicsObject.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
   "/home/effi/projects/CG_2015/InitClass.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/InitClass.cpp.o"

@@ -13,6 +13,8 @@ glm/ext.hpp
 /home/effi/projects/CG_2015/glm/ext.hpp
 cmath
 -
+SOIL/SOIL.h
+/home/effi/projects/CG_2015/SOIL/SOIL.h
 iostream
 -
 
@@ -111,6 +113,8 @@ LightSource.h
 /home/effi/projects/CG_2015/LightSource.h
 glm/gtx/string_cast.hpp
 /home/effi/projects/CG_2015/glm/gtx/string_cast.hpp
+
+/home/effi/projects/CG_2015/SOIL/SOIL.h
 
 /home/effi/projects/CG_2015/camera.cpp
 camera.h

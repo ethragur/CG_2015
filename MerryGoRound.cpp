@@ -28,7 +28,7 @@
 #include "glm/gtx/string_cast.hpp"
 
 //set to 1 when using the opensource intel or amd driver
-#define USES_MESA_DRIVER 0
+#define USES_MESA_DRIVER 1
 
 //storage for all the modles loaded from the obj
 std::vector<GraphicsObject> allObjs;
