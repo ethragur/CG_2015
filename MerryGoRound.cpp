@@ -59,6 +59,35 @@ void Display()
 }
 
 
+int currentTime;
+int previousTime;
+int frameCount;
+
+void calcFps()
+{
+   //  Increase frame count
+    frameCount++;
+ 
+    //  Get the number of milliseconds since glutInit called
+    //  (or first call to glutGet(GLUT ELAPSED TIME)).
+    int currentTime = glutGet(GLUT_ELAPSED_TIME);
+ 
+    //  Calculate time passed
+    int timeInterval = currentTime - previousTime;
+ 
+    if(timeInterval > 1000)
+    {
+        //  calculate the number of frames per second
+        std::cout << frameCount / (timeInterval / 1000.0f) << std::endl;
+ 
+        //  Set time
+        previousTime = currentTime;
+ 
+        //  Reset frame count
+        frameCount = 0;
+    }
+}
+
 /******************************************************************
 *
 * OnIdle
@@ -88,8 +117,11 @@ void OnIdle()
       
   }
   InputManager::onIdle();
+  calcFps();
   glutPostRedisplay();
 }
+
+
 
 
 /******************************************************************
