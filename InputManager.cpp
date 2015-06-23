@@ -81,10 +81,10 @@ void InputManager::mouse(int button, int state, int x, int y)
       switch(button) 
       {
 	  case 3:
-		Camera::getInstance()->move(glm::vec3(0.0,0.0,1.00));
+		Camera::getInstance()->move('w');
 		break;
 	  case 4:
-		Camera::getInstance()->move(glm::vec3(0.0,0.0,-1.00));
+		Camera::getInstance()->move('s');
 		break;
       }
 
@@ -97,8 +97,7 @@ void InputManager::mouseMovement(int x, int y)
   {
     int centx = glutGet(GLUT_WINDOW_WIDTH) / 2;
     int centy = glutGet(GLUT_WINDOW_HEIGHT) / 2;
-    Camera::getInstance()->rotate(glm::vec3( (0.001*(y- centy))   , 0.001 * (x - centx) , 0));
-    //cam.rotate(glm::vec3());
+    Camera::getInstance()->rotate((0.1*(x- centx))   , 0.1 * (y - centy));
     if (x != centx || y != centy)
     {
       glutWarpPointer(centx, centy);
@@ -112,8 +111,8 @@ void InputManager::acMouseMovement(int x, int y)
   {
     int centx = glutGet(GLUT_WINDOW_WIDTH) / 2;
     int centy = glutGet(GLUT_WINDOW_HEIGHT) / 2;
-    Camera::getInstance()->rotateScreenMid(glm::vec3( (0.001*(y- centy))   , 0.001 * (x - centx) , 0));
-    //cam.rotate(glm::vec3());
+   // Camera::getInstance()->rotateScreenMid(glm::vec3( (0.001*(y- centy))   , 0.001 * (x - centx) , 0));
+    
     if (x != centx || y != centy)
     {
       glutWarpPointer(centx, centy);
@@ -140,25 +139,25 @@ void InputManager::keyboardUp(unsigned char key, int x, int y)
 
 
 void InputManager::onIdle()
-{
+{  
   if(FORWARD)
   {
-    Camera::getInstance()->move(glm::vec3(0,0,0.1));
+    Camera::getInstance()->move('w');
   }
   else if(BACK)
   {
-    Camera::getInstance()->move(glm::vec3(0,0,-0.1));
+    Camera::getInstance()->move('s');
   }
   else if(LEFT)
   {
-    Camera::getInstance()->move(glm::vec3(0.1,0,0));
+    Camera::getInstance()->move('a');
   }
   else if(RIGHT)
   {
-    Camera::getInstance()->move(glm::vec3(-0.1,0,0));
+    Camera::getInstance()->move('d');
   }
-  if(!MODE1)
+  /*if(!MODE1)
   {
     Camera::getInstance()->freeFly();
-  }
+  }*/
 }

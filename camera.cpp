@@ -8,24 +8,40 @@
 
 Camera *Camera::inst = NULL;
 
-Camera::Camera()
+Camera::Camera() : Front(glm::vec3(0.0f, 0.0f, -1.0f))
 {
- ViewMatrix = glm::mat4(1.0);
- ProjectionMatrix = glm::mat4(1.0);
- fovy = 45.0;
- aspect = 1.0; 
- nearPlane = 1.0; 
- farPlane = 1000.0;
- ProjectionMatrix = glm::perspective(fovy, aspect, nearPlane, farPlane);
- 
-  /* Set viewing transform */
-  camera_disp = -15.0;
-  ViewMatrix = glm::translate(glm::vec3(0.0,0.0, camera_disp));
-  cameraPos = glm::vec3(0.0,0.0, camera_disp);
-  move(glm::vec3(0,-2,0));
-  initialViewMatrix = ViewMatrix;
-  factor = 1;
+  fovy = 45.0;
+  aspect = 1.0; 
+  nearPlane = 1.0; 
+  farPlane = 1000.0;
+  ProjectionMatrix = glm::perspective(fovy, aspect, nearPlane, farPlane);
   
+  this->Position = glm::vec3(0.0f, 2.0f, 6.0f);
+  this->WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+  this->Yaw = -90.0f;
+  this->Pitch = 0.0f;
+  this->updateCameraVectors();
+}
+
+
+// Returns the view matrix calculated using Eular Angles and the LookAt Matrix
+glm::mat4 Camera::GetViewMatrix()
+{
+    return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
+}
+
+
+void Camera::updateCameraVectors()
+{
+    // Calculate the new Front vector
+    glm::vec3 front;
+    front.x = cos(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
+    front.y = sin(glm::radians(this->Pitch));
+    front.z = sin(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
+    this->Front = glm::normalize(front);
+    // Also re-calculate the Right and Up vector
+    this->Right = glm::normalize(glm::cross(this->Front, this->WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+    this->Up    = glm::normalize(glm::cross(this->Right, this->Front));
 }
 
 Camera* Camera::getInstance()
@@ -33,75 +49,47 @@ Camera* Camera::getInstance()
   if(inst == NULL)
   {
     inst = new Camera();
-    return inst;
   }
   return inst;
 }
 
-
-//moves the camera to a point
-void Camera::move(glm::vec3 transVec)
+void Camera::move(char dir)
 {
-    glm::mat4 translation(1.0f);
-    translation = glm::translate(transVec);
-    ViewMatrix = translation * ViewMatrix;
-    cameraPos += transVec;
-    
-    //std::cout << "x: " << cameraPos.x << ";  y: " << cameraPos.y << ";  z: " << cameraPos.z << std::endl;
-}
-
-//rotates the Camera by a vec3
-void Camera::rotate(glm::vec3 rotation)
-{
-  glm::mat4 mRotation(1.0f);
-  if(rotation.x != 0.0f) 
-	  mRotation = glm::rotate(mRotation, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-  if(rotation.y != 0.0f)
-	  mRotation = glm::rotate(mRotation, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-  if(rotation.z != 0.0f)
-	  mRotation = glm::rotate(mRotation, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-
-  ViewMatrix = mRotation * ViewMatrix;
- 
- // ViewMatrix = glm::lookAt(cameraPos ,cameraPos + rotation, glm::vec3(0,1,0));
-}
-
-//rotates the camera around the screens center
-void Camera::rotateScreenMid(glm::vec3 rotation)
-{
-  glm::mat4 mRotation(1.0f);
-  if(rotation.x != 0.0f) 
-	  mRotation = glm::rotate(mRotation, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-  if(rotation.y != 0.0f)
-	  mRotation = glm::rotate(mRotation, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-  if(rotation.z != 0.0f)
-	  mRotation = glm::rotate(mRotation, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-  ViewMatrix *= mRotation;
-}
-
-
-//lookAt the current ScreenMid
-void Camera::lookAtCenter()
-{
-  glm::mat4 oldView = ViewMatrix;  
-}
-
-
-void Camera::freeFly()
-{
-  oldtime = newtime;
-  newtime = glutGet(GLUT_ELAPSED_TIME); 
-  //
-  if(ViewMatrix[1][1] > 0.95 || ViewMatrix[1][1] < 0.85)
-    rotateScreenMid(glm::vec3(0.002,0.0, 0));
+  if(dir == 'w')
+  {
+      this->Position += this->Front * 0.1;
+  }
+  else if(dir == 's')
+  {
+      this->Position -= this->Front * 0.1;
+  }
+  else if(dir == 'a')
+  {
+    this->Position -= this->Right * 0.1;
+  }
   else
   {
-    rotateScreenMid(glm::vec3(0,-0.002, 0));
+    this->Position += this->Right * 0.1;
   }
- 
-  move(glm::vec3((sin((newtime/10)*(M_PI/180)) / 20) * factor, (sin((newtime/10)*(M_PI/180)) / 20) * factor ,0.0));
-  
-  move(glm::vec3(0.0,0.0,(sin((newtime/10)*(M_PI/180)) / 20) * factor ));
+      
+}
+
+void Camera::rotate(GLfloat x, GLfloat y)
+{
+  this->Yaw   += x;
+  this->Pitch -= y;
+
+  // Make sure that when pitch is out of bounds, screen doesn't get flipped
+  if (true)
+  {
+      if (this->Pitch > 89.0f)
+	  this->Pitch = 89.0f;
+      if (this->Pitch < -89.0f)
+	  this->Pitch = -89.0f;
+  }
+
+  // Update Front, Right and Up Vectors using the updated Eular angles
+  this->updateCameraVectors();
 }
 
 

@@ -3,7 +3,7 @@
 #include "GraphicsObject.h"
 #include <iostream>
 
-GLfloat LightSource::intensity = 30.0f;
+GLfloat LightSource::intensity = 40.0f;
 
 LightSource::LightSource(const glm::vec3 & pos, const glm::vec3 & col, bool move) :
 position(pos),

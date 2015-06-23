@@ -108,7 +108,6 @@ normtexname(normtexname)
   vertex_normal_data = resNorm;
   vertex_tangent_data = resTang;
  // vertex_bintangent_data = biresTang;
-  
   //calc position
   GLfloat x = 0.0f;
   GLfloat y = 0.0f;
@@ -177,7 +176,24 @@ void GraphicsObject::IdleWork(bool updown)
     {
       UpDown();
     }
+  } 
+  
+  //Get all the objects the start with Billboard
+  if(name.find("Billboard") != std::string::npos)
+  {
+	//std::cout << name << std::endl;
+    	glm::vec3 viewDir = glm::vec3(0, 0, 1);
+	
+	glm::vec3 dist = Camera::getInstance()->Position - position;
+	dist.y = 0;
+	dist = glm::normalize(dist);
+	glm::vec3 up = glm::cross(viewDir, dist);
+	GLfloat alpha = glm::dot(viewDir, dist);
+	ModelMatrix = glm::translate(position);
+	ModelMatrix *= glm::rotate((GLfloat)acos(alpha), up);
+	ModelMatrix *= glm::translate(-position);
   }
+  
 }
 
 
@@ -374,7 +390,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
         std::cerr << "Could not bind uniform ViewMatrix " << std::endl;
         exit(-1);
     }
-    glUniformMatrix4fv(ViewUniform, 1, GL_FALSE, glm::value_ptr(Camera::getInstance()->ViewMatrix));
+    glUniformMatrix4fv(ViewUniform, 1, GL_FALSE, glm::value_ptr(Camera::getInstance()->GetViewMatrix()));
    
     GLint RotationUniform = glGetUniformLocation(ShaderProgram, "ModelMatrix");
     if (RotationUniform == -1) 

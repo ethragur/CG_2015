@@ -91,7 +91,7 @@ void main()
 	  //specular lighting only on surface which face light
 	  if(diff > 0)
 	  {
-	    float specStrength = 32;
+	    float specStrength = 8;
 	    vec3 viewDir = normalize(-FragPosView);
 	    vec3 reflectDir = reflect(-l, n);
 	    float spec = pow(clamp(dot(viewDir, reflectDir), 0, 1), shininess);

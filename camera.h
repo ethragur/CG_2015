@@ -2,6 +2,7 @@
 #define CAMERA_H
 
 #include "glm/glm.hpp"
+#include <GL/gl.h>
 
 class Camera
 {
@@ -21,15 +22,24 @@ public:
   int oldtime;
   int newtime;
   float factor;
+  
+  glm::vec3 Position;
+  glm::vec3 Front;
+  glm::vec3 Up;
+  glm::vec3 Right;
+  glm::vec3 WorldUp;
 
+  GLfloat Yaw;
+  GLfloat Pitch;
+  
+  
   //func
   Camera();
-  void move(glm::vec3);
-  void rotate(glm::vec3);
-  void freeFly();
-  void rotateScreenMid(glm::vec3);
-  void lookAtCenter();
   static Camera* getInstance();
+  void updateCameraVectors();
+  glm::mat4 GetViewMatrix();
+  void move(char dir);
+  void rotate(GLfloat, GLfloat);
   
 };
 
