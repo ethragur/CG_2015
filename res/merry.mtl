@@ -51,7 +51,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd fur3.png
-map_Ns fur_normal.png
 
 newmtl Material.004
 Ns 96.078431
@@ -62,7 +61,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd fur4.png
-map_Ns fur_normal.png
 
 newmtl Material.005
 Ns 96.078431
@@ -95,7 +93,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd fur1.png
-map_Ns fur_normal.png
 
 newmtl Material.008
 Ns 96.078431
@@ -148,5 +145,4 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd fur2.png
-map_Ns fur_normal.png
 

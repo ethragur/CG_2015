@@ -39,6 +39,8 @@ public:
   GLint textureID;
   GLint normalMapID;
   
+  glm::vec3 position;
+  
   glm::mat4 TranslateOrigin;
   glm::mat4 InitialTransform;
   glm::mat4 ModelMatrix;

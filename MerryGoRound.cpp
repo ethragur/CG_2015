@@ -126,17 +126,17 @@ void Initialize(void)
       
       if(allObjs[i].name.compare("Light1") == 0)
       {
-	 LightSource tmp(glm::vec3(0,10,0), glm::vec3(1,1,1), false);
+	 LightSource tmp(glm::vec3(allObjs[i].position.x,allObjs[i].position.y,allObjs[i].position.z) , glm::vec3(1,1,1), false);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light2") == 0)
-      {
-	 LightSource tmp(glm::vec3(10,2,0), glm::vec3(1,1,1), true);
+      { 
+	 LightSource tmp(glm::vec3(allObjs[i].position.x,allObjs[i].position.y,allObjs[i].position.z), glm::vec3(1,1,1), true);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light3") == 0)
       {
- 	 LightSource tmp(glm::vec3(-10,2,0), glm::vec3(1,1,1), true);
+ 	 LightSource tmp(glm::vec3(allObjs[i].position.x,allObjs[i].position.y,allObjs[i].position.z), glm::vec3(1,1,1), true);
 	 lightSources.push_back(tmp);
       }
       

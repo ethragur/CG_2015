@@ -36,7 +36,7 @@ normtexname(normtexname)
   std::vector<glm::vec3> tangents(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
   std::vector<glm::vec3> bitangents(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
   std::vector<GLfloat> tmp_tangents(vertex_buffer_temp.size());
-  std::vector<GLfloat> tmp_bitangents(vertex_buffer_temp.size());
+ //std::vector<GLfloat> tmp_bitangents(vertex_buffer_temp.size());
   
   
   std::cout << "Calculating Normals and Tangents for: " << name << std::endl;
@@ -57,7 +57,7 @@ normtexname(normtexname)
     norm[(index_buffer_temp[i+1])] += fn;
     norm[(index_buffer_temp[i+2])] += fn;
     
-    glm::vec3 tangent, bitangent;
+    glm::vec3 tangent;
     
     glm::vec3 edge1 = v2 - v1;
     glm::vec3 edge2 = v3 - v2;
@@ -71,22 +71,23 @@ normtexname(normtexname)
     
     tangent = glm::vec3( f * (DeltaV2 * edge1.x - DeltaV1 * edge2.x), f * (DeltaV2 * edge1.y - DeltaV1 * edge2.y) ,f * (DeltaV2 * edge1.z - DeltaV1 * edge2.z));
     
-    bitangent = glm::vec3 (f * (-DeltaU2 * edge1.x - DeltaU1 * edge2.x), f * (-DeltaU2 * edge1.y - DeltaU1 * edge2.y), f * (-DeltaU2 * edge1.z - DeltaU1 * edge2.z));
+    //bitangent = glm::vec3 (f * (-DeltaU2 * edge1.x - DeltaU1 * edge2.x), f * (-DeltaU2 * edge1.y - DeltaU1 * edge2.y), f * (-DeltaU2 * edge1.z - DeltaU1 * edge2.z));
     
     tangents[(index_buffer_temp[i+0])] += tangent; 
     tangents[(index_buffer_temp[i+1])] += tangent;
     tangents[(index_buffer_temp[i+2])] += tangent;
     
+    /*
     bitangents[(index_buffer_temp[i+0])] += bitangent; 
     bitangents[(index_buffer_temp[i+1])] += bitangent;
     bitangents[(index_buffer_temp[i+2])] += bitangent;
-
+    */
     
   }
   
   std::vector<GLfloat> resNorm(vertex_buffer_temp.size(), 0);
   std::vector<GLfloat> resTang(vertex_buffer_temp.size(), 0);
-  std::vector<GLfloat> biresTang(vertex_buffer_temp.size(), 0);
+  //std::vector<GLfloat> biresTang(vertex_buffer_temp.size(), 0);
   
   for(int i = 0; i < norm.size(); i++)
   {
@@ -97,15 +98,29 @@ normtexname(normtexname)
     resTang[i*3+0] = tangents[i].x;
     resTang[i*3+1] = tangents[i].y;
     resTang[i*3+2] = tangents[i].z;
-    
+    /*
     biresTang[i*3+0] = bitangents[i].x;
     biresTang[i*3+1] = bitangents[i].y;
     biresTang[i*3+2] = bitangents[i].z;
+    */
   }
   
   vertex_normal_data = resNorm;
   vertex_tangent_data = resTang;
-  vertex_bintangent_data = biresTang;
+ // vertex_bintangent_data = biresTang;
+  
+  //calc position
+  GLfloat x = 0.0f;
+  GLfloat y = 0.0f;
+  GLfloat z = 0.0f;
+  for(int i = 0; i < vertex_buffer_temp.size(); i = i+3)
+  {
+    x  += vertex_buffer_temp[i];
+    y  += vertex_buffer_temp[i+1];
+    z  += vertex_buffer_temp[i+2];
+  }
+  
+  position = glm::vec3(x / (vertex_buffer_temp.size() /3), y / (vertex_buffer_temp.size() /3), z / (vertex_buffer_temp.size() / 3));
  
 }
 
@@ -229,9 +244,12 @@ void GraphicsObject::SetupDataBuffers()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, TBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertex_tangent_data.size() * sizeof(GLfloat), &vertex_tangent_data[0], GL_STATIC_DRAW);
     
+    /*
+    ** calculated in Vertex shader
     glGenBuffers(1, &BBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertex_bintangent_data.size() * sizeof(GLfloat), &vertex_bintangent_data, GL_STATIC_DRAW);
+    */
 }
 
 
@@ -259,9 +277,11 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     glBindBuffer(GL_ARRAY_BUFFER, TBO);
     glVertexAttribPointer(vTangents,3, GL_FLOAT, GL_FALSE, 0,0);
     
+    /* calc done in Vertex shader
     glEnableVertexAttribArray(vBiTangents);
     glBindBuffer(GL_ARRAY_BUFFER, BBO);
     glVertexAttribPointer(vBiTangents,3, GL_FLOAT, GL_FALSE,0,0);
+    */
     
     
     
@@ -298,10 +318,12 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     GLint lightIntensitLoc = glGetUniformLocation(ShaderProgram, "lightIntensity");
     glUniform1fv(lightIntensitLoc, lightSources.size(),  &lightIntensity[0]);
   
-    
+    /*
+     * Not needed in Viewspace only in World
     GLint cameraPosShader = glGetUniformLocation(ShaderProgram, "cameraPos"); 
     glUniform3f(cameraPosShader, Camera::getInstance()->cameraPos.x, Camera::getInstance()->cameraPos.y, Camera::getInstance()->cameraPos.z);
-
+    */
+    
     GLint diffColor = glGetUniformLocation(ShaderProgram, "objectColor");
     glUniform3f(diffColor, diffuse.r, diffuse.g, diffuse.b);
     
@@ -370,7 +392,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     glDisableVertexAttribArray(vNormals);
     glDisableVertexAttribArray(vUV);
     glDisableVertexAttribArray(vTangents);
-    glDisableVertexAttribArray(vBiTangents);
+    //glDisableVertexAttribArray(vBiTangents);
 }
 
 
