@@ -1,0 +1,152 @@
+# Blender MTL File: 'merry.blend'
+# Material Count: 13
+
+newmtl BillboardMat
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd tree.png
+
+newmtl Material
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.465508 0.016536
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd disco.png
+
+newmtl Material.001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.074481 0.054363 0.072886
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd wood.png
+map_Ns wood_normal.png
+
+newmtl Material.002
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.506210 0.800000
+Ks 0.236842 0.236842 0.236842
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd sky.png
+
+newmtl Material.003
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.602501 0.640000 0.611752
+Ks 0.067233 0.051982 1.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd fur3.png
+map_Ns fur_normal.png
+
+newmtl Material.004
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.243747 0.296052 0.044225
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd fur4.png
+map_Ns fur_normal.png
+
+newmtl Material.005
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.014933 0.020187
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd floor.png
+map_Ns floor_normal.png
+
+newmtl Material.006
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.008951 0.000303
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd floor.png
+map_Ns floor_normal.png
+
+newmtl Material.007
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.008301 0.364473
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd fur1.png
+map_Ns fur_normal.png
+
+newmtl Material.008
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.333204 0.069632
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd wood.png
+map_Ns wood_normal.png
+
+newmtl Material.009
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.615678 0.055583
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd disco.png
+
+newmtl Material.010
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.034047 0.640000 0.006527
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd earth.png
+map_Ns normal_ground.png
+
+newmtl Material.012
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.091624 0.640000 0.187440
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd disco.png
+
+newmtl Material.014
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.107028 0.066994
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd fur2.png
+map_Ns fur_normal.png
+

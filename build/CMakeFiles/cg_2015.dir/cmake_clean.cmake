@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/cg_2015.dir/tiny_obj_loader.cpp.o"
   "CMakeFiles/cg_2015.dir/camera.cpp.o"
   "CMakeFiles/cg_2015.dir/InputManager.cpp.o"
+  "CMakeFiles/cg_2015.dir/Billboard.cpp.o"
   "CMakeFiles/cg_2015.dir/LightSource.cpp.o"
   "CMakeFiles/cg_2015.dir/SOIL/SOIL.c.o"
   "CMakeFiles/cg_2015.dir/SOIL/image_helper.c.o"
@@ -13,8 +14,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/cg_2015.dir/SOIL/stb_image_aug.c.o"
   "cg_2015.pdb"
   "cg_2015"
-  "cg_2015.pdb"
-  "CMakeFiles/CMakeRelink.dir/cg_2015"
 )
 
 # Per-language clean rules from dependency scanning.

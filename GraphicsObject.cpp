@@ -9,6 +9,7 @@ float GraphicsObject::speed = 1.0;
 bool GraphicsObject::disableSpec = false;
 bool GraphicsObject::disableDiff = false;
 bool GraphicsObject::disableAmbient = false;
+bool GraphicsObject::disableNormalMapping = false;
 
 GraphicsObject::GraphicsObject(
   const std::vector<GLfloat> & vertex_buffer_temp, 
@@ -18,7 +19,8 @@ GraphicsObject::GraphicsObject(
   const std::vector<GLfloat> & tex_tmp,
   GLfloat shiny,
   const std::string &name,
-  const std::string &texname) :
+  const std::string &texname,
+  const std::string &normtexname) :
 vertex_buffer_data(vertex_buffer_temp),
 index_buffer_data(index_buffer_temp),
 diffuse(diff_tmp),
@@ -26,35 +28,85 @@ specular(spec_tmp),
 texture_vertex_data(tex_tmp),
 shininess(shiny),
 name(name),
-texname(texname)
+texname(texname),
+normtexname(normtexname)
 { 
-  //calculations of vertex normals
+  //calculations of vertex normals, tangents and bitangents
   std::vector<glm::vec3> norm(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
+  std::vector<glm::vec3> tangents(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
+  std::vector<glm::vec3> bitangents(vertex_buffer_temp.size() / 3, glm::vec3(0,0,0));
+  std::vector<GLfloat> tmp_tangents(vertex_buffer_temp.size());
+  std::vector<GLfloat> tmp_bitangents(vertex_buffer_temp.size());
   
+  
+  std::cout << "Calculating Normals and Tangents for: " << name << std::endl;
   for(int i = 0; i < index_buffer_temp.size() ; i+=3)
   {
+    
     glm::vec3 v1 = glm::vec3(vertex_buffer_temp[index_buffer_temp[i+0]*3+0], vertex_buffer_temp[index_buffer_temp[i+0]*3+1],vertex_buffer_temp[index_buffer_temp[i+0]*3+2]);
     glm::vec3 v2 = glm::vec3(vertex_buffer_temp[index_buffer_temp[i+1]*3+0], vertex_buffer_temp[index_buffer_temp[i+1]*3+1],vertex_buffer_temp[index_buffer_temp[i+1]*3+2]);
     glm::vec3 v3 = glm::vec3(vertex_buffer_temp[index_buffer_temp[i+2]*3+0], vertex_buffer_temp[index_buffer_temp[i+2]*3+1],vertex_buffer_temp[index_buffer_temp[i+2]*3+2]);
+    
+    glm::vec2 texCoordv1 = glm::vec2(texture_vertex_data[index_buffer_temp[i+0]*2+0], texture_vertex_data[index_buffer_temp[i+0]*2+1]);
+    glm::vec2 texCoordv2 = glm::vec2(texture_vertex_data[index_buffer_temp[i+1]*2+0], texture_vertex_data[index_buffer_temp[i+1]*2+1]);
+    glm::vec2 texCoordv3 = glm::vec2(texture_vertex_data[index_buffer_temp[i+2]*2+0], texture_vertex_data[index_buffer_temp[i+2]*2+1]);
+    
     glm::vec3 fn = glm::normalize(glm::cross(v3-v2,v1-v2));
-    norm[(index_buffer_temp[i])+0] += fn; 
-    norm[(index_buffer_temp[i])+1] += fn;
-    norm[(index_buffer_temp[i])+2] += fn;
+    
+    norm[(index_buffer_temp[i+0])] += fn; 
+    norm[(index_buffer_temp[i+1])] += fn;
+    norm[(index_buffer_temp[i+2])] += fn;
+    
+    glm::vec3 tangent, bitangent;
+    
+    glm::vec3 edge1 = v2 - v1;
+    glm::vec3 edge2 = v3 - v2;
+    
+    float DeltaU1 = texCoordv2.x - texCoordv1.x;
+    float DeltaV1 = texCoordv2.y - texCoordv1.y;
+    float DeltaU2 = texCoordv3.x - texCoordv1.x;
+    float DeltaV2 = texCoordv3.y - texCoordv1.y;
+    
+    float f = 1.0f / (DeltaU1 * DeltaV2 -DeltaU2 * DeltaV1);
+    
+    tangent = glm::vec3( f * (DeltaV2 * edge1.x - DeltaV1 * edge2.x), f * (DeltaV2 * edge1.y - DeltaV1 * edge2.y) ,f * (DeltaV2 * edge1.z - DeltaV1 * edge2.z));
+    
+    bitangent = glm::vec3 (f * (-DeltaU2 * edge1.x - DeltaU1 * edge2.x), f * (-DeltaU2 * edge1.y - DeltaU1 * edge2.y), f * (-DeltaU2 * edge1.z - DeltaU1 * edge2.z));
+    
+    tangents[(index_buffer_temp[i+0])] += tangent; 
+    tangents[(index_buffer_temp[i+1])] += tangent;
+    tangents[(index_buffer_temp[i+2])] += tangent;
+    
+    bitangents[(index_buffer_temp[i+0])] += bitangent; 
+    bitangents[(index_buffer_temp[i+1])] += bitangent;
+    bitangents[(index_buffer_temp[i+2])] += bitangent;
+
+    
   }
   
   std::vector<GLfloat> resNorm(vertex_buffer_temp.size(), 0);
+  std::vector<GLfloat> resTang(vertex_buffer_temp.size(), 0);
+  std::vector<GLfloat> biresTang(vertex_buffer_temp.size(), 0);
   
   for(int i = 0; i < norm.size(); i++)
   {
     resNorm[i*3+0] = norm[i].x;
     resNorm[i*3+1] = norm[i].y;
     resNorm[i*3+2] = norm[i].z;
+    
+    resTang[i*3+0] = tangents[i].x;
+    resTang[i*3+1] = tangents[i].y;
+    resTang[i*3+2] = tangents[i].z;
+    
+    biresTang[i*3+0] = bitangents[i].x;
+    biresTang[i*3+1] = bitangents[i].y;
+    biresTang[i*3+2] = bitangents[i].z;
   }
   
   vertex_normal_data = resNorm;
-  
-  
-  
+  vertex_tangent_data = resTang;
+  vertex_bintangent_data = biresTang;
+ 
 }
 
 
@@ -70,16 +122,30 @@ void GraphicsObject::initobj(float x, float y, float z)
   TranslateOrigin = glm::translate(glm::vec3(x,y,z));
   ModelMatrix = TranslateOrigin * ModelMatrix;
   
+  std::string texpath;
+  std::string normtexpath;
+  
   //load texture from materials
-  std::string texpath = "../res/" + texname;
-  if(texname.size() == 0)
+  if(texname.size() > 0)
   {
-    textureID = LoadTexture("../res/default.png");
+    texpath = "../res/" + texname;
   }
   else
   {
-    textureID = LoadTexture(texname);
+    texpath = "../res/default.png";
   }
+  
+  if(normtexname.size() > 0)
+  {
+    normtexpath = "../res/" + normtexname;
+  }
+  else
+  {
+    normtexpath = "../res/default_normal.png";
+  }
+  
+  textureID = LoadTexture(texpath);
+  normalMapID = LoadTexture(normtexpath); 
 }
 
 
@@ -88,7 +154,7 @@ void GraphicsObject::IdleWork(bool updown)
   //compute FPS independent TIME
   oldtime = newtime;
   newtime = glutGet(GLUT_ELAPSED_TIME) ; 
-  if(!(name.compare("back1") == 0 || name.compare("Plane") == 0))
+  if(!(name.compare("back1") == 0 || name.compare("Plane") == 0 || name.compare("Billboard") <= 1))
   {
     rotAroundCenter();
   
@@ -101,12 +167,21 @@ void GraphicsObject::IdleWork(bool updown)
 
 
 /* Updown Movement Function for the Horses
+ * string comp not really a good solution...
  * 
  * */
 void GraphicsObject::UpDown()
 {
-  TranslateOrigin = glm::translate(glm::vec3(0,sin(((newtime)/10)*(M_PI/180)),0));
-  ModelMatrix = TranslateOrigin * ModelMatrix;
+  if(name == "horse1" || name == "horse2")
+  {
+    TranslateOrigin = glm::translate(glm::vec3(0,cos(((newtime)/10)*(M_PI/180))/1.2f,0));
+    ModelMatrix = TranslateOrigin * ModelMatrix;
+  }
+  else
+  {
+    TranslateOrigin = glm::translate(glm::vec3(0,sin(((newtime)/10)*(M_PI/180))/1.2f,0));
+    ModelMatrix = TranslateOrigin * ModelMatrix;
+  }
 }
 
 
@@ -150,6 +225,13 @@ void GraphicsObject::SetupDataBuffers()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, UBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, texture_vertex_data.size() * sizeof(GLfloat), &texture_vertex_data[0], GL_STATIC_DRAW);
  
+    glGenBuffers(1, &TBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, TBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertex_tangent_data.size() * sizeof(GLfloat), &vertex_tangent_data[0], GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &BBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertex_bintangent_data.size() * sizeof(GLfloat), &vertex_bintangent_data, GL_STATIC_DRAW);
 }
 
 
@@ -173,6 +255,16 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     glBindBuffer(GL_ARRAY_BUFFER, UBO);
     glVertexAttribPointer(vUV,2, GL_FLOAT, GL_FALSE,0,0);
     
+    glEnableVertexAttribArray(vTangents);
+    glBindBuffer(GL_ARRAY_BUFFER, TBO);
+    glVertexAttribPointer(vTangents,3, GL_FLOAT, GL_FALSE, 0,0);
+    
+    glEnableVertexAttribArray(vBiTangents);
+    glBindBuffer(GL_ARRAY_BUFFER, BBO);
+    glVertexAttribPointer(vBiTangents,3, GL_FLOAT, GL_FALSE,0,0);
+    
+    
+    
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     GLint size; 
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);  
@@ -182,6 +274,7 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     std::vector<GLfloat> lightColorMat(lightSources.size() * 3, 0);
     std::vector<GLfloat> lightIntensity(lightSources.size(), 0);
     
+    //fill those vectors
     for(int i = 0; i < lightSources.size() * 3; i += 3)
     {    
 	
@@ -206,9 +299,8 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     glUniform1fv(lightIntensitLoc, lightSources.size(),  &lightIntensity[0]);
   
     
-    GLint cameraPosShader = glGetUniformLocation(ShaderProgram, "camerPos"); 
+    GLint cameraPosShader = glGetUniformLocation(ShaderProgram, "cameraPos"); 
     glUniform3f(cameraPosShader, Camera::getInstance()->cameraPos.x, Camera::getInstance()->cameraPos.y, Camera::getInstance()->cameraPos.z);
- 
 
     GLint diffColor = glGetUniformLocation(ShaderProgram, "objectColor");
     glUniform3f(diffColor, diffuse.r, diffuse.g, diffuse.b);
@@ -228,11 +320,20 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     
     GLint ambiLightning = glGetUniformLocation(ShaderProgram, "disableAmbi");
     glUniform1i(ambiLightning,  GraphicsObject::disableAmbient);
+   
     
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureID);
     GLint texSampler = glGetUniformLocation(ShaderProgram, "texSampler");
     glUniform1i(texSampler, 0);
+    
+    GLint normalMapping = glGetUniformLocation(ShaderProgram, "disableNormalMapping");
+    glUniform1i(normalMapping, GraphicsObject::disableNormalMapping);
+    
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, normalMapID);
+    GLint normTexSampler = glGetUniformLocation(ShaderProgram, "normTexSampler");
+    glUniform1i(normTexSampler, 1);
     
     
     
@@ -268,21 +369,20 @@ void GraphicsObject::Draw(GLuint ShaderProgram, std::vector<LightSource> lightSo
     glDisableVertexAttribArray(vPosition);
     glDisableVertexAttribArray(vNormals);
     glDisableVertexAttribArray(vUV);
+    glDisableVertexAttribArray(vTangents);
+    glDisableVertexAttribArray(vBiTangents);
 }
 
 
 //Load BMP file and give it to OPENGL
 GLint GraphicsObject::LoadTexture(const std::string & filename)
 {
+  std::cout << "Loading Texture: " << filename << " for: " << name << std::endl;
   GLuint texture;
 
   int width, height;
 
   unsigned char * data;
-
-  
-  width = 512;
-  height = 512;
   
   
   data = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGBA );
@@ -318,7 +418,6 @@ GLint GraphicsObject::LoadTexture(const std::string & filename)
   glGenerateMipmap(GL_TEXTURE_2D);
   
   
-  glBindTexture( GL_TEXTURE_2D, 0 );
   free( data );
 
   return texture;

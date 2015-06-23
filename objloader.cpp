@@ -1,7 +1,7 @@
 #include "objloader.h"
 #include "tiny_obj_loader.hpp"
 #include "glm/glm.hpp"
-
+#include "Billboard.h"
 
 /*	Creates GraphicsObjects from an Obj file and stores them in a vector
  * 	@path Path to the Obj file
@@ -28,18 +28,35 @@ std::vector<GraphicsObject> ObjLoader::loadObj ( const std::string& objpath, con
       glm::vec3 diff = glm::vec3(mats[shapes[i].mesh.material_ids[0]].diffuse[0], mats[shapes[i].mesh.material_ids[0]].diffuse[1], mats[shapes[i].mesh.material_ids[0]].diffuse[2]);
       glm::vec3 spec = glm::vec3(mats[shapes[i].mesh.material_ids[0]].specular[0], mats[shapes[i].mesh.material_ids[0]].specular[1],mats[shapes[i].mesh.material_ids[0]].specular[2]);
       std::string texname = mats[shapes[i].mesh.material_ids[0]].diffuse_texname;
+      std::string normtexname = mats[shapes[i].mesh.material_ids[0]].normal_texname;
       GLfloat shiny = mats[shapes[i].mesh.material_ids[0]].shininess;
       //push back to the vector     
-      std::cout << texname << std::endl;
-      retVec.push_back(GraphicsObject(shapes[i].mesh.positions, 
-				      shapes[i].mesh.indices ,
-				      diff, 
-				      spec,
-				      shapes[i].mesh.texcoords ,
-				      shiny, 
-				      shapes[i].name,
-				      texname
+     /* if(texname.compare("Billboard") <= 1)
+      {
+	retVec.push_back(Billboard(shapes[i].mesh.positions, 
+					shapes[i].mesh.indices ,
+					diff, 
+					spec,
+					shapes[i].mesh.texcoords ,
+					shiny, 
+					shapes[i].name,
+					texname,
+					normtexname
  				    ));
+      }
+      else
+      {*/
+	retVec.push_back(GraphicsObject(shapes[i].mesh.positions, 
+					shapes[i].mesh.indices ,
+					diff, 
+					spec,
+					shapes[i].mesh.texcoords ,
+					shiny, 
+					shapes[i].name,
+					texname,
+					normtexname
+ 				    ));
+      //}
   }   
   return retVec;
 }

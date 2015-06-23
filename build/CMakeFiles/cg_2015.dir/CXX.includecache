@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/effi/projects/CG_2015/Billboard.cpp
+Billboard.h
+/home/effi/projects/CG_2015/Billboard.h
+
+/home/effi/projects/CG_2015/Billboard.h
+GraphicsObject.h
+/home/effi/projects/CG_2015/GraphicsObject.h
+
 /home/effi/projects/CG_2015/GraphicsObject.cpp
 GraphicsObject.h
 /home/effi/projects/CG_2015/GraphicsObject.h
@@ -2275,6 +2283,8 @@ tiny_obj_loader.hpp
 /home/effi/projects/CG_2015/tiny_obj_loader.hpp
 glm/glm.hpp
 /home/effi/projects/CG_2015/glm/glm.hpp
+Billboard.h
+/home/effi/projects/CG_2015/Billboard.h
 
 /home/effi/projects/CG_2015/objloader.h
 GraphicsObject.h

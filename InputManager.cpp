@@ -53,6 +53,7 @@ void InputManager::keyboard(unsigned char key, int x, int y)
      case 'b': GraphicsObject::disableSpec = !GraphicsObject::disableSpec; break;
      case 'v': GraphicsObject::disableDiff = !GraphicsObject::disableDiff; break;
      case 'c': GraphicsObject::disableAmbient = !GraphicsObject::disableAmbient; break;
+     case 'n': GraphicsObject::disableNormalMapping = !GraphicsObject::disableNormalMapping; break;
      case 'h': LightSource::intensity += 0.1f; break;
      case 'l': LightSource::intensity -= 0.1f; break;
      default: break;

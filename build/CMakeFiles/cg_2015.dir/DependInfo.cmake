@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_CHECK_C
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/effi/projects/CG_2015/Billboard.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/Billboard.cpp.o"
   "/home/effi/projects/CG_2015/GraphicsObject.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/GraphicsObject.cpp.o"
   "/home/effi/projects/CG_2015/InitClass.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/InitClass.cpp.o"
   "/home/effi/projects/CG_2015/InputManager.cpp" "/home/effi/projects/CG_2015/build/CMakeFiles/cg_2015.dir/InputManager.cpp.o"

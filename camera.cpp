@@ -46,6 +46,8 @@ void Camera::move(glm::vec3 transVec)
     translation = glm::translate(transVec);
     ViewMatrix = translation * ViewMatrix;
     cameraPos += transVec;
+    
+    //std::cout << "x: " << cameraPos.x << ";  y: " << cameraPos.y << ";  z: " << cameraPos.z << std::endl;
 }
 
 //rotates the Camera by a vec3
@@ -58,8 +60,10 @@ void Camera::rotate(glm::vec3 rotation)
 	  mRotation = glm::rotate(mRotation, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
   if(rotation.z != 0.0f)
 	  mRotation = glm::rotate(mRotation, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
- 
+
   ViewMatrix = mRotation * ViewMatrix;
+ 
+ // ViewMatrix = glm::lookAt(cameraPos ,cameraPos + rotation, glm::vec3(0,1,0));
 }
 
 //rotates the camera around the screens center

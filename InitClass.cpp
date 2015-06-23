@@ -30,8 +30,8 @@ void InitClass::CreateShaderProgram()
   }
 
   /* Load shader code from file */
-  InitClass::VertexShaderString = InitClass::LoadShader("../vertexshader.vs");
-  InitClass::FragmentShaderString = InitClass::LoadShader("../fragmentshader.fs");
+  InitClass::VertexShaderString = InitClass::LoadShader("../vertexshaderworld.vs");
+  InitClass::FragmentShaderString = InitClass::LoadShader("../fragmentshaderworld.fs");
 
   /* Separately add vertex and fragment shader to program */
   InitClass::AddShader(InitClass::ShaderProgram, VertexShaderString, GL_VERTEX_SHADER);

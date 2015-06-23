@@ -50,6 +50,16 @@ CMAKE_BINARY_DIR = /home/effi/projects/CG_2015/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+.PHONY : install/strip/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -145,10 +155,29 @@ cg_2015/fast:
 	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/build
 .PHONY : cg_2015/fast
 
-# Manual pre-install relink rule for target.
-cg_2015/preinstall:
-	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/preinstall
-.PHONY : cg_2015/preinstall
+Billboard.o: Billboard.cpp.o
+.PHONY : Billboard.o
+
+# target to build an object file
+Billboard.cpp.o:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/Billboard.cpp.o
+.PHONY : Billboard.cpp.o
+
+Billboard.i: Billboard.cpp.i
+.PHONY : Billboard.i
+
+# target to preprocess a source file
+Billboard.cpp.i:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/Billboard.cpp.i
+.PHONY : Billboard.cpp.i
+
+Billboard.s: Billboard.cpp.s
+.PHONY : Billboard.s
+
+# target to generate assembly for a file
+Billboard.cpp.s:
+	$(MAKE) -f CMakeFiles/cg_2015.dir/build.make CMakeFiles/cg_2015.dir/Billboard.cpp.s
+.PHONY : Billboard.cpp.s
 
 GraphicsObject.o: GraphicsObject.cpp.o
 .PHONY : GraphicsObject.o
@@ -444,12 +473,16 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/strip"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... install"
 	@echo "... cg_2015"
 	@echo "... list_install_components"
 	@echo "... install/local"
+	@echo "... Billboard.o"
+	@echo "... Billboard.i"
+	@echo "... Billboard.s"
 	@echo "... GraphicsObject.o"
 	@echo "... GraphicsObject.i"
 	@echo "... GraphicsObject.s"

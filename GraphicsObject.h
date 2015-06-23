@@ -19,29 +19,48 @@ public:
   //vars
   std::string name;
   std::string texname;
+  std::string normtexname;
+  
+  //vertex
   GLuint VBO;
+  //color
   GLuint CBO;
+  //indicies
   GLuint IBO;
+  //normals
   GLuint NBO;
+  //uvs
   GLuint UBO;
+  //tangents
+  GLuint TBO;
+  //bitangents
+  GLuint BBO;
+  
   GLint textureID;
+  GLint normalMapID;
+  
   glm::mat4 TranslateOrigin;
   glm::mat4 InitialTransform;
   glm::mat4 ModelMatrix;
+  
   std::vector<GLfloat> vertex_buffer_data;
   std::vector<GLuint> index_buffer_data;
   std::vector<GLfloat> vertex_normal_data;
   std::vector<GLfloat> texture_vertex_data;
+  std::vector<GLfloat> vertex_tangent_data;
+  std::vector<GLfloat> vertex_bintangent_data;
   
   
   glm::vec3 diffuse;
   glm::vec3 specular;
   GLfloat shininess;
   
+  //Shader Flags
   static float speed;
   static bool disableSpec;
   static bool disableAmbient;
   static bool disableDiff;
+  static bool disableNormalMapping;
 
     
   //func
@@ -52,14 +71,16 @@ public:
 		 const std::vector<GLfloat> & tex_tmp,
 		 GLfloat shiny,
 		 const std::string & name,
-		 const std::string & texname);
+		 const std::string & texname,
+		 const std::string & normtexname);
+  
   void Draw(GLuint ShaderProgram, std::vector<LightSource> lightSources);
   void initobj(float x, float y, float z);
   void IdleWork(bool updown);
   
   GLint LoadTexture(const std::string & filename);
   
-  enum DataID {vPosition = 0, vNormals = 1, vUV = 2}; 
+  enum DataID {vPosition = 0, vNormals = 1, vUV = 2, vTangents = 3, vBiTangents = 4}; 
   
 private:
   //vars

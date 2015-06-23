@@ -28,7 +28,7 @@
 #include "glm/gtx/string_cast.hpp"
 
 //set to 1 when using the opensource intel or amd driver
-#define USES_MESA_DRIVER 1
+#define USES_MESA_DRIVER 0
 
 //storage for all the modles loaded from the obj
 std::vector<GraphicsObject> allObjs;
@@ -109,6 +109,9 @@ void Initialize(void)
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    
     /*Intel troubleshooting*/
     InitClass::setupArrayObject();    
     
@@ -128,17 +131,12 @@ void Initialize(void)
       }
       if(allObjs[i].name.compare("Light2") == 0)
       {
-	 LightSource tmp(glm::vec3(-3,3.8,-3), glm::vec3(1,1,1), true);
+	 LightSource tmp(glm::vec3(10,2,0), glm::vec3(1,1,1), true);
 	 lightSources.push_back(tmp);
       }
       if(allObjs[i].name.compare("Light3") == 0)
       {
- 	 LightSource tmp(glm::vec3(3,3.8,3), glm::vec3(1,1,1), true);
-	 lightSources.push_back(tmp);
-      }
-      if(allObjs[i].name.compare("Light4") == 0)
-      {
-	 LightSource tmp(glm::vec3(0,-10,0), glm::vec3(1,1,1), false);	 
+ 	 LightSource tmp(glm::vec3(-10,2,0), glm::vec3(1,1,1), true);
 	 lightSources.push_back(tmp);
       }
       
@@ -166,7 +164,6 @@ int main(int argc, char** argv)
     glutInitWindowSize(900, 900);
     glutInitWindowPosition(400, 400);
     glutCreateWindow("CG Proseminar - MerryGoRound");
-    
     //enable FSAA
     glEnable(GL_MULTISAMPLE);
 

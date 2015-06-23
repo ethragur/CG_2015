@@ -1,92 +1,105 @@
 #version 330
 
-in vec3 fragNormal;
-in vec3 world_pos;
-in vec3 world_posM;
+in vec3 Normal;
+in vec3 FragPos;
 in vec2 vUV;
+in mat3 TBN;
 
 uniform sampler2D texSampler;
-out vec4 finalColor;
-
+uniform sampler2D normTexSampler;
 uniform vec3 objectColor;
 
-const int numberOfLights = 4;
-uniform vec3 lightPos[numberOfLights];
+const int numberOfLights = 3;
+in vec3 LightPosView[numberOfLights];
 uniform vec3 lightColor[numberOfLights];
 uniform float lightIntensity[numberOfLights];
 
-uniform vec3 cameraPos;
+in vec3 LightDirection[numberOfLights];
+in vec3 EyeDirection_tanSpace;
+
 uniform vec3 specColor;
 uniform float shininess;
-
 
 uniform bool disableSpec;
 uniform bool disableDiff;
 uniform bool disableAmbi;
+uniform bool disableNormalMapping;
 
+out vec4 finalColor;
 
 void main() 
 {
+  
   vec3 ambient = vec3(0,0,0);
   vec3 diffuse = vec3(0,0,0);
   vec3 specular = vec3(0,0,0);
   vec3 result = vec3(0,0,0);
   
+  
   vec3 texColor = texture(texSampler, vUV.st).rgb;
-  vec4 texColorA = texture(texSampler, vUV.st).rgba;
+  float texAlpha = texture(texSampler, vUV.st).a;
+  //texColor = texColor * texAlpha;
   //ambient
-  if(!disableAmbi)
+  
+  if(texAlpha < 0.1)
   {
-    float ambientIntensity = 0.2f;
-    ambient = ambientIntensity * vec3(1,1,1);
+    discard;
   }
-  result = result + (ambient *texColor);
-  
-  vec3 norm = normalize(fragNormal);
-  for(int i = 0; i < numberOfLights; i++)
+  else
   {
-    vec3 lightDirDiff = normalize(lightPos[i] - world_posM); 
-    vec3 lightDirSpec = normalize(lightPos[i] - world_pos); 
-    //normalize Normals and distance from LightDirection
-    
-    
-    float diff = max(dot(norm, lightDirDiff), 0.0);
-    if(!disableDiff)
+    if(!disableAmbi)
     {
-      //diffuse   
-      diffuse = diff * lightColor[i];
+      float ambientIntensity = 0.1f;
+      ambient = ambientIntensity * vec3(1,1,1);
     }
-  
-    if(!disableSpec)
-    { 
-      //specular intensity
-      float specularStrength = 16.0f;
     
-      float spec;
-      //fix so that specular is only shown on the right side 
-      if(diff > 0.0)
+    
+    result = result + (ambient *texColor);
+    
+    for(int i = 0; i < numberOfLights; i++)
+    {
+      vec3 n;
+      vec3 l;
+      
+      if(!disableNormalMapping)
       {
-	//distance between object and camera
-	vec3 viewDir = normalize(  world_pos - cameraPos);
-	//get reflection vector, negate lightDir cause we need the light the other way around
-	vec3 reflectDir = reflect(-lightDirSpec, norm);
-	//dot product between viewDir and ReflectDir shouldn't be negative, then take it to the power of the shininess factor
-	spec = pow(clamp(dot(viewDir, reflectDir),0.0,1.0), shininess);
+	vec3 TextureNormal_tangentspace = normalize( texture2D( normTexSampler, vUV ).rgb*2.0 - 1.0);
+	n =  normalize(TBN*TextureNormal_tangentspace);
+	l = normalize(LightPosView[i] - FragPos);
       }
       else
       {
-	spec = 0.0;
+	n = normalize(Normal );
+	l = normalize(LightPosView[i] - FragPos);
       }
       
-      specular = specularStrength *  spec * specColor * lightColor[i]  ;  
       
-    }
-    result = result + (specular + diffuse) * texColor * lightIntensity[i];
-  }
-
-  
-     finalColor = texColorA;
-  //see normals for debug
- //     finalColor = vec4(norm, 1.0f);
+      float diff = clamp( dot( n,l ), 0,1 );
+      if(!disableDiff)
+      {
+	//diffuse   
+	diffuse = diff * lightColor[i];
+      }
+      
     
+      if(!disableSpec)
+      {
+	//specular lighting only on surface which face light
+	  float specStrength = 8;
+	  vec3 viewDir;
+	  viewDir = normalize(-FragPos);
+	  vec3 reflectDir = reflect(-l, n);
+	  float spec = pow(clamp(dot(viewDir, reflectDir), 0, 1), shininess);
+	  specular = specStrength * spec * lightColor[i] * specColor;
+	
+      }
+     // float attenuation = 1.0 / (1.0 + 5.0 * pow(length(LightPosView[i] - FragPos), 2));
+      result = result + (diffuse + specular) * texColor * lightIntensity[i];
+    
+    }
+    
+    
+    
+    finalColor = vec4(result, texAlpha);
+  }
 }
